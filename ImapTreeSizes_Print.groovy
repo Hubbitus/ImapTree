@@ -12,45 +12,43 @@ import info.hubbitus.imaptree.ImapTreeSize
 
 ConfigObject config = new ConfigSlurper().parse(Config).config;
 
-ImapTreeSize imapTree = new ImapTreeSize(config.account);
+def cli = new CliBuilder(usage: 'Usage options: -[hc]')
+cli.h(longOpt: 'help', 'usage information', required: false)
+cli.c(longOpt: 'cached', 'run from cached file. No information gathered from imap account actually. Instead read previously saved file config.fullXmlCache. Useful for deep analysis and experiments.', required: false)
+OptionAccessor opt = cli.parse(args)
 
-imapTree.tree.depthFirst().each{
-	println "<<${it.name()}>>: Size: ${it.@size}"
+if(opt.h /* || opt.arguments().isEmpty() */ ) {
+	cli.usage()
 }
+else{
+	ImapTreeSize imapTree;
 
-/*Map res = imapTree.tree.depthFirst().collect { n ->
-	[
-		name        : n.name()
-		, selfSize  : n.@size
-		, treeSize  : n.depthFirst().sum { it.@size }
-		, treeChilds: n.depthFirst().size()
-	]
-}
-
-XStream xstream = new XStream(
-	new XppDriver() { // For console run
-		public HierarchicalStreamWriter createWriter(Writer out) {
-			return new PrettyPrintWriter(out) {
-				protected void writeText(QuickWriter writer, String text) {
-					if(text ==~ /(?s).*[<>&].*//*) {
-						writer.write('<![CDATA[');
-						writer.write(text);
-						writer.write(']]>');
-					} else {
-						writer.write(text);
-					}
-				}
-			};
+	if (!opt.c){
+		imapTree = new ImapTreeSize(config.account);
+		if (config.log.fullXmlCache){
+			File file = new File(config.log.fullXmlCache);
+			if(file.exists()) file.delete();
+			file << imapTree.serializeToXML();
 		}
 	}
-);
+	else{
+		println('Run from cache');
+		imapTree = ImapTreeSize.fromCacheXMLfile(new File(config.log.fullXmlCache));
+	}
 
-OutputStream stream = new ByteArrayOutputStream();
-xstream.toXML(res)
+	imapTree.tree.depthFirst().each{
+		println "<<${it.name()}>>: Size: ${it.@size}"
+	}
+}
 
-File file = new File('res.xml');
-if(file.exists()) file.delete();
-file << xstream.toXML(res);*/
+//		Map res = imapTree.tree.depthFirst().collect { n ->
+//			[
+//					name        : n.name()
+//					, selfSize  : n.@size
+//					, treeSize  : n.depthFirst().sum { it.@size }
+//					, treeChilds: n.depthFirst().size()
+//			]
+//		}
 
 /*
 //import java.awt.*

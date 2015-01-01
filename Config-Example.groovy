@@ -19,11 +19,17 @@ config{
 		login: 'some.name2@gmail.com'
 		,password: 'Super-Pass for name 2'
 	)
-	// Some sort ov nesting available also with groovy ConfigSlurper magick:
+	// Some sort ov nesting available also with groovy ConfigSlurper magic:
 	account3 = account1.with{
 		login = 'some.name3@gmail.com'
 		password = 'Super-Pass for name 3'
 	}
 	// and also constructor style form available (example same as account1):
 	account4 = new ImapAccount('imap.gmail.com', 933, 'some.name@gmail.com', 'Super-Pass', 'gimaps', 'INBOX')
+
+	log{
+		// To save full cache of results to operate next time from it. Provide false there to disable writing
+		// When read from file occurred no any validation or invalidation performed. It even do not compared for what account it had been gathered!
+		fullXmlCache = 'data.xml'
+	}
 }

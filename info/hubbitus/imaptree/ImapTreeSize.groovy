@@ -1,23 +1,31 @@
 package info.hubbitus.imaptree
 
-//@Grab(group='javax.mail', module='mail', version='1.5.2')
+import com.sun.mail.gimap.GmailFolder
+import com.sun.mail.imap.IMAPFolder
+import com.thoughtworks.xstream.XStream
+import com.thoughtworks.xstream.annotations.XStreamOmitField
+import com.thoughtworks.xstream.core.util.QuickWriter
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter
+import com.thoughtworks.xstream.io.xml.XppDriver
 @Grab(group='com.sun.mail', module='javax.mail', version='1.5.2')
 @Grab(group='com.sun.mail', module='gimap', version='1.5.2')
+
 @Grab(group='org.apache.logging.log4j', module='log4j-api', version='2.1')
 @Grab(group='org.apache.logging.log4j', module='log4j-core', version='2.1')
 
+@Grab(group='xmlpull', module='xmlpull', version='1.1.3.1')
+@Grab(group='com.thoughtworks.xstream', module='xstream', version='1.4.7')
+
 import groovy.util.logging.Log4j2
 
-import javax.mail.FetchProfile
+import javax.mail.*
 
-// Base example from: http://dmitrijs.artjomenko.com/2012/03/how-to-read-imap-email-with-groovy.html
-import javax.mail.Folder
-import javax.mail.Message
-import javax.mail.Session
-import javax.mail.Store
-
+//@Grab(group='javax.mail', module='mail', version='1.5.2')
 /**
  * Recursively walk through IMAP folder from provided start and calculate that's size (number of messages and bytes)
+ *
+ * Base example from: http://dmitrijs.artjomenko.com/2012/03/how-to-read-imap-email-with-groovy.html
  *
  * @author Pavel Alexeev - <Pahan@Hubbitus.info>
  * @created 2015-01-01 17:49
@@ -26,10 +34,11 @@ import javax.mail.Store
 class ImapTreeSize{
 	public ImapAccount account;
 
-
 	Node tree;
 
+	@XStreamOmitField
 	private Store store;
+	@XStreamOmitField
 	private Folder rootImapFolder;
 
 	ImapTreeSize(ImapAccount account){
@@ -97,5 +106,57 @@ class ImapTreeSize{
 				f.close(false)
 			}
 		} else return new Size(onlyFolders: true, bytes: 0, messages: 0)
+	}
+
+	// Store text as CDATA sections for readability
+	@Lazy
+	@XStreamOmitField
+	private static XStream xStream = {
+		XStream xStream = new XStream(
+			new XppDriver() {
+				public HierarchicalStreamWriter createWriter(Writer out) {
+					return new PrettyPrintWriter(out) {
+						protected void writeText(QuickWriter writer, String text) {
+							if(text ==~ /(?s).*[<>&].*/) {
+								writer.write('<![CDATA[');
+								writer.write(text);
+								writer.write(']]>');
+							} else {
+								writer.write(text);
+							}
+						}
+					};
+				}
+			}
+		);
+
+		xStream.autodetectAnnotations(true);
+		xStream.classLoader = getClass().classLoader;
+
+		xStream.omitField(ImapTreeSize, 'log');
+		xStream.omitField(Folder, 'store');
+		xStream.omitField(IMAPFolder, 'logger');
+		xStream.omitField(IMAPFolder, 'connectionPoolLogger');
+
+		xStream
+	}();
+
+	/**
+	 * Return string representation of This object. If that once saved to file that can be then reconstructed by fabric
+	 * method {@link #fromCacheXMLfile(java.io.File)}
+	 *
+	 * @return
+	 */
+	String serializeToXML(){
+		return xStream.toXML(this);
+	}
+
+	/**
+	 *
+	 * @param file
+	 * @return
+	 */
+	public static fromCacheXMLfile(File file){
+		return xStream.fromXML(file);
 	}
 }
