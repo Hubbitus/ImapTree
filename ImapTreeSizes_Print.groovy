@@ -12,7 +12,7 @@ import info.hubbitus.imaptree.ImapTreeSize
 
 ConfigObject config = new ConfigSlurper().parse(Config).config;
 
-ImapTreeSize imapTree = new ImapTreeSize(config.account.host, config.account.port, config.account.login, config.account.password, config.account.folder);
+ImapTreeSize imapTree = new ImapTreeSize(config.account);
 
 imapTree.tree.depthFirst().each{
 	println "<<${it.name()}>>: Size: ${it.@size}"

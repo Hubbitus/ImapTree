@@ -24,39 +24,40 @@ import javax.mail.Store
  */
 @Log4j2
 class ImapTreeSize{
-	Folder rootImapFolder;
+	public ImapAccount account;
+
 
 	Node tree;
 
 	private Store store;
-	public static ConfigObject config = new ConfigObject();
+	private Folder rootImapFolder;
 
-	public ImapTreeSize(String host, Integer port, String login, String password, String folder = 'INBOX') {
-		config.host = host;
-		config.port = port;
-		config.login = login;
-		config.password = password;
-		config.folder = folder;
+	ImapTreeSize(ImapAccount account){
+		this.account = account;
 
 		connect()
 		buildTree();
 	}
 
+	ImapTreeSize(String host, Integer port, String login, String password, String accountType, String folder = 'INBOX') {
+		this(new ImapAccount(host, port, login, password, accountType, folder));
+	}
+
 	protected void connect() {
 		Session session = Session.getInstance(
 			new Properties(
-				'mail.store.protocol': 'imaps'
-				, 'mail.imaps.host': 'imap.gmail.com'
-				, 'mail.imaps.port': '993'
+				'mail.store.protocol': account.type
+				, 'mail.imaps.host': account.host
+				, 'mail.imaps.port': account.port
 			)
 			,null
-		)
+		);
 
-		store = session.getStore('gimaps') // GmailSSLStore actually
-		store.connect(config.host, config.login, config.password)
+		store = session.getStore(account.type);
+		store.connect(account.host, account.login, account.password);
 
-		rootImapFolder = store.getFolder(config.folder) // GmailFolder
-		tree = new Node(null, rootImapFolder.fullName, [root: true], rootImapFolder)
+		rootImapFolder = store.getFolder(account.folder); // GmailFolder
+		tree = new Node(null, rootImapFolder.fullName, [root: true], rootImapFolder);
 	}
 
 	protected void buildTree(Folder cur = null, Node parentTreeNode = null) {
