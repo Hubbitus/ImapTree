@@ -7,6 +7,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField
 import com.thoughtworks.xstream.core.util.QuickWriter
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter
+import com.thoughtworks.xstream.io.xml.StaxDriver
 import com.thoughtworks.xstream.io.xml.XppDriver
 @Grab(group='com.sun.mail', module='javax.mail', version='1.5.2')
 @Grab(group='com.sun.mail', module='gimap', version='1.5.2')
@@ -78,9 +79,10 @@ class ImapTreeSize{
 			parentTreeNode.value = cur;
 			parentTreeNode.attributes().root = true;
 			parentTreeNode.attributes().size = getFolderSize(cur);
+			parentTreeNode.attributes().folder = cur; // Folder self. Value object of node became NodeList if some childs added
 			node = parentTreeNode;
 		} else {
-			node = new Node(parentTreeNode, cur.fullName, [size: getFolderSize(cur)], cur);
+			node = new Node(parentTreeNode, cur.fullName, [size: getFolderSize(cur), folder: cur], cur);
 			log.debug """Folder <<${node.name()}>>: size: ${node.@size}; parent folder <<${node.parent().value()[0]}>> size: ${node.parent().@size}"""
 			// value()[0] required to obtain real value but not NodeList. Bug? See trees.groovy
 		}
@@ -113,7 +115,8 @@ class ImapTreeSize{
 	@XStreamOmitField
 	private static XStream xStream = {
 		XStream xStream = new XStream(
-			new XppDriver() {
+//			new XppDriver() {
+			new StaxDriver(){ // For console run
 				public HierarchicalStreamWriter createWriter(Writer out) {
 					return new PrettyPrintWriter(out) {
 						protected void writeText(QuickWriter writer, String text) {
