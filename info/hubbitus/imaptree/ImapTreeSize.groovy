@@ -1,14 +1,5 @@
 package info.hubbitus.imaptree
 
-import com.sun.mail.gimap.GmailFolder
-import com.sun.mail.imap.IMAPFolder
-import com.thoughtworks.xstream.XStream
-import com.thoughtworks.xstream.annotations.XStreamOmitField
-import com.thoughtworks.xstream.core.util.QuickWriter
-import com.thoughtworks.xstream.io.HierarchicalStreamWriter
-import com.thoughtworks.xstream.io.xml.PrettyPrintWriter
-import com.thoughtworks.xstream.io.xml.StaxDriver
-import com.thoughtworks.xstream.io.xml.XppDriver
 @Grab(group='com.sun.mail', module='javax.mail', version='1.5.2')
 @Grab(group='com.sun.mail', module='gimap', version='1.5.2')
 
@@ -19,7 +10,13 @@ import com.thoughtworks.xstream.io.xml.XppDriver
 @Grab(group='com.thoughtworks.xstream', module='xstream', version='1.4.7')
 
 import groovy.util.logging.Log4j2
-
+import com.thoughtworks.xstream.annotations.XStreamOmitField
+import com.sun.mail.imap.IMAPFolder
+import com.thoughtworks.xstream.XStream
+import com.thoughtworks.xstream.core.util.QuickWriter
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter
+import com.thoughtworks.xstream.io.xml.StaxDriver
 import javax.mail.*
 
 //@Grab(group='javax.mail', module='mail', version='1.5.2')
@@ -102,7 +99,7 @@ class ImapTreeSize{
 				List<Message> messages = f.messages as List;
 				f.fetch(messages as Message[], fp);
 
-				return new Size(bytes: messages.collect { it.size }.sum(), messages: messages.size())
+				return new Size(bytes: (Long)messages.collect { it.size }.sum(), messages: messages.size())
 			}
 			finally {
 				f.close(false)
@@ -145,21 +142,23 @@ class ImapTreeSize{
 	}();
 
 	/**
-	 * Return string representation of This object. If that once saved to file that can be then reconstructed by fabric
-	 * method {@link #fromCacheXMLfile(java.io.File)}
+	 * Write string representation of This object in XML. If that once saved to file that can be then reconstructed by
+	 * fabric method {@link #deserializeFromFile(java.io.File)}
 	 *
 	 * @return
 	 */
-	String serializeToXML(){
-		return xStream.toXML(this);
+	void serializeToFile(File file){
+		if(file.exists()) file.delete();
+		file << xStream.toXML(this);
 	}
 
 	/**
+	 * Reconstruct object from previous saved XML cache file. {@see #serializeToFile(java.io.File)}
 	 *
 	 * @param file
 	 * @return
 	 */
-	public static fromCacheXMLfile(File file){
-		return xStream.fromXML(file);
+	static ImapTreeSize deserializeFromFile(File file){
+		xStream.fromXML(file);
 	}
 }

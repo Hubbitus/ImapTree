@@ -1,5 +1,5 @@
 #!/opt/groovy-2.3.6/bin/groovy
-
+import info.hubbitus.imaptree.ImapAccount
 import info.hubbitus.imaptree.ImapTreeSize
 
 /**
@@ -24,29 +24,40 @@ if(opt.h /*|| opt.arguments().isEmpty()*/ ) {
 }
 else{
 	ImapTreeSize imapTree;
+	String accountName;
+	ImapAccount imapAccount;
+
+	switch(true){
+		case !config.accounts:
+			throw new RuntimeException('You must configure at least one parameter in config-file Config.groovy. See Config-Example.groovy for details');
+
+		case config.accounts.size() > 1 && !opt.a:
+			throw new RuntimeException ('You must provide desired account name in commandline via -a/--account option because multiple accounts defined in config!');
+
+		case 1 == config.accounts.size():
+			accountName = config.accounts.find{true}.key;
+			imapAccount = config.accounts.find{true}.value;
+			println ("You do not provide account as option, but only one defined in config. [${accountName}] will be used.");
+			break;
+
+		default:
+			accountName = opt.a;
+			imapAccount = (ImapAccount)config.accounts[accountName];
+			if (!imapAccount){
+				throw new RuntimeException ("It seams requested account [$accountName] is not defined in config!");
+			}
+	}
+	File xmlCacheFile = new File(config.log.fullXmlCache.replace('%{account}', accountName));
 
 	if (!opt.c){
-		switch(true){
-			case !config.accounts:
-				throw new RuntimeException('To run not in cached (-c) mode you must configure at least one parameter in config-file Config.groovy. See Config-Example.groovy for details');
-
-			case config.accounts.size() > 1 && !opt.a:
-				throw new RuntimeException ('To run not in cached (-c) mode you must provide desired account name in commandline via -a/--account option');
-
-			default:
-				println ("You do not provide account as option, but only one defined in config. [${config.accounts[opt.a]}] will be used.");
-		}
-
 		imapTree = new ImapTreeSize(config.accounts[opt.a]);
 		if (config.log.fullXmlCache){
-			File file = new File(config.log.fullXmlCache);
-			if(file.exists()) file.delete();
-			file << imapTree.serializeToXML();
+			imapTree.serializeToFile(xmlCacheFile);
 		}
 	}
 	else{
-		println('Run from cache');
-		imapTree = ImapTreeSize.fromCacheXMLfile(new File(config.log.fullXmlCache));
+		println("Run from cache file [${xmlCacheFile.absolutePath}]");
+		imapTree = ImapTreeSize.deserializeFromFile(xmlCacheFile);
 	}
 
 //	Node.metaClass.depthLevel = {

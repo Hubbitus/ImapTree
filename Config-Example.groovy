@@ -32,8 +32,9 @@ config{
 
 	log{
 		// To save full cache of results to operate next time from it. Provide false there to disable writing
-		// When read from file occurred no any validation or invalidation performed. It even do not compared for what account it had been gathered!
+		// When read from file occurred no any validation or invalidation performed (IMAP may change over time).
 		// Directory must exists
-		fullXmlCache = '.results/data.xml'
+		// %{account} will be replaced by used account name
+		fullXmlCache = '.results/%{account}.data.xml'
 	}
 }
