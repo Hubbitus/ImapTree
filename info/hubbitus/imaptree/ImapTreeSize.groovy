@@ -1,9 +1,5 @@
 package info.hubbitus.imaptree
 
-import com.sun.mail.gimap.GmailFolder
-import com.sun.mail.util.MailLogger
-import groovy.transform.CompileStatic
-import groovy.transform.TypeChecked
 @Grab(group='com.sun.mail', module='javax.mail', version='1.5.2')
 @Grab(group='com.sun.mail', module='gimap', version='1.5.2')
 
@@ -14,6 +10,8 @@ import groovy.transform.TypeChecked
 
 import groovy.util.logging.Log4j2
 import com.thoughtworks.xstream.annotations.XStreamOmitField
+import com.sun.mail.gimap.GmailFolder
+import com.sun.mail.util.MailLogger
 import com.sun.mail.imap.IMAPFolder
 import com.thoughtworks.xstream.XStream
 import com.thoughtworks.xstream.core.util.QuickWriter
@@ -22,7 +20,6 @@ import com.thoughtworks.xstream.io.xml.PrettyPrintWriter
 import com.thoughtworks.xstream.io.xml.StaxDriver
 import javax.mail.*
 
-//@Grab(group='javax.mail', module='mail', version='1.5.2')
 /**
  * Recursively walk through IMAP folder from provided start and calculate that's size (number of messages and bytes)
  *
@@ -35,22 +32,20 @@ import javax.mail.*
 class ImapTreeSize {
 	ImapAccount account;
 
-	@Lazy
-	Node tree = {
+	@Lazy Node tree = {
 		Folder rootImapFolder = store.getFolder(account.folder);
 		new Node(null, rootImapFolder.fullName, [root: true], rootImapFolder);
 	}();
 
 	@XStreamOmitField
-	@Lazy
-	private Store store = {
+	@Lazy private Store store = {
 		Session session = Session.getInstance(
-				new Properties(
-						'mail.store.protocol': account.type
-						, 'mail.imaps.host': account.host
-						, 'mail.imaps.port': account.port
-				)
-				, null
+			new Properties(
+				'mail.store.protocol': account.type
+				, 'mail.imaps.host': account.host
+				, 'mail.imaps.port': account.port
+			)
+			, null
 		);
 		Store store = session.getStore(account.type);
 		store.connect(account.host, account.login, account.password);
@@ -112,8 +107,7 @@ class ImapTreeSize {
 
 	// Store text as CDATA sections for readability
 	@XStreamOmitField
-	@Lazy
-	private static XStream xStream = {
+	@Lazy private static XStream xStream = {
 		XStream xStream = new XStream(
 //			new XppDriver() {
 				new StaxDriver() { // For console run

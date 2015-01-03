@@ -1,6 +1,7 @@
 #!/opt/groovy-2.3.6/bin/groovy
 import info.hubbitus.imaptree.ImapAccount
 import info.hubbitus.imaptree.ImapTreeSize
+import info.hubbitus.imaptree.utils.ConfigExtended
 
 /**
  * Simple example to just print folder sizes recursively
@@ -10,22 +11,40 @@ import info.hubbitus.imaptree.ImapTreeSize
  * */
 
 
-ConfigObject config = new ConfigSlurper().parse(Config).config;
+ConfigExtended config = (ConfigExtended)new ConfigSlurper().parse(Config).config;
 
-def cli = new CliBuilder(usage: 'Usage options: -[hc]')
-cli.h(longOpt: 'help', 'usage information', required: false)
+def cli = new CliBuilder(/*usage: 'Usage:'*/)
+cli.h(longOpt: 'help', 'This usage information', required: false)
 cli.a(longOpt: 'account', 'Account name from defined in config file under config.accounts section. Required if you define more than one there. Otherwise warning printed and its selected automatically.', required: false, args: 1)
 cli.c(longOpt: 'cached', 'run from cached file. No information gathered from imap account actually. Instead read previously saved file config.fullXmlCache. Useful for deep analysis and experiments.', required: false)
-cli._(longOpt: 'print-depth', 'Max amount of nesting folders print. By default all. Starts from 1, so only root folder will be printed. 2 means also 1st level childs and so on.', required: false, args: 1)
+cli.d(longOpt: 'print-depth', 'Max amount of nesting folders print. By default all. Starts from 1, so only root folder will be printed. 2 means also 1st level childs and so on.', required: false, args: 1)
 cli.o(longOpt: 'operation', 'Operation to perform. Otherwise just folder sizes printed (default operation named printFolderSizes)', required: false, args: 1)
+cli.D(longOpt: 'config', '''Change configured options from command line. Allow runtime override. May appear multiple times - processed in that order. For example:
+	-D log.fullXmlCache="some.file" --config operations.printFolderSizes.folder='{true}' -D operations.printFolderSizes.message='{m-> println "SUBJ: ${m.subject}"}'
+	Values trimmed - use quotes and escapes where appropriate''', required: false, args: 2, valueSeparator: '=', argName: 'property=value')
 OptionAccessor opt = cli.parse(args)
 
 config.opt = opt;
 
 if(opt.h /*|| opt.arguments().isEmpty()*/ ) {
+	/*
+	* Unix-hack to use full terminal width (by suggestion from http://stackoverflow.com/questions/1286461/can-i-find-the-console-width-with-java)
+	* It was implemented in similar fashion (https://issues.apache.org/jira/browse/CLI-166), but then reverted because can't
+	* be used for all systems in java-way
+	*/
+	try{
+		cli.width = ["bash", "-c", "tput cols 2> /dev/tty"].execute().text.toInteger()
+	}
+	catch(IOException ignore){}
 	cli.usage()
 }
 else{
+	if (opt.D){
+		(opt.Ds as List).collate(2).each{// Override configs from commandline options
+			config.setFromPropertyPathLikeKey(it[0], it[1]);
+		}
+	}
+
 	ImapTreeSize imapTree;
 	String accountName;
 	ImapAccount imapAccount;
