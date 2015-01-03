@@ -1,5 +1,7 @@
 package info.hubbitus.imaptree
 
+import com.sun.mail.gimap.GmailFolder
+import com.sun.mail.util.MailLogger
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 @Grab(group='com.sun.mail', module='javax.mail', version='1.5.2')
@@ -30,20 +32,34 @@ import javax.mail.*
  * @created 2015-01-01 17:49
  */
 @Log4j2
-class ImapTreeSize{
-	public ImapAccount account;
+class ImapTreeSize {
+	ImapAccount account;
 
-	Node tree;
+	@Lazy
+	Node tree = {
+		Folder rootImapFolder = store.getFolder(account.folder);
+		new Node(null, rootImapFolder.fullName, [root: true], rootImapFolder);
+	}();
 
 	@XStreamOmitField
-	private Store store;
-	@XStreamOmitField
-	private Folder rootImapFolder;
+	@Lazy
+	private Store store = {
+		Session session = Session.getInstance(
+				new Properties(
+						'mail.store.protocol': account.type
+						, 'mail.imaps.host': account.host
+						, 'mail.imaps.port': account.port
+				)
+				, null
+		);
+		Store store = session.getStore(account.type);
+		store.connect(account.host, account.login, account.password);
+		store
+	}();
 
-	ImapTreeSize(ImapAccount account){
+	ImapTreeSize(ImapAccount account) {
 		this.account = account;
 
-		connect();
 		buildTree();
 	}
 
@@ -51,37 +67,23 @@ class ImapTreeSize{
 		this(new ImapAccount(host, port, login, password, accountType, folder));
 	}
 
-	protected void connect() {
-		Session session = Session.getInstance(
-			new Properties(
-				'mail.store.protocol': account.type
-				, 'mail.imaps.host': account.host
-				, 'mail.imaps.port': account.port
-			)
-			,null
-		);
-
-		store = session.getStore(account.type);
-		store.connect(account.host, account.login, account.password);
-
-		rootImapFolder = store.getFolder(account.folder);
-		tree = new Node(null, rootImapFolder.fullName, [root: true], rootImapFolder);
-	}
-
 	protected void buildTree(Folder cur = null, Node parentTreeNode = null) {
 		Node node;
 
 		if(null == cur) {
-			cur = rootImapFolder;
+			cur = (Folder) tree.value();
 			parentTreeNode = tree;
 			parentTreeNode.value = cur;
 			parentTreeNode.attributes().root = true;
 			parentTreeNode.attributes().size = getFolderSize(cur);
-			parentTreeNode.attributes().folder = cur; // Folder self. Value object of node became NodeList if some childs added
+			parentTreeNode.attributes().folder = cur;
+			// Folder self. Value object of node became NodeList if some childs added
 			node = parentTreeNode;
 		} else {
 			node = new Node(parentTreeNode, cur.fullName, [size: getFolderSize(cur), folder: cur], cur);
-			log.debug """Folder <<${node.name()}>>: size: ${node.@size}; parent folder <<${node.parent().value()[0]}>> size: ${node.parent().@size}"""
+			log.debug """Folder <<${node.name()}>>: size: ${node.@size}; parent folder <<${
+				node.parent().value()[0]
+			}>> size: ${node.parent().@size}"""
 			// value()[0] required to obtain real value but not NodeList. Bug? See trees.groovy
 		}
 
@@ -92,7 +94,7 @@ class ImapTreeSize{
 
 	Size getFolderSize(Folder f) {
 		if(f.type & f.HOLDS_MESSAGES) {
-			try{
+			try {
 				log.debug "Calculate size of folder: <<$f>>; total messages: ${f.getMessageCount()}, deleted count: ${f.getDeletedMessageCount()}, new count: ${f.getNewMessageCount()}, unread count: ${f.getUnreadMessageCount()}";
 				f.open(Folder.READ_ONLY);
 				FetchProfile fp = new FetchProfile();
@@ -100,7 +102,7 @@ class ImapTreeSize{
 				List<Message> messages = f.messages as List;
 				f.fetch(messages as Message[], fp);
 
-				return new Size(bytes: (Long)messages.collect { it.size }.sum(), messages: messages.size())
+				return new Size(bytes: (Long) messages.collect { it.size }.sum(), messages: messages.size())
 			}
 			finally {
 				f.close(false)
@@ -110,24 +112,25 @@ class ImapTreeSize{
 
 	// Store text as CDATA sections for readability
 	@XStreamOmitField
-	@Lazy private static XStream xStream = {
+	@Lazy
+	private static XStream xStream = {
 		XStream xStream = new XStream(
 //			new XppDriver() {
-			new StaxDriver(){ // For console run
-				public HierarchicalStreamWriter createWriter(Writer out) {
-					return new PrettyPrintWriter(out) {
-						protected void writeText(QuickWriter writer, String text) {
-							if(text ==~ /(?s).*[<>&].*/) {
-								writer.write('<![CDATA[');
-								writer.write(text);
-								writer.write(']]>');
-							} else {
-								writer.write(text);
+				new StaxDriver() { // For console run
+					public HierarchicalStreamWriter createWriter(Writer out) {
+						return new PrettyPrintWriter(out) {
+							protected void writeText(QuickWriter writer, String text) {
+								if(text ==~ /(?s).*[<>&].*/) {
+									writer.write('<![CDATA[');
+									writer.write(text);
+									writer.write(']]>');
+								} else {
+									writer.write(text);
+								}
 							}
-						}
-					};
+						};
+					}
 				}
-			}
 		);
 
 		xStream.autodetectAnnotations(true);
@@ -147,19 +150,33 @@ class ImapTreeSize{
 	 *
 	 * @return
 	 */
-	void serializeToFile(File file){
+	void serializeToFile(File file) {
 		if(file.exists()) file.delete();
 		file << xStream.toXML(this);
 	}
 
 	/**
-	 * Reconstruct object from previous saved XML cache file. {@see #serializeToFile(java.io.File)}
+	 * Reconstruct object from previous saved XML cache file. {@see # serializeToFile ( java.io.File )}
 	 *
 	 * @param file
 	 * @return
 	 */
-	static ImapTreeSize deserializeFromFile(File file){
-		xStream.fromXML(file);
+	static ImapTreeSize deserializeFromFile(File file) {
+		ImapTreeSize res = (ImapTreeSize)xStream.fromXML(file);
+		// Fore de-serialized objects - reconstruct omitted store and loggers
+		GmailFolder.metaClass.getStore = IMAPFolder.metaClass.getStore = {
+			if(!delegate.@store) {
+				delegate.@store = res.store;
+			}
+			delegate.@store;
+		}
+		GmailFolder.metaClass.getLogger = IMAPFolder.metaClass.getLogger = {
+			if(!delegate.@logger) {
+				delegate.@logger = new MailLogger(delegate.getClass(), 'DEBUG IMAP', res.store.session);
+			}
+			delegate.@logger;
+		}
+		res;
 	}
 
 	/**
@@ -172,8 +189,11 @@ class ImapTreeSize{
 	void traverseTree(Closure<Boolean> folderHandle, Closure messageHandle, String traverseType = 'depthFirst'){
 		tree."$traverseType"().each{Node n ->
 			try {
-				if(folderHandle(n)) {
-					if(!((Folder)n.@folder).open){ // Allow open and initialize manually in folder processing closure
+				if(folderHandle(n)){
+					if(!((Folder) n.@folder).open){ // Allow open and initialize manually in folder processing closure
+						// In case working from cache - init store and logger fields. Also no checking or results needed -it have been done in meta-getters
+						n.@folder.store; n.@folder.logger;
+
 						n.@folder.open(Folder.READ_ONLY);
 					}
 					n.@folder.messages.each{Message message ->
@@ -181,11 +201,11 @@ class ImapTreeSize{
 					}
 				}
 			}
-			catch(Throwable t){
+			catch(Throwable t) {
 				log.fatal("Exception happened on processing operation: ", t);
 			}
 			finally {
-				if (n.@folder.open)
+				if(n.@folder.open)
 					n.@folder.close(false)
 			}
 		}

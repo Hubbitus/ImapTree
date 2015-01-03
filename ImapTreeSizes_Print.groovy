@@ -64,7 +64,6 @@ else{
 	}
 
 	def operation = (opt.operation ? config.operations[opt.operation] : config.operations.printFolderSizes);
-	println operation;
 	imapTree.traverseTree(operation.folder, operation.message, config.operations.treeTraverseOrder)
 }
 
