@@ -1,6 +1,7 @@
 package info.hubbitus.imaptree
 
 import groovy.transform.AutoClone
+import groovy.transform.CompileStatic
 import groovy.transform.Sortable
 
 /**
@@ -11,12 +12,19 @@ import groovy.transform.Sortable
  **/
 @Sortable
 @AutoClone
+@CompileStatic
 class Size {
 	Long bytes = 0 // Size in bytes of messages in folder
 	Long messages = 0// Number of messages in folder
 	boolean onlyFolders = false
 
-	// http://stackoverflow.com/questions/3758606/how-to-convert-byte-size-into-human-readable-format-in-java
+	/**
+	 * Base implementation borrowed from: http://stackoverflow.com/questions/3758606/how-to-convert-byte-size-into-human-readable-format-in-java
+	 *
+	 * @param bytes
+	 * @param si
+	 * @return
+	 */
 	public static String humanReadableByteCount(long bytes, boolean si = false) {
 		int unit = si ? 1000 : 1024;
 		if(bytes < unit) return bytes + " B";
@@ -25,6 +33,11 @@ class Size {
 		return String.format("%.2f %sB", bytes / Math.pow(unit, exp), pre);
 	}
 
+	/**
+	 * Human readable bytes count representation.
+	 *
+	 * @return
+	 */
 	String hr(){
 		humanReadableByteCount(bytes ?: 0)
 	}

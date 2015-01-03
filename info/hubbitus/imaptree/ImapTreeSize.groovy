@@ -1,12 +1,13 @@
 package info.hubbitus.imaptree
 
+import groovy.transform.CompileStatic
+import groovy.transform.TypeChecked
 @Grab(group='com.sun.mail', module='javax.mail', version='1.5.2')
 @Grab(group='com.sun.mail', module='gimap', version='1.5.2')
 
 @Grab(group='org.apache.logging.log4j', module='log4j-api', version='2.1')
 @Grab(group='org.apache.logging.log4j', module='log4j-core', version='2.1')
 
-@Grab(group='xmlpull', module='xmlpull', version='1.1.3.1')
 @Grab(group='com.thoughtworks.xstream', module='xstream', version='1.4.7')
 
 import groovy.util.logging.Log4j2
@@ -42,7 +43,7 @@ class ImapTreeSize{
 	ImapTreeSize(ImapAccount account){
 		this.account = account;
 
-		connect()
+		connect();
 		buildTree();
 	}
 
@@ -63,7 +64,7 @@ class ImapTreeSize{
 		store = session.getStore(account.type);
 		store.connect(account.host, account.login, account.password);
 
-		rootImapFolder = store.getFolder(account.folder); // GmailFolder
+		rootImapFolder = store.getFolder(account.folder);
 		tree = new Node(null, rootImapFolder.fullName, [root: true], rootImapFolder);
 	}
 
@@ -91,7 +92,7 @@ class ImapTreeSize{
 
 	Size getFolderSize(Folder f) {
 		if(f.type & f.HOLDS_MESSAGES) {
-			try {
+			try{
 				log.debug "Calculate size of folder: <<$f>>; total messages: ${f.getMessageCount()}, deleted count: ${f.getDeletedMessageCount()}, new count: ${f.getNewMessageCount()}, unread count: ${f.getUnreadMessageCount()}";
 				f.open(Folder.READ_ONLY);
 				FetchProfile fp = new FetchProfile();
@@ -108,9 +109,8 @@ class ImapTreeSize{
 	}
 
 	// Store text as CDATA sections for readability
-	@Lazy
 	@XStreamOmitField
-	private static XStream xStream = {
+	@Lazy private static XStream xStream = {
 		XStream xStream = new XStream(
 //			new XppDriver() {
 			new StaxDriver(){ // For console run
@@ -160,5 +160,34 @@ class ImapTreeSize{
 	 */
 	static ImapTreeSize deserializeFromFile(File file){
 		xStream.fromXML(file);
+	}
+
+	/**
+	 * Traverse all Folders and messages in it byt desired order
+	 *
+	 * @param folderHandle
+	 * @param messageHandle
+	 * @param traverseType
+	 */
+	void traverseTree(Closure<Boolean> folderHandle, Closure messageHandle, String traverseType = 'depthFirst'){
+		tree."$traverseType"().each{Node n ->
+			try {
+				if(folderHandle(n)) {
+					if(!((Folder)n.@folder).open){ // Allow open and initialize manually in folder processing closure
+						n.@folder.open(Folder.READ_ONLY);
+					}
+					n.@folder.messages.each{Message message ->
+						messageHandle(message);
+					}
+				}
+			}
+			catch(Throwable t){
+				log.fatal("Exception happened on processing operation: ", t);
+			}
+			finally {
+				if (n.@folder.open)
+					n.@folder.close(false)
+			}
+		}
 	}
 }

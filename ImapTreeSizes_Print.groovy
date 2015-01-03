@@ -17,7 +17,10 @@ cli.h(longOpt: 'help', 'usage information', required: false)
 cli.a(longOpt: 'account', 'Account name from defined in config file under config.accounts section. Required if you define more than one there. Otherwise warning printed and its selected automatically.', required: false, args: 1)
 cli.c(longOpt: 'cached', 'run from cached file. No information gathered from imap account actually. Instead read previously saved file config.fullXmlCache. Useful for deep analysis and experiments.', required: false)
 cli._(longOpt: 'print-depth', 'Max amount of nesting folders print. By default all. Starts from 1, so only root folder will be printed. 2 means also 1st level childs and so on.', required: false, args: 1)
+cli.o(longOpt: 'operation', 'Operation to perform. Otherwise just folder sizes printed (default operation named printFolderSizes)', required: false, args: 1)
 OptionAccessor opt = cli.parse(args)
+
+config.opt = opt;
 
 if(opt.h /*|| opt.arguments().isEmpty()*/ ) {
 	cli.usage()
@@ -60,35 +63,9 @@ else{
 		imapTree = ImapTreeSize.deserializeFromFile(xmlCacheFile);
 	}
 
-//	Node.metaClass.depthLevel = {
-//		delegate.folder.name().split(
-//			(it.folder.value() instanceof NodeList ? it.folder.value()[0] : it.folder.value()).separator.toString()
-//		).size()
-//		77
-//	}
-
-// First very simple implementation, without subtrees
-//	imapTree.tree.depthFirst().each{
-//		println "<<${it.name()}>>: Size: ${it.@size}"
-//	}
-
-	List<Map> res = imapTree.tree.depthFirst().collect{Node n ->
-		[
-			node       : n
-			,selfSize  : n.@size
-			,treeSize  : n.depthFirst().sum { it.@size }
-			,treeChilds: n.depthFirst().size()
-		]
-	};
-
-	res.each{
-//		println("it.node.name(): ${it.node.name()}")
-//		println("it.node.@folder: ${it.node.@folder}")
-//		println("Depth: ${it.node.name().split(it.node.@folder.separator.toString()).size()}")
-		if (opt.'print-depth' && (it.node.name().split(it.node.@folder.separator.toString()).size() <= opt.'print-depth'.toInteger()) ){
-			println "<<${it.node.name()}>>: SelfSize: ${it.selfSize}; treeSize: ${it.treeSize}; treeChilds: ${it.treeChilds}"
-		}
-	}
+	def operation = (opt.operation ? config.operations[opt.operation] : config.operations.printFolderSizes);
+	println operation;
+	imapTree.traverseTree(operation.folder, operation.message, config.operations.treeTraverseOrder)
 }
 
 /*
