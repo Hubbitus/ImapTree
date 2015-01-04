@@ -54,10 +54,13 @@ class ImapTreeSize {
 		store
 	}();
 
+	private ProgressLogger pl;
+
 	ImapTreeSize(ImapAccount account) {
 		this.account = account;
 
 		buildTree();
+		pl.stop();// Just for logging
 	}
 
 	ImapTreeSize(String host, Integer port, String login, String password, String accountType, String folder = 'INBOX') {
@@ -68,6 +71,7 @@ class ImapTreeSize {
 		Node node;
 
 		if(null == cur) {
+			pl = new ProgressLogger(-1, log.&info, null, 'Folder');
 			cur = (Folder) tree.value();
 			parentTreeNode = tree;
 			parentTreeNode.value = cur;
@@ -83,6 +87,7 @@ class ImapTreeSize {
 			}>> size: ${node.parent().@size}"""
 			// value()[0] required to obtain real value but not NodeList. Bug? See trees.groovy
 		}
+		pl.next();
 
 		cur.list().each { // recursive
 			buildTree(it, node)
