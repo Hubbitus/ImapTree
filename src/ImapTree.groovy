@@ -1,4 +1,5 @@
 #!/opt/groovy-2.3.6/bin/groovy
+import groovy.ui.Console
 import info.hubbitus.imaptree.ImapAccount
 import info.hubbitus.imaptree.ImapTreeSize
 import info.hubbitus.imaptree.utils.ConfigExtended
@@ -20,7 +21,11 @@ cli.h(longOpt: 'help', 'This usage information', required: false)
 cli.a(longOpt: 'account', 'Account name from defined in config file under config.accounts section. Required if you define more than one there. Otherwise warning printed and its selected automatically.', required: false, args: 1)
 cli.c(longOpt: 'cached', 'run from cached file. No information gathered from imap account actually. Instead read previously saved file config.fullXmlCache. Useful for deep analysis and experiments.', required: false)
 cli.d(longOpt: 'print-depth', 'Max amount of nesting folders print. By default all. Starts from 1, so only root folder will be printed. 2 means also 1st level childs and so on.', required: false, args: 1)
-cli.o(longOpt: 'operation', 'Operation to perform. Otherwise just folder sizes printed (default operation named printFolderSizes)', required: false, args: 1)
+cli.o(longOpt: 'operation', '''Operation to perform. Otherwise just folder sizes printed (default operation named printFolderSizes).
+By default (in example config) implemented operations:
+	o printFolderSizes - (default if no other defined) - just print on console sizes (in bytes, human readable size and count of messages and sub-folders)
+	o GroovyConsole - Opens GUI GroovyConsole with binded gathered data and snippet to start from investigate it in interactive mode.
+See example config comments for more details.''', required: false, args: 1)
 cli.D(longOpt: 'config', '''Change configured options from command line. Allow runtime override. May appear multiple times - processed in that order. For example:
 	-D log.fullXmlCache="some.file" --config operations.printFolderSizes.folder='{true}' -D operations.printFolderSizes.message='{m-> println "SUBJ: ${m.subject}"}'
 	Values trimmed - use quotes and escapes where appropriate''', required: false, args: 2, valueSeparator: '=', argName: 'property=value')
@@ -85,29 +90,9 @@ else{
 	}
 
 	def operation = (opt.operation ? config.operations[opt.operation] : config.operations.printFolderSizes);
-	imapTree.traverseTree(operation.folder, operation.message, config.operations.treeTraverseOrder)
+		if (operation.fullControl){
+			operation.fullControl(imapTree, config);
+		}else{
+			imapTree.traverseTree(operation.folder, operation.message, config.operations.treeTraverseOrder);
+		}
 }
-
-/*
-//import java.awt.*
-import java.awt.FlowLayout
-import java.awt.GridLayout
-import javax.swing.*
-import groovy.swing.SwingBuilder
-
-
-aFrame = new SwingBuilder().frame(title:"Hello World",size:[200,200]){
-    panel(layout: new FlowLayout()) {
-      scrollPane(preferredSize:[200,130]) {
-        tree(){
-            node('one')
-        }
-      }
-      panel(layout:new GridLayout(1,2,15,15)){
-         button(text:"Ok")
-         button(text:"Cancel")
-      }
-    }
-}
-aFrame.show()
-*/

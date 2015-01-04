@@ -23,7 +23,9 @@
           <root url="jar://$USER_HOME$/.groovy/grapes/com.sun.mail/gimap/jars/gimap-1.5.2.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.ideaLibSources/gimap-1.5.2-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
