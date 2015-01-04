@@ -54,6 +54,7 @@ class ImapTreeSize {
 		store
 	}();
 
+	@XStreamOmitField
 	private ProgressLogger pl;
 
 	ImapTreeSize(ImapAccount account) {
