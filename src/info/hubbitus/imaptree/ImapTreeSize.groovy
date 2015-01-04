@@ -18,6 +18,8 @@ import com.thoughtworks.xstream.core.util.QuickWriter
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter
 import com.thoughtworks.xstream.io.xml.StaxDriver
+import info.hubbitus.imaptree.utils.bench.ProgressLogger
+
 import javax.mail.*
 
 /**
@@ -181,7 +183,7 @@ class ImapTreeSize {
 	 * @param traverseType
 	 */
 	void traverseTree(Closure<Boolean> folderHandle, Closure messageHandle, String traverseType = 'depthFirst'){
-		tree."$traverseType"().each{Node n ->
+		ProgressLogger.each(tree."$traverseType"()){Node n ->
 			try {
 				if(folderHandle(n)){
 					if(!((Folder) n.@folder).open){ // Allow open and initialize manually in folder processing closure
@@ -190,18 +192,18 @@ class ImapTreeSize {
 
 						n.@folder.open(Folder.READ_ONLY);
 					}
-					n.@folder.messages.each{Message message ->
+					ProgressLogger.each(n.@folder.messages as List<Message>){Message message ->
 						messageHandle(message);
-					}
+					} { log.info it }
 				}
 			}
-			catch(Throwable t) {
+			catch(Throwable t){
 				log.fatal("Exception happened on processing operation: ", t);
 			}
 			finally {
 				if(n.@folder.open)
 					n.@folder.close(false)
 			}
-		}
+		} { log.info it }
 	}
 }

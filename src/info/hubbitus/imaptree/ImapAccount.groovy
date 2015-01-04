@@ -1,5 +1,6 @@
 package info.hubbitus.imaptree
 
+import groovy.transform.CompileStatic
 import groovy.transform.TupleConstructor
 
 /**
@@ -9,6 +10,7 @@ import groovy.transform.TupleConstructor
  * @created 2015-01-01 21:06
  **/
 @TupleConstructor
+@CompileStatic
 class ImapAccount{
 	String host = 'imap.gmail.com';
 	Integer port = 933;

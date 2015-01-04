@@ -3,6 +3,8 @@ import info.hubbitus.imaptree.ImapAccount
 import info.hubbitus.imaptree.ImapTreeSize
 import info.hubbitus.imaptree.utils.ConfigExtended
 
+@Grab(group='commons-cli', module='commons-cli', version='1.2')
+
 /**
  * Simple example to just print folder sizes recursively
  *
@@ -72,7 +74,7 @@ else{
 	File xmlCacheFile = new File(config.log.fullXmlCache.replace('%{account}', accountName));
 
 	if (!opt.c){
-		imapTree = new ImapTreeSize(config.accounts[opt.a]);
+		imapTree = new ImapTreeSize(imapAccount);
 		if (config.log.fullXmlCache){
 			imapTree.serializeToFile(xmlCacheFile);
 		}
