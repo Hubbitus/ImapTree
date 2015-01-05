@@ -1,6 +1,7 @@
 import groovy.ui.Console
-import info.hubbitus.imaptree.ImapAccount
+import info.hubbitus.imaptree.config.ImapAccount
 import info.hubbitus.imaptree.ImapTreeSize
+import info.hubbitus.imaptree.config.Operation
 
 import javax.mail.Message
 
@@ -40,76 +41,67 @@ config{
 	 *
 	 */
 	operations{
-		// Name of method {@link groovy.util.Node} (http://groovy.codehaus.org/api/groovy/util/Node.html) for order tree traversal
-		// breadthFirst or depthFirst. See <a href="http://en.wikipedia.org/wiki/Tree_traversal">theory</a>
-		treeTraverseOrder = 'depthFirst'
-
-		// Base example and default operation!
-		printFolderSizes{
-			/**
-			 * Return values treated as:
-			 *	true - process messages in it also
-			 *	false - otherwise
-			 *
-			 * Node passed have next content:
-			 *	value - (obtained by value()) is Folder if it leaf or NodeList otherwise
-			 * Attributes:
-			 *	@folder - Folder
-			 *	@size - calculated size
-			 *	@root - boolean is flag is it root folder or not
-			 *
-			 * In closures body full this config available as config variable and it additionally have
-			 *	config.opt - CliBuilder parsed command line passed options.
-			 */
-			folder = {Node node->
+		// For description of options see Operation class
+		printFolderSizes = new Operation(
+			folderProcess: {Node node->
+				println "printFolderSizes process folder ${node.@folder}"
 				if (config.opt.'print-depth' && (node.name().split(node.@folder.separator.toString()).size() <= config.opt.'print-depth'.toInteger()) ){
 					println "<<${node.name()}>>: SelfSize: ${node.@size}; treeSize: ${node.depthFirst().sum { it.@size }}; treeChilds: ${node.depthFirst().size()}"
 				}
 				false
 			}
-			message = {Message m-> } // Is not used in particular case (false returned from folder handler), but for example may contain: println m.subject
-		}
+			,messageProcess: {Message m-> } // Is not used in particular case (false returned from folder handler), but for example may contain: println m.subject
+		)
+		eachMessage = new Operation(
+			folderProcess: {Node node->
+				println "eachMessage process folder <<${node.name()}>>: SelfSize: ${node.@size}; treeSize: ${node.depthFirst().sum { it.@size }}; treeChilds: ${node.depthFirst().size()}"
+				true
+			}
+			,messageProcess: {Message m-> println "eachMessage msg SUBJECT: ${m.subject}"} // Is not used in particular case (false returned from folder handler), but for example may contain: println m.subject
+		)
 		// Just bing results in interactive GUI GroovyConsole for further experiments
 		GroovyConsole{
-			fullControl = {ImapTreeSize imapTree, ConfigObject config->
-				// http://groovy.codehaus.org/Groovy+Console
-				Console console = new Console([imapTree: imapTree, config: config] as Binding);
-				console.run();
-				console.with{ // Set default content of console
-					swing.edt{
-						inputArea.editable = false
-					}
-					swing.doOutside{
-						try {
-							def consoleText ='''// Typical usage this console to analyse results:
-// All groovy magic available!
-imapTree.traverseTree(
-	{f->
-		config.operations.printFolderSizes.folder(f) // Call default handler, but also enable messages processing
-		true
-	}
-	,{m-> // Careful! It will be very slow run it code directly on big folders with many messages!
-		println "(SUBJ: [${m.subject}]) Labels: ${m.getLabels()}"
-	}
-	,config.operations.treeTraverseOrder
-);
-''';
-							swing.edt {
-								updateTitle()
-								inputArea.document.remove 0, inputArea.document.length
-								inputArea.document.insertString 0, consoleText, null
-								setDirty(false)
-								inputArea.caretPosition = 0
+			new Operation(
+				fullControl: {ImapTreeSize imapTree, ConfigObject config->
+					// http://groovy.codehaus.org/Groovy+Console
+					Console console = new Console([imapTree: imapTree, config: config] as Binding);
+					console.run();
+					console.with{ // Set default content of console
+						swing.edt{
+							inputArea.editable = false
+						}
+						swing.doOutside{
+							try {
+								def consoleText ='''// Typical usage this console to analyse results:
+	// All groovy magic available!
+	imapTree.traverseTree(
+		{f->
+			config.operations.printFolderSizes.folder(f) // Call default handler, but also enable messages processing
+			true
+		}
+		,{m-> // Careful! It will be very slow run it code directly on big folders with many messages!
+			println "(SUBJ: [${m.subject}]) Labels: ${m.getLabels()}"
+		}
+		,config.operations.treeTraverseOrder
+	);
+	''';
+								swing.edt {
+									updateTitle()
+									inputArea.document.remove 0, inputArea.document.length
+									inputArea.document.insertString 0, consoleText, null
+									setDirty(false)
+									inputArea.caretPosition = 0
+								}
+							} finally {
+								swing.edt { inputArea.editable = true }
+								// GROOVY-3684: focus away and then back to inputArea ensures caret blinks
+								swing.doLater outputArea.&requestFocusInWindow
+								swing.doLater inputArea.&requestFocusInWindow
 							}
-						} finally {
-							swing.edt { inputArea.editable = true }
-							// GROOVY-3684: focus away and then back to inputArea ensures caret blinks
-							swing.doLater outputArea.&requestFocusInWindow
-							swing.doLater inputArea.&requestFocusInWindow
 						}
 					}
 				}
-			}
+			)
 		}
 	}
 

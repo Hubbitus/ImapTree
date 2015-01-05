@@ -1,4 +1,4 @@
-package info.hubbitus.imaptree
+package info.hubbitus.imaptree.config
 
 import groovy.transform.CompileStatic
 import groovy.transform.TupleConstructor

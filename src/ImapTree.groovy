@@ -1,7 +1,7 @@
 #!/opt/groovy-2.3.6/bin/groovy
-import groovy.ui.Console
-import info.hubbitus.imaptree.ImapAccount
+import info.hubbitus.imaptree.config.ImapAccount
 import info.hubbitus.imaptree.ImapTreeSize
+import info.hubbitus.imaptree.config.Operation
 import info.hubbitus.imaptree.utils.ConfigExtended
 
 @Grab(group='commons-cli', module='commons-cli', version='1.2')
@@ -27,7 +27,7 @@ By default (in example config) implemented operations:
 	o GroovyConsole - Opens GUI GroovyConsole with binded gathered data and snippet to start from investigate it in interactive mode.
 See example config comments for more details.''', required: false, args: 1)
 cli.D(longOpt: 'config', '''Change configured options from command line. Allow runtime override. May appear multiple times - processed in that order. For example:
-	-D log.fullXmlCache="some.file" --config operations.printFolderSizes.folder='{true}' -D operations.printFolderSizes.message='{m-> println "SUBJ: ${m.subject}"}'
+	-D log.fullXmlCache="some.file" --config operations.printFolderSizes.folderProcess='{true}' -D operations.printFolderSizes.messageProcess='{m-> println "SUBJ: ${m.subject}"}'
 	Values trimmed - use quotes and escapes where appropriate''', required: false, args: 2, valueSeparator: '=', argName: 'property=value')
 OptionAccessor opt = cli.parse(args)
 
@@ -89,10 +89,12 @@ else{
 		imapTree = ImapTreeSize.deserializeFromFile(xmlCacheFile);
 	}
 
-	def operation = (opt.operation ? config.operations[opt.operation] : config.operations.printFolderSizes);
+	Operation operation = (opt.operation ? config.operations[opt.operation] : config.operations.printFolderSizes) as Operation;
+	operation.config = config;
+println operation.dump();
 		if (operation.fullControl){
 			operation.fullControl(imapTree, config);
 		}else{
-			imapTree.traverseTree(operation.folder, operation.message, config.operations.treeTraverseOrder);
+			imapTree.traverseTree(operation);
 		}
 }

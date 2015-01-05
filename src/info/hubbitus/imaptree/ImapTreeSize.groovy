@@ -18,6 +18,8 @@ import com.thoughtworks.xstream.core.util.QuickWriter
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter
 import com.thoughtworks.xstream.io.xml.StaxDriver
+import info.hubbitus.imaptree.config.ImapAccount
+import info.hubbitus.imaptree.config.Operation
 import info.hubbitus.imaptree.utils.bench.ProgressLogger
 
 import javax.mail.*
@@ -188,25 +190,21 @@ class ImapTreeSize {
 	 * @param messageHandle
 	 * @param traverseType
 	 */
-	void traverseTree(Closure<Boolean> folderHandle, Closure messageHandle, String traverseType = 'depthFirst'){
-		ProgressLogger.each(tree."$traverseType"()){Node n ->
+	void traverseTree(Operation operation){
+		ProgressLogger.each(tree."${operation.treeTraverseOrder}"()){Node n ->
 			try {
-				if(folderHandle(n)){
-					if(!((Folder) n.@folder).open){ // Allow open and initialize manually in folder processing closure
-						// In case working from cache - init store and logger fields. Also no checking or results needed -it have been done in meta-getters
-						n.@folder.store; n.@folder.logger;
-
-						n.@folder.open(Folder.READ_ONLY);
-					}
+				if(operation.folderProcess(n)){
+					operation.folderOpen(n);
 					ProgressLogger.each(n.@folder.messages as List<Message>){Message message ->
-						messageHandle(message);
+						operation.messageProcess(message);
 					} { log.info it }
 				}
+				if (operation.folderClose) operation.folderClose(n);
 			}
 			catch(Throwable t){
 				log.fatal("Exception happened on processing operation: ", t);
 			}
-			finally {
+			finally {// Ensure folder closed
 				if(n.@folder.open)
 					n.@folder.close(false)
 			}
