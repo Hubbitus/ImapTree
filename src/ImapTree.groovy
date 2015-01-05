@@ -27,7 +27,7 @@ By default (in example config) implemented operations:
 	o GroovyConsole - Opens GUI GroovyConsole with binded gathered data and snippet to start from investigate it in interactive mode.
 See example config comments for more details.''', required: false, args: 1)
 cli.D(longOpt: 'config', '''Change configured options from command line. Allow runtime override. May appear multiple times - processed in that order. For example:
-	-D log.fullXmlCache="some.file" --config operations.printFolderSizes.folderProcess='{true}' -D operations.printFolderSizes.messageProcess='{m-> println "SUBJ: ${m.subject}"}'
+	-D log.fullXmlCache="some.file" --config operations.printFolderSizes.folderProcess='{true}' -D operations.printFolderSizes.messageProcess='{m-> println "SUBJ: ${m.subject}"}' --config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
 	Values trimmed - use quotes and escapes where appropriate''', required: false, args: 2, valueSeparator: '=', argName: 'property=value')
 OptionAccessor opt = cli.parse(args)
 
@@ -48,6 +48,12 @@ if(opt.h /*|| opt.arguments().isEmpty()*/ ) {
 else{
 	if (opt.D){
 		(opt.Ds as List).collate(2).each{// Override configs from commandline options
+// @TODO BUG?:
+//			--config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
+// works while:
+//			'operations.printFolderSizes.treeTraverseOrder="breadthFirst"'
+// parsed into strings: it[0]=[operations.printFolderSizes.treeTraverseOrder], it[1]=["breadthFirst]
+//			println "it[0]=[${it[0]}], it[1]=[${it[1]}]"
 			config.setFromPropertyPathLikeKey(it[0], it[1]);
 		}
 	}
