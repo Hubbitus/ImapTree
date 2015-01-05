@@ -86,13 +86,13 @@ else{
 	}
 	else{
 		println("Run from cache file [${xmlCacheFile.absolutePath}]");
-		imapTree = ImapTreeSize.deserializeFromFile(xmlCacheFile);
+		imapTree = ImapTreeSize.deserializeFromFile(xmlCacheFile, imapAccount);
 	}
 
 	Operation operation = (opt.operation ? config.operations[opt.operation] : config.operations.printFolderSizes) as Operation;
 	operation.config = config;
 		if (operation.fullControl){
-			operation.fullControl(imapTree, config);
+			operation.fullControl(imapTree);
 		}else{
 			imapTree.traverseTree(operation);
 		}

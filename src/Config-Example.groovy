@@ -61,7 +61,7 @@ config{
 		)
 		// Just bing results in interactive GUI GroovyConsole for further experiments
 		GroovyConsole = new Operation(
-			fullControl: {ImapTreeSize imapTree, ConfigObject config->
+			fullControl: {ImapTreeSize imapTree->
 				// http://groovy.codehaus.org/Groovy+Console
 				Console console = new Console([imapTree: imapTree, config: config] as Binding);
 				console.run();

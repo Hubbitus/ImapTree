@@ -81,7 +81,9 @@
           <root url="jar://$USER_HOME$/.groovy/grapes/com.thoughtworks.xstream/xstream/jars/xstream-1.4.7.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.ideaLibSources/xstream-1.4.7-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="library" name="org.codehaus.groovy:groovy-all:2.3.7" level="application" />

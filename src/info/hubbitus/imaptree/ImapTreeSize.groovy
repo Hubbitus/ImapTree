@@ -1,5 +1,6 @@
 package info.hubbitus.imaptree
 
+import com.sun.mail.imap.IMAPStore
 @Grab(group='com.sun.mail', module='javax.mail', version='1.5.2')
 @Grab(group='com.sun.mail', module='gimap', version='1.5.2')
 
@@ -10,9 +11,7 @@ package info.hubbitus.imaptree
 
 import groovy.util.logging.Log4j2
 import com.thoughtworks.xstream.annotations.XStreamOmitField
-import com.sun.mail.gimap.GmailFolder
 import com.sun.mail.util.MailLogger
-import com.sun.mail.imap.IMAPFolder
 import com.thoughtworks.xstream.XStream
 import com.thoughtworks.xstream.core.util.QuickWriter
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter
@@ -21,6 +20,7 @@ import com.thoughtworks.xstream.io.xml.StaxDriver
 import info.hubbitus.imaptree.config.ImapAccount
 import info.hubbitus.imaptree.config.Operation
 import info.hubbitus.imaptree.utils.bench.ProgressLogger
+import info.hubbitus.imaptree.xstream.DontSaveConverter
 
 import javax.mail.*
 
@@ -59,11 +59,18 @@ class ImapTreeSize {
 	@XStreamOmitField
 	private ProgressLogger pl;
 
-	ImapTreeSize(ImapAccount account) {
+	/**
+	 *
+	 * @param account
+	 * @param doNotBuildTree For factory - to create object to what tie new de-serialised
+	 */
+	ImapTreeSize(ImapAccount account, boolean doNotBuildTree = false){
 		this.account = account;
 
-		buildTree();
-		pl.stop();// Just for logging
+		if (!doNotBuildTree){
+			buildTree();
+			pl.stop();// Just for logging
+		}
 	}
 
 	ImapTreeSize(String host, Integer port, String login, String password, String accountType, String folder = 'INBOX') {
@@ -117,40 +124,42 @@ class ImapTreeSize {
 
 	// Store text as CDATA sections for readability
 	@XStreamOmitField
-	@Lazy private static XStream xStream = {
+	@Lazy private XStream xStream = {
 		XStream xStream = new XStream(
-//			new XppDriver() {
-				new StaxDriver() { // For console run
-					public HierarchicalStreamWriter createWriter(Writer out) {
-						return new PrettyPrintWriter(out) {
-							protected void writeText(QuickWriter writer, String text) {
-								if(text ==~ /(?s).*[<>&].*/) {
-									writer.write('<![CDATA[');
-									writer.write(text);
-									writer.write(']]>');
-								} else {
-									writer.write(text);
-								}
+			new StaxDriver() { // For console run
+				public HierarchicalStreamWriter createWriter(Writer out) {
+					return new PrettyPrintWriter(out) {
+						protected void writeText(QuickWriter writer, String text) {
+							if(text ==~ /(?s).*[<>&].*/) {
+								writer.write('<![CDATA[');
+								writer.write(text);
+								writer.write(']]>');
+							} else {
+								writer.write(text);
 							}
-						};
-					}
+						}
+					};
 				}
+			}
 		);
 
 		xStream.autodetectAnnotations(true);
 		xStream.classLoader = getClass().classLoader;
-
 		xStream.omitField(ImapTreeSize, 'log');
-		xStream.omitField(Folder, 'store');
-		xStream.omitField(IMAPFolder, 'logger');
-		xStream.omitField(IMAPFolder, 'connectionPoolLogger');
+
+//		xStream.omitField(Folder, 'store');
+		xStream.registerConverter(new DontSaveConverter(Store, store));
+//		xStream.omitField(IMAPFolder, 'logger');
+		xStream.registerConverter(new DontSaveConverter(MailLogger, new MailLogger('_fromXmlFolder', 'DEBUG IMAP', store.session)));
+//		xStream.omitField(IMAPFolder, 'connectionPoolLogger');
+		xStream.registerConverter(new DontSaveConverter(MailLogger, ((IMAPStore)store).getConnectionPoolLogger()));
 
 		xStream
 	}();
 
 	/**
 	 * Write string representation of This object in XML. If that once saved to file that can be then reconstructed by
-	 * fabric method {@link #deserializeFromFile(java.io.File)}
+	 * fabric method {@link #deserializeFromFile(java.io.File, info.hubbitus.imaptree.config.ImapAccount)}}
 	 *
 	 * @return
 	 */
@@ -163,24 +172,24 @@ class ImapTreeSize {
 	 * Reconstruct object from previous saved XML cache file. {@see # serializeToFile ( java.io.File )}
 	 *
 	 * @param file
+	 * @param imapAccount ImapAccount - for what tie deserialized object. Used to do not store excessive information like
+	 *	store, loggers into file and leave it readable.
 	 * @return
 	 */
-	static ImapTreeSize deserializeFromFile(File file) {
-		ImapTreeSize res = (ImapTreeSize)xStream.fromXML(file);
-		// Fore de-serialized objects - reconstruct omitted store and loggers
-		GmailFolder.metaClass.getStore = IMAPFolder.metaClass.getStore = {
-			if(!delegate.@store) {
-				delegate.@store = res.store;
-			}
-			delegate.@store;
-		}
-		GmailFolder.metaClass.getLogger = IMAPFolder.metaClass.getLogger = {
-			if(!delegate.@logger) {
-				delegate.@logger = new MailLogger(delegate.getClass(), 'DEBUG IMAP', res.store.session);
-			}
-			delegate.@logger;
-		}
-		res;
+	static ImapTreeSize deserializeFromFile(File file, ImapAccount imapAccount) {
+		ImapTreeSize imapTreeSize = new ImapTreeSize(imapAccount, true);
+		imapTreeSize.deserialize(file);
+	}
+
+	/**
+	 * Reconstruct object from previous saved XML cache file. {@see # serializeToFile (java.io.File)}
+	 * Non-static helper for {@link #deserializeFromFile(java.io.File, info.hubbitus.imaptree.config.ImapAccount)}
+	 *
+	 * @param file
+	 * @return
+	 */
+	private ImapTreeSize deserialize(File file){
+		xStream.fromXML(file);
 	}
 
 	/**
