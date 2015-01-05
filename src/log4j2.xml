@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+http://mariemjabloun.blogspot.ru/2014/09/log4j-2-tutorial-solve-error.html
+http://www.programering.com/a/MTO0MjMwATc.html
+http://logging.apache.org/log4j/2.0/manual/migration.html
+-->
+<Configuration status="ERROR">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<!-- http://logging.apache.org/log4j/2.0/manual/layouts.html#Patterns -->
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{1} - %msg%n"/>
+		</Console>
+		<File name="LogFile" fileName="process.log" append="false">
+			<PatternLayout pattern="%t %-5p %c{2} - %m%n"/>
+		</File>
+	</Appenders>
+	<Loggers>
+		<Root level="DEBUG">
+			<AppenderRef ref="Console"/>
+			<AppenderRef ref="LogFile"/>
+		</Root>
+	</Loggers>
+</Configuration>
