@@ -35,7 +35,8 @@ import javax.mail.Folder
  *
  * @author Pavel Alexeev - <Pahan@Hubbitus.info> (pasha)
  * @created 2015-01-05 00:33
- * */
+ **/
+//@AutoClone Simple annotation can't be used due to the bug: https://jira.codehaus.org/browse/GROOVY-7091 (fixed in groovy >= 2.3.8)
 class Operation{
 	// If it defined ALL OTHER IGNORED - for custom processors
 	Closure fullControl;
@@ -86,4 +87,18 @@ class Operation{
 	Closure folderClose;
 
 	Closure messageProcess;
+
+	/**
+	 * @AutoClone Simple annotation can't be used due to the bug: https://jira.codehaus.org/browse/GROOVY-7091 (fixed in groovy >= 2.3.8)
+	 *
+	 * @return
+	 */
+	@Override
+	Operation clone(){
+		Operation res = new Operation();
+		this.properties.findAll{ 'class' != it.key }.each{
+			res."${it.key}" = it.value
+		}
+		res;
+	}
 }

@@ -91,7 +91,6 @@ else{
 
 	Operation operation = (opt.operation ? config.operations[opt.operation] : config.operations.printFolderSizes) as Operation;
 	operation.config = config;
-println operation.dump();
 		if (operation.fullControl){
 			operation.fullControl(imapTree, config);
 		}else{

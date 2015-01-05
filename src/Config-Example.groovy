@@ -60,49 +60,49 @@ config{
 			,messageProcess: {Message m-> println "eachMessage msg SUBJECT: ${m.subject}"} // Is not used in particular case (false returned from folder handler), but for example may contain: println m.subject
 		)
 		// Just bing results in interactive GUI GroovyConsole for further experiments
-		GroovyConsole{
-			new Operation(
-				fullControl: {ImapTreeSize imapTree, ConfigObject config->
-					// http://groovy.codehaus.org/Groovy+Console
-					Console console = new Console([imapTree: imapTree, config: config] as Binding);
-					console.run();
-					console.with{ // Set default content of console
-						swing.edt{
-							inputArea.editable = false
-						}
-						swing.doOutside{
-							try {
-								def consoleText ='''// Typical usage this console to analyse results:
-	// All groovy magic available!
-	imapTree.traverseTree(
-		{f->
-			config.operations.printFolderSizes.folder(f) // Call default handler, but also enable messages processing
-			true
-		}
-		,{m-> // Careful! It will be very slow run it code directly on big folders with many messages!
-			println "(SUBJ: [${m.subject}]) Labels: ${m.getLabels()}"
-		}
-		,config.operations.treeTraverseOrder
-	);
-	''';
-								swing.edt {
-									updateTitle()
-									inputArea.document.remove 0, inputArea.document.length
-									inputArea.document.insertString 0, consoleText, null
-									setDirty(false)
-									inputArea.caretPosition = 0
-								}
-							} finally {
-								swing.edt { inputArea.editable = true }
-								// GROOVY-3684: focus away and then back to inputArea ensures caret blinks
-								swing.doLater outputArea.&requestFocusInWindow
-								swing.doLater inputArea.&requestFocusInWindow
+		GroovyConsole = new Operation(
+			fullControl: {ImapTreeSize imapTree, ConfigObject config->
+				// http://groovy.codehaus.org/Groovy+Console
+				Console console = new Console([imapTree: imapTree, config: config] as Binding);
+				console.run();
+				console.with{ // Set default content of console
+					swing.edt{
+						inputArea.editable = false
+					}
+					swing.doOutside{
+						try {
+							def consoleText ='''// Typical usage this console to analyse results:
+// All groovy magic available!
+// F.e. redefine closure
+def operation = config.operations.printFolderSizes.clone()
+
+operation.folderProcess = {node->
+    config.operations.printFolderSizes.folderProcess(node) // Call default handler, but also enable messages processing
+    true
+}
+// Add message processing:
+operation.messageProcess = {m->
+    println "msg SUBJ: ${m.subject}"
+}
+imapTree.traverseTree(operation);
+''';
+							swing.edt {
+								updateTitle()
+								inputArea.document.remove 0, inputArea.document.length
+								inputArea.document.insertString 0, consoleText, null
+								setDirty(false)
+								inputArea.caretPosition = 0
 							}
+						} finally {
+							swing.edt { inputArea.editable = true }
+							// GROOVY-3684: focus away and then back to inputArea ensures caret blinks
+							swing.doLater outputArea.&requestFocusInWindow
+							swing.doLater inputArea.&requestFocusInWindow
 						}
 					}
 				}
-			)
-		}
+			}
+		)
 	}
 
 	log{
