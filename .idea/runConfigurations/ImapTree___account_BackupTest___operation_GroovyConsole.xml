@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ImapTree --account BackupTest --operation GroovyConsole" type="GroovyScriptRunConfiguration" factoryName="Groovy" singleton="true">
+    <module name="ImapTreeSize" />
+    <setting name="path" value="file://$PROJECT_DIR$/src/ImapTree.groovy" />
+    <setting name="vmparams" value="" />
+    <setting name="params" value="--account BackupTest --operation GroovyConsole" />
+    <setting name="workDir" value="file://$PROJECT_DIR$/src" />
+    <setting name="debug" value="false" />
+    <RunnerSettings RunnerId="Profile " />
+    <RunnerSettings RunnerId="Run" />
+    <ConfigurationWrapper RunnerId="Run" />
+    <method>
+      <option name="Make" enabled="false" />
+    </method>
+  </configuration>
+</component>
