@@ -1,5 +1,7 @@
 package info.hubbitus.imaptree.config
 
+import com.sun.mail.imap.IMAPFolder
+
 import javax.mail.Folder
 
 /**
@@ -39,6 +41,7 @@ import javax.mail.Folder
 //@AutoClone Simple annotation can't be used due to the bug: https://jira.codehaus.org/browse/GROOVY-7091 (fixed in groovy >= 2.3.8)
 class Operation{
 	// If it defined ALL OTHER IGNORED - for custom processors
+	// Single argument passed - ImapTreeSize object
 	Closure fullControl;
 
 	/**
@@ -75,10 +78,7 @@ class Operation{
 	 */
 	Closure folderOpen = {Node n->
 		if(!((Folder) n.@folder).open){ // Allow open and initialize manually in folder processing closure
-			// In case working from cache - init store and logger fields. Also no checking or results needed -it have been done in meta-getters
-			n.@folder.store; n.@folder.logger;
-
-			n.@folder.open(folderOpenMode);
+			n.@folder.open(delegate.getFolderOpenMode());
 		}
 	}
 	/**
@@ -97,7 +97,14 @@ class Operation{
 	Operation clone(){
 		Operation res = new Operation();
 		this.properties.findAll{ 'class' != it.key }.each{
-			res."${it.key}" = it.value
+			if (it.value instanceof Closure){
+				Closure cln = (Closure)it.value.clone();
+				cln.delegate = res;
+				res."${it.key}" = cln;
+			}
+			else{
+				res."${it.key}" = it.value
+			}
 		}
 		res;
 	}
