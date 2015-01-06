@@ -1,7 +1,5 @@
 package info.hubbitus.imaptree.config
 
-import com.sun.mail.imap.IMAPFolder
-
 import javax.mail.Folder
 
 /**
@@ -39,7 +37,11 @@ import javax.mail.Folder
  * @created 2015-01-05 00:33
  **/
 //@AutoClone Simple annotation can't be used due to the bug: https://jira.codehaus.org/browse/GROOVY-7091 (fixed in groovy >= 2.3.8)
-class Operation{
+class Operation extends DelegateBase{
+	Operation(Map map){
+		ConstructFromMap(map);
+	}
+
 	// If it defined ALL OTHER IGNORED - for custom processors
 	// Single argument passed - ImapTreeSize object
 	Closure fullControl;
@@ -58,12 +60,7 @@ class Operation{
 	/**
 	 * Handle folder - print, calculate stats, gather additional information and so on.
 	 */
-	Closure<Boolean> folderProcess = {
-		if (config.opt.'print-depth' && (node.name().split(node.@folder.separator.toString()).size() <= config.opt.'print-depth'.toInteger()) ){
-			println "<<${node.name()}>>: SelfSize: ${node.@size}; treeSize: ${node.depthFirst().sum { it.@size }}; treeChilds: ${node.depthFirst().size()}"
-		}
-		false
-	}
+	Closure<Boolean> folderProcess;
 	/**
 	 * Main purpose open folder. Also handle restore from cache and initialisation
 	 *

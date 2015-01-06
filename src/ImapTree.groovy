@@ -24,7 +24,9 @@ cli.d(longOpt: 'print-depth', 'Max amount of nesting folders print. By default a
 cli.o(longOpt: 'operation', '''Operation to perform. Otherwise just folder sizes printed (default operation named printFolderSizes).
 By default (in example config) implemented operations:
 	o printFolderSizes - (default if no other defined) - just print on console sizes (in bytes, human readable size and count of messages and sub-folders)
+	o eachMessage - print subject of each message. Good start to customise message processing.
 	o GroovyConsole - Opens GUI GroovyConsole with binded gathered data and snippet to start from investigate it in interactive mode.
+	o gmailTrueDeleteMessages - Real delete messages from Gmail-Imap to do not waste space (delete from '[Gmail]All mail'). Please see example config for detailed description problem and solution
 See example config comments for more details.''', required: false, args: 1)
 cli.D(longOpt: 'config', '''Change configured options from command line. Allow runtime override. May appear multiple times - processed in that order. For example:
 	-D log.fullXmlCache="some.file" --config operations.printFolderSizes.folderProcess='{true}' -D operations.printFolderSizes.messageProcess='{m-> println "SUBJ: ${m.subject}"}' --config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
