@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b23fecd-e9ea-4c09-85fe-819090fd2945" name="Default" comment="Solve Operation closures redelegation problem (access to config). Import DelegateBase class">
+    <list default="true" id="4b23fecd-e9ea-4c09-85fe-819090fd2945" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Config-Example.groovy" afterPath="$PROJECT_DIR$/src/Config-Example.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -109,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Config-Example.groovy" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Config-Example.groovy" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Config-Example.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.107143" vertical-offset="828" max-vertical-offset="2340">
-              <caret line="79" column="50" selection-start-line="79" selection-start-column="50" selection-end-line="79" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.54593176" vertical-offset="1365" max-vertical-offset="2340">
+              <caret line="121" column="86" selection-start-line="121" selection-start-column="86" selection-end-line="121" selection-end-column="86" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
                 <element signature="e#386#1588#0" expanded="true" />
@@ -121,22 +121,25 @@
                 <element signature="e#1824#2175#0" expanded="true" />
                 <element signature="e#2383#2600#0" expanded="true" />
                 <element signature="e#2621#2768#0" expanded="true" />
+                <element signature="e#2902#4271#0" expanded="true" />
+                <element signature="e#3095#4266#0" expanded="true" />
                 <element signature="e#3145#3186#0" expanded="true" />
                 <element signature="e#3145#3186#0" expanded="true" />
+                <element signature="e#3207#4260#0" expanded="true" />
                 <element signature="e#3775#3991#0" expanded="true" />
-                <element signature="e#5867#5893#0" expanded="true" />
-                <element signature="e#5914#7561#0" expanded="true" />
-                <element signature="e#7579#7642#0" expanded="true" />
-                <element signature="e#7655#7999#0" expanded="true" />
+                <element signature="e#5869#5895#0" expanded="true" />
+                <element signature="e#5916#7563#0" expanded="true" />
+                <element signature="e#7581#7644#0" expanded="true" />
+                <element signature="e#7657#8001#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImapTree.groovy" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ImapTree.groovy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ImapTree.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4199475" vertical-offset="1088" max-vertical-offset="1469">
+            <state vertical-scroll-proportion="-5.714286" vertical-offset="1088" max-vertical-offset="1469">
               <caret line="96" column="79" selection-start-line="96" selection-start-column="79" selection-end-line="96" selection-end-column="79" />
               <folding>
                 <element signature="e#31#79#0" expanded="true" />
@@ -804,7 +807,13 @@
       <option name="project" value="LOCAL" />
       <updated>1420508114737</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Adjust config usage in examples.">
+      <created>1420512337108</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1420512337108</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -880,7 +889,8 @@
     <MESSAGE value="ConfigExtended expand doc and example about quoting path literals:&#10;config.setFromPropertyPathLikeKey('some.test.s', '&quot;s CHANGED&quot;');" />
     <MESSAGE value="Implement gmailTrueDeleteMessages operation!" />
     <MESSAGE value="Solve Operation closures redelegation problem (access to config). Import DelegateBase class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Solve Operation closures redelegation problem (access to config). Import DelegateBase class" />
+    <MESSAGE value="Adjust config usage in examples." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjust config usage in examples." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1361,28 +1371,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Config-Example.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.107143" vertical-offset="828" max-vertical-offset="2340">
-          <caret line="79" column="50" selection-start-line="79" selection-start-column="50" selection-end-line="79" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-            <element signature="e#386#1588#0" expanded="true" />
-            <element signature="e#1325#1402#0" expanded="true" />
-            <element signature="e#1824#2175#0" expanded="true" />
-            <element signature="e#2383#2600#0" expanded="true" />
-            <element signature="e#2621#2768#0" expanded="true" />
-            <element signature="e#3145#3186#0" expanded="true" />
-            <element signature="e#3145#3186#0" expanded="true" />
-            <element signature="e#3775#3991#0" expanded="true" />
-            <element signature="e#5867#5893#0" expanded="true" />
-            <element signature="e#5914#7561#0" expanded="true" />
-            <element signature="e#7579#7642#0" expanded="true" />
-            <element signature="e#7655#7999#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Config.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.535714" vertical-offset="627" max-vertical-offset="2197">
@@ -1408,11 +1396,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ImapTree.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4199475" vertical-offset="1088" max-vertical-offset="1469">
+        <state vertical-scroll-proportion="-5.714286" vertical-offset="1088" max-vertical-offset="1469">
           <caret line="96" column="79" selection-start-line="96" selection-start-column="79" selection-end-line="96" selection-end-column="79" />
           <folding>
             <element signature="e#31#79#0" expanded="true" />
             <element signature="e#3273#3701#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Config-Example.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54593176" vertical-offset="1365" max-vertical-offset="2340">
+          <caret line="121" column="86" selection-start-line="121" selection-start-column="86" selection-end-line="121" selection-end-column="86" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#386#1588#0" expanded="true" />
+            <element signature="e#1325#1402#0" expanded="true" />
+            <element signature="e#1824#2175#0" expanded="true" />
+            <element signature="e#2383#2600#0" expanded="true" />
+            <element signature="e#2621#2768#0" expanded="true" />
+            <element signature="e#2902#4271#0" expanded="true" />
+            <element signature="e#3095#4266#0" expanded="true" />
+            <element signature="e#3145#3186#0" expanded="true" />
+            <element signature="e#3145#3186#0" expanded="true" />
+            <element signature="e#3207#4260#0" expanded="true" />
+            <element signature="e#3775#3991#0" expanded="true" />
+            <element signature="e#5869#5895#0" expanded="true" />
+            <element signature="e#5916#7563#0" expanded="true" />
+            <element signature="e#7581#7644#0" expanded="true" />
+            <element signature="e#7657#8001#0" expanded="true" />
           </folding>
         </state>
       </provider>

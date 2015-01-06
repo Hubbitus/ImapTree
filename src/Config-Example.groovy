@@ -118,8 +118,8 @@ imapTree.traverseTree(operation);
 		 * 1) Setup move messages to '[Gmail]/Trash' folder and delete messages *without* hold Shift key - then messages fully
 		 * deleted from ALL folders if there was copies.
 		 * 1.1) It does not work with folders - labels like '[Gmail]/Корзина/My deleted folder' created instead.
-		 * 2) If use Shift key or do not move messages into '[Gmail]/Trash' messages appeared in '[Gmail]All mail' and still eat space.
-		 * 3) Deleting label from Gmail web-interface also leave messages in '[Gmail]All mail'
+		 * 2) If use Shift key or do not move messages into '[Gmail]/Trash' messages appeared in '[Gmail]/All mail' and still eat space.
+		 * 3) Deleting label from Gmail web-interface also leave messages in '[Gmail]/All mail'
 		 *
 		 * So this task solve that problem and work in next way:
 		 * 1) For configured root folder walk recursively and for each message:
