@@ -190,3 +190,7 @@ So this `operation` `gmailTrueDeleteMessages` solve that problem for me and work
 Essentially space from messages must be freed.
 
 
+## Alternatives
+
+Ehhh. It was found ta the end of developing. Developing on [Google Apps Script](https://developers.google.com/apps-script/overview) seams great because may interact witn mail inside Google services.
+There also goode [case-studies examples](https://developers.google.com/apps-script/case-studies) to start learn how it works.
