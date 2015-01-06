@@ -46,8 +46,7 @@ config{
 		// For description of options see Operation class
 		printFolderSizes = new Operation(
 			folderProcess: {Node node->
-				println "printFolderSizes process folder ${node.@folder}"
-				if (config.opt.'print-depth' && (node.name().split(node.@folder.separator.toString()).size() <= config.opt.'print-depth'.toInteger()) ){
+				if ( (false == config.opt.'print-depth') || (node.name().split(node.@folder.separator.toString()).size() <= config.opt.'print-depth'.toInteger()) ){
 					println "<<${node.name()}>>: SelfSize: ${node.@size}; subTreeSize: ${node.depthFirst().sum { it.@size }}; childSubtreeFolders: ${node.depthFirst().size() - 1}"
 				}
 				false
@@ -78,6 +77,7 @@ config{
 							def consoleText ='''// Typical usage this console to analyse results:
 // All groovy magic available!
 // F.e. redefine closure
+config.operations.printFolderSizes.config = config
 def operation = config.operations.printFolderSizes.clone()
 
 operation.folderProcess = {node->
