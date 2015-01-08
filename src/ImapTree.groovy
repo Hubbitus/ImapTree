@@ -27,6 +27,7 @@ By default (in example config) implemented operations:
 	o eachMessage - print subject of each message. Good start to customise message processing.
 	o GroovyConsole - Opens GUI GroovyConsole with binded gathered data and snippet to start from investigate it in interactive mode.
 	o gmailTrueDeleteMessages - Real delete messages from Gmail-Imap to do not waste space (delete from '[Gmail]All mail'). Please see example config for detailed description problem and solution
+	o fxTreeTable - GUI Tree, Table on JavaFX. I think it is the best instrument just for investigation like "where my space". Unfortunately there some problems and it may not work out of the box. Please read further description in Config-Example.groovy.
 See example config comments for more details.''', required: false, args: 1)
 cli.D(longOpt: 'config', '''Change configured options from command line. Allow runtime override. May appear multiple times - processed in that order. For example:
 	-D log.fullXmlCache="some.file" --config operations.printFolderSizes.folderProcess='{true}' -D operations.printFolderSizes.messageProcess='{m-> println "SUBJ: ${m.subject}"}' --config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
