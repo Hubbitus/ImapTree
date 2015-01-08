@@ -229,42 +229,42 @@ imapTree.traverseTree(operation);
 									,new javafx.scene.control.TreeTableColumn('Self size, bytes').with{
 //										it.setPrefWidth(150);
 										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.@size.bytes) // Size object
+											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.@size.bytes ?: 0)
 										}
 										it
 									}
 									,new javafx.scene.control.TreeTableColumn('Self size, hr').with{
 //										it.setPrefWidth(150);
 										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyStringWrapper(param.value.value.@size.hr()) // Size object
+											new javafx.beans.property.ReadOnlyStringWrapper(param.value.value.@size.hr())
 										}
 										it
 									}
 									,new javafx.scene.control.TreeTableColumn('Messages').with{
 //										it.setPrefWidth(150);
 										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.@size.messages) // Size object
+											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.@size.messages ?: 0)
 										}
 										it
 									}
 									,new javafx.scene.control.TreeTableColumn('Sub-tree size, bytes').with{
 //										it.setPrefWidth(150);
 										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.depthFirst().sum { it.@size }.bytes) // Size object
+											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.depthFirst().sum { it.@size }.bytes ?: 0)
 										}
 										it
 									}
 									,new javafx.scene.control.TreeTableColumn('Sub-tree size, hr').with{
 //										it.setPrefWidth(150);
 										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyStringWrapper(param.value.value.depthFirst().sum { it.@size }.hr()) // Size object
+											new javafx.beans.property.ReadOnlyStringWrapper(param.value.value.depthFirst().sum { it.@size }.hr())
 										}
 										it
 									}
 									,new javafx.scene.control.TreeTableColumn('Sub-tree messages').with{
 //										it.setPrefWidth(150);
 										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.depthFirst().sum { it.@size }.messages) // Size object
+											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.depthFirst().sum { it.@size }.messages ?: 0)
 										}
 										it
 									}
