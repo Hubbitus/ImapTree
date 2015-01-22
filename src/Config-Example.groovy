@@ -58,6 +58,7 @@ config{
 				println "eachMessage process folder <<${node.name()}>>: SelfSize: ${node.@size}; subTreeSize: ${node.depthFirst().sum { it.@size }}; childSubtreeFolders: ${node.depthFirst().size() - 1}"
 				true
 			}
+			// For Gmail there will be GmailMessage: https://javamail.java.net/nonav/docs/api/com/sun/mail/gimap/GmailMessage.html
 			,messageProcess: {Message m->
 				println "<<${m.folder}>> (Folder attributes: ${m.folder.getAttributes()})); (Labels: ${m.getLabels()}); {SUBJ: ${m.subject}}"
 			}
@@ -89,6 +90,12 @@ operation.messageProcess = {m->
 	println "msg SUBJ: ${m.subject}"
 }
 imapTree.traverseTree(operation);
+
+/* Did not want logging, error handling and prefer plain access? Never has been easy:
+if (!imapTree.tree.@folder.open)
+	imapTree.tree.@folder.open(2 /*READ_WRITE*/)
+println imapTree.tree.@folder.messages
+*/
 ''';
 							swing.edt {
 								updateTitle()

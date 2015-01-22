@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/Config.groovy" line="209" mnemonic="0" />
+    <bookmark url="file://$PROJECT_DIR$/src/Config.groovy" line="216" mnemonic="0" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b23fecd-e9ea-4c09-85fe-819090fd2945" name="Default" comment="Just Typo in comments">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Config-Example.groovy" afterPath="$PROJECT_DIR$/src/Config-Example.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Config.groovy" afterPath="$PROJECT_DIR$/src/Config.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ImapTreeSize.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,7 +34,7 @@
         <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="2047" max-vertical-offset="2925">
-              <caret line="205" column="12" selection-start-line="205" selection-start-column="12" selection-end-line="205" selection-end-column="12" />
+              <caret line="205" column="37" selection-start-line="205" selection-start-column="37" selection-end-line="205" selection-end-column="37" />
               <folding>
                 <element signature="e#32#66#0" expanded="true" />
                 <element signature="e#1427#1563#0" expanded="true" />
@@ -48,43 +48,66 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Operation.groovy" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Operation.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="1365">
+              <caret line="57" column="37" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
+              <folding>
+                <element signature="e#2540#2706#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Folder.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/javax/mail/Folder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="7360" max-vertical-offset="21411">
+              <caret line="604" column="43" selection-start-line="604" selection-start-column="28" selection-end-line="604" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Config.groovy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Config.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.25" vertical-offset="3128" max-vertical-offset="3978">
-              <caret line="269" column="89" selection-start-line="269" selection-start-column="70" selection-end-line="269" selection-end-column="89" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3232" max-vertical-offset="4069">
+              <caret line="277" column="41" selection-start-line="276" selection-start-column="70" selection-end-line="276" selection-end-column="89" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
-                <element signature="e#258#909#0" expanded="true" />
-                <element signature="e#1090#1441#0" expanded="true" />
-                <element signature="e#1649#1866#0" expanded="true" />
-                <element signature="e#1887#2034#0" expanded="true" />
-                <element signature="e#2168#3537#0" expanded="true" />
-                <element signature="e#2361#3532#0" expanded="true" />
-                <element signature="e#2473#3526#0" expanded="true" />
-                <element signature="e#3041#3257#0" expanded="true" />
-                <element signature="e#5133#5159#0" expanded="true" />
-                <element signature="e#5180#6827#0" expanded="true" />
-                <element signature="e#6845#6908#0" expanded="true" />
-                <element signature="e#10022#10192#0" expanded="true" />
-                <element signature="e#10290#10577#0" expanded="true" />
-                <element signature="e#10358#10553#0" expanded="true" />
-                <element signature="e#10653#10934#0" expanded="true" />
-                <element signature="e#10721#10910#0" expanded="true" />
-                <element signature="e#11010#11299#0" expanded="true" />
-                <element signature="e#11078#11275#0" expanded="true" />
-                <element signature="e#11372#11657#0" expanded="true" />
-                <element signature="e#11440#11633#0" expanded="true" />
-                <element signature="e#11725#12017#0" expanded="true" />
-                <element signature="e#11793#11993#0" expanded="true" />
-                <element signature="e#12097#12410#0" expanded="true" />
-                <element signature="e#12165#12386#0" expanded="true" />
-                <element signature="e#12487#12796#0" expanded="true" />
-                <element signature="e#12555#12772#0" expanded="true" />
-                <element signature="e#12873#13189#0" expanded="true" />
-                <element signature="e#12941#13165#0" expanded="true" />
-                <element signature="e#13704#14337#0" expanded="true" />
-                <element signature="e#14457#14667#0" expanded="true" />
+                <element signature="e#258#1124#0" expanded="true" />
+                <element signature="e#1305#1656#0" expanded="true" />
+                <element signature="e#1864#2081#0" expanded="true" />
+                <element signature="e#2102#2249#0" expanded="true" />
+                <element signature="e#2383#3752#0" expanded="true" />
+                <element signature="e#2576#3747#0" expanded="true" />
+                <element signature="e#2688#3741#0" expanded="true" />
+                <element signature="e#3256#3472#0" expanded="true" />
+                <element signature="e#5348#5374#0" expanded="true" />
+                <element signature="e#5395#7042#0" expanded="true" />
+                <element signature="e#7060#7123#0" expanded="true" />
+                <element signature="e#10237#10407#0" expanded="true" />
+                <element signature="e#10505#10792#0" expanded="true" />
+                <element signature="e#10573#10768#0" expanded="true" />
+                <element signature="e#10868#11149#0" expanded="true" />
+                <element signature="e#10936#11125#0" expanded="true" />
+                <element signature="e#11225#11514#0" expanded="true" />
+                <element signature="e#11293#11490#0" expanded="true" />
+                <element signature="e#11587#11872#0" expanded="true" />
+                <element signature="e#11655#11848#0" expanded="true" />
+                <element signature="e#11940#12232#0" expanded="true" />
+                <element signature="e#12008#12208#0" expanded="true" />
+                <element signature="e#12312#12625#0" expanded="true" />
+                <element signature="e#12380#12601#0" expanded="true" />
+                <element signature="e#12702#13011#0" expanded="true" />
+                <element signature="e#12770#12987#0" expanded="true" />
+                <element signature="e#13088#13404#0" expanded="true" />
+                <element signature="e#13156#13380#0" expanded="true" />
+                <element signature="e#13553#13757#0" expanded="true" />
+                <element signature="e#13919#14552#0" expanded="true" />
+                <element signature="e#14672#14882#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,8 +126,8 @@
       <file leaf-file-name="ImapTree.groovy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ImapTree.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="46" max-vertical-offset="1482">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="1482">
+              <caret line="105" column="29" selection-start-line="105" selection-start-column="29" selection-end-line="105" selection-end-column="29" />
               <folding>
                 <element signature="e#31#79#0" expanded="true" />
                 <element signature="e#3525#3953#0" expanded="true" />
@@ -115,55 +138,59 @@
       </file>
       <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-26.413794" vertical-offset="1353" max-vertical-offset="2665">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2119" max-vertical-offset="2665">
               <caret line="163" column="46" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="MarkdownPreviewEditor">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Config-Example.groovy" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Config-Example.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3882353" vertical-offset="3193" max-vertical-offset="4043">
-              <caret line="273" column="89" selection-start-line="273" selection-start-column="70" selection-end-line="273" selection-end-column="89" />
+            <state vertical-scroll-proportion="0.25170842" vertical-offset="754" max-vertical-offset="4134">
+              <caret line="77" column="97" selection-start-line="77" selection-start-column="97" selection-end-line="77" selection-end-column="97" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
                 <element signature="e#386#1588#0" expanded="true" />
                 <element signature="e#1325#1402#0" expanded="true" />
                 <element signature="e#1824#2175#0" expanded="true" />
                 <element signature="e#2383#2600#0" expanded="true" />
-                <element signature="e#2621#2768#0" expanded="true" />
-                <element signature="e#2902#4271#0" expanded="true" />
-                <element signature="e#3095#4266#0" expanded="true" />
-                <element signature="e#3207#4260#0" expanded="true" />
-                <element signature="e#3775#3991#0" expanded="true" />
-                <element signature="e#5869#5895#0" expanded="true" />
-                <element signature="e#5916#7563#0" expanded="true" />
-                <element signature="e#7581#7644#0" expanded="true" />
-                <element signature="e#10762#10932#0" expanded="true" />
-                <element signature="e#11030#11317#0" expanded="true" />
-                <element signature="e#11098#11293#0" expanded="true" />
-                <element signature="e#11393#11674#0" expanded="true" />
-                <element signature="e#11461#11650#0" expanded="true" />
-                <element signature="e#11750#12024#0" expanded="true" />
-                <element signature="e#11818#12000#0" expanded="true" />
-                <element signature="e#12097#12367#0" expanded="true" />
-                <element signature="e#12165#12343#0" expanded="true" />
-                <element signature="e#12435#12712#0" expanded="true" />
-                <element signature="e#12503#12688#0" expanded="true" />
-                <element signature="e#12792#13090#0" expanded="true" />
-                <element signature="e#12860#13066#0" expanded="true" />
-                <element signature="e#13167#13461#0" expanded="true" />
-                <element signature="e#13235#13437#0" expanded="true" />
-                <element signature="e#13538#13839#0" expanded="true" />
-                <element signature="e#13606#13815#0" expanded="true" />
-                <element signature="e#14354#14987#0" expanded="true" />
-                <element signature="e#15107#15451#0" expanded="true" />
+                <element signature="e#2743#2890#0" expanded="true" />
+                <element signature="e#4105#4321#0" expanded="true" />
+                <element signature="e#6199#6225#0" expanded="true" />
+                <element signature="e#6246#7893#0" expanded="true" />
+                <element signature="e#7911#7974#0" expanded="true" />
+                <element signature="e#10125#15424#0" expanded="true" />
+                <element signature="e#10596#15419#0" expanded="true" />
+                <element signature="e#10657#15413#0" expanded="true" />
+                <element signature="e#10709#15406#0" expanded="true" />
+                <element signature="e#10927#15398#0" expanded="true" />
+                <element signature="e#11092#11262#0" expanded="true" />
+                <element signature="e#11360#11647#0" expanded="true" />
+                <element signature="e#11428#11623#0" expanded="true" />
+                <element signature="e#11723#12004#0" expanded="true" />
+                <element signature="e#11791#11980#0" expanded="true" />
+                <element signature="e#12080#12354#0" expanded="true" />
+                <element signature="e#12148#12330#0" expanded="true" />
+                <element signature="e#12427#12697#0" expanded="true" />
+                <element signature="e#12495#12673#0" expanded="true" />
+                <element signature="e#12765#13042#0" expanded="true" />
+                <element signature="e#12833#13018#0" expanded="true" />
+                <element signature="e#13122#13420#0" expanded="true" />
+                <element signature="e#13190#13396#0" expanded="true" />
+                <element signature="e#13497#13791#0" expanded="true" />
+                <element signature="e#13565#13767#0" expanded="true" />
+                <element signature="e#13868#14169#0" expanded="true" />
+                <element signature="e#13936#14145#0" expanded="true" />
+                <element signature="e#14251#14546#0" expanded="true" />
+                <element signature="e#14318#14522#0" expanded="true" />
+                <element signature="e#14684#15317#0" expanded="true" />
+                <element signature="e#15437#15781#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -274,16 +301,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -428,7 +446,16 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ImapTreeSize" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -479,74 +506,14 @@
     </key>
   </component>
   <component name="RunManager" selected="Groovy.ImapTree -c --account BackupTest --operation fxTreeTable">
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Profile " />
-      <method />
-    </configuration>
-    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="INTERPRETER_PATH" value="/bin/bash" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <module name="ImapTreeSize" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
-    <configuration default="true" type="uTestRunConfiguration" factoryName="utest">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <extension name="scalaCoverage" />
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
       <module name="" />
       <setting name="path" value="" />
-      <setting name="package" value="" />
       <setting name="vmparams" value="" />
       <setting name="params" value="" />
-      <setting name="workingDirectory" value="$PROJECT_DIR$" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="testName" value="" />
-      <setting name="testKind" value="Class" />
-      <setting name="showProgressMessages" value="true" />
-      <envs />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <RunnerSettings RunnerId="Profile " />
       <method />
     </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
@@ -572,19 +539,14 @@
       <RunnerSettings RunnerId="Profile " />
       <method />
     </configuration>
-    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <extension name="scalaCoverage" />
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="package" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workingDirectory" value="$PROJECT_DIR$" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="testName" value="" />
-      <setting name="testKind" value="Class" />
-      <setting name="showProgressMessages" value="true" />
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="ImapTreeSize" />
       <envs />
       <method />
     </configuration>
@@ -604,9 +566,30 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -624,14 +607,58 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+    <configuration default="true" type="uTestRunConfiguration" factoryName="utest">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <extension name="scalaCoverage" />
       <module name="" />
       <setting name="path" value="" />
+      <setting name="package" value="" />
       <setting name="vmparams" value="" />
       <setting name="params" value="" />
-      <setting name="workDir" value="file://$PROJECT_DIR$" />
-      <setting name="debug" value="false" />
+      <setting name="workingDirectory" value="$PROJECT_DIR$" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <RunnerSettings RunnerId="Profile " />
+      <method />
+    </configuration>
+    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <extension name="scalaCoverage" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="$PROJECT_DIR$" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <envs />
       <method />
     </configuration>
     <configuration default="false" name="ImapTree --account BackupTest --operation eachMessage" type="GroovyScriptRunConfiguration" factoryName="Groovy">
@@ -819,36 +846,36 @@
     <frame x="1364" y="-3" width="1557" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.49971414" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32349727" sideWeight="0.25016546" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952598" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.4996691" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41639343" sideWeight="0.5003309" order="14" side_tool="true" content_ui="tabs" x="1418" y="647" width="1751" height="318" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22898743" sideWeight="0.6771653" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18464594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.49971414" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41639343" sideWeight="0.5003309" order="14" side_tool="true" content_ui="tabs" x="1418" y="647" width="1751" height="318" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32349727" sideWeight="0.25016546" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21016562" sideWeight="0.32125986" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="DB Execution Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32954547" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="DBHelper" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24957167" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32970712" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.4996691" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18464594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952598" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.078093976" sideWeight="0.6771653" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5842294" sideWeight="0.8947717" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="DBHelper" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="DatabaseBrowser" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32970712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32349727" sideWeight="0.74983454" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989071" sideWeight="0.7088021" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24957167" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="DB Execution Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32954547" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.4996691" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33661202" sideWeight="0.63203174" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5842294" sideWeight="0.8947717" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32349727" sideWeight="0.74983454" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32970712" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="DBOutput" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32954547" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -927,19 +954,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Config.groovy</url>
-          <line>64</line>
+          <line>71</line>
           <properties />
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Config.groovy</url>
-          <line>203</line>
+          <line>210</line>
           <properties />
           <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Config.groovy</url>
-          <line>215</line>
+          <line>222</line>
           <properties />
           <option name="timeStamp" value="79" />
         </line-breakpoint>
@@ -978,7 +1005,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.5462185" vertical-offset="1957" max-vertical-offset="2821">
           <caret line="287" column="0" selection-start-line="287" selection-start-column="0" selection-end-line="287" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1021,9 +1047,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33269963" vertical-offset="1086" max-vertical-offset="4407">
           <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
-          <folding>
-            <element signature="e#4004#4005#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1076,13 +1099,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/javax/mail/Folder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.642857" vertical-offset="1350" max-vertical-offset="21411">
-          <caret line="122" column="18" selection-start-line="122" selection-start-column="14" selection-end-line="122" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/com/sun/mail/util/MailLogger.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334" vertical-offset="638" max-vertical-offset="5499">
@@ -1108,7 +1124,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40088105" vertical-offset="0" max-vertical-offset="4550">
           <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1138,7 +1153,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37759337" vertical-offset="533" max-vertical-offset="1443">
           <caret line="57" column="43" selection-start-line="0" selection-start-column="0" selection-end-line="107" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1183,9 +1197,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5551331" vertical-offset="20" max-vertical-offset="546">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <element signature="e#40#103#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1209,17 +1220,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="962">
           <caret line="68" column="1" selection-start-line="68" selection-start-column="1" selection-end-line="68" selection-end-column="1" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Operation.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="735" max-vertical-offset="1482">
-          <caret line="70" column="18" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
-          <folding>
-            <element signature="e#2540#2706#0" expanded="false" />
-            <element signature="e#3148#3336#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1248,7 +1248,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5896" max-vertical-offset="7371">
           <caret line="540" column="12" selection-start-line="540" selection-start-column="12" selection-end-line="540" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1285,7 +1284,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3764479" vertical-offset="0" max-vertical-offset="518">
           <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1300,14 +1298,65 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1377" max-vertical-offset="8164">
           <caret line="254" column="14" selection-start-line="254" selection-start-column="11" selection-end-line="254" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Config.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3232" max-vertical-offset="4069">
+          <caret line="277" column="41" selection-start-line="276" selection-start-column="70" selection-end-line="276" selection-end-column="89" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#258#1124#0" expanded="true" />
+            <element signature="e#1305#1656#0" expanded="true" />
+            <element signature="e#1864#2081#0" expanded="true" />
+            <element signature="e#2102#2249#0" expanded="true" />
+            <element signature="e#2383#3752#0" expanded="true" />
+            <element signature="e#2576#3747#0" expanded="true" />
+            <element signature="e#2688#3741#0" expanded="true" />
+            <element signature="e#3256#3472#0" expanded="true" />
+            <element signature="e#5348#5374#0" expanded="true" />
+            <element signature="e#5395#7042#0" expanded="true" />
+            <element signature="e#7060#7123#0" expanded="true" />
+            <element signature="e#10237#10407#0" expanded="true" />
+            <element signature="e#10505#10792#0" expanded="true" />
+            <element signature="e#10573#10768#0" expanded="true" />
+            <element signature="e#10868#11149#0" expanded="true" />
+            <element signature="e#10936#11125#0" expanded="true" />
+            <element signature="e#11225#11514#0" expanded="true" />
+            <element signature="e#11293#11490#0" expanded="true" />
+            <element signature="e#11587#11872#0" expanded="true" />
+            <element signature="e#11655#11848#0" expanded="true" />
+            <element signature="e#11940#12232#0" expanded="true" />
+            <element signature="e#12008#12208#0" expanded="true" />
+            <element signature="e#12312#12625#0" expanded="true" />
+            <element signature="e#12380#12601#0" expanded="true" />
+            <element signature="e#12702#13011#0" expanded="true" />
+            <element signature="e#12770#12987#0" expanded="true" />
+            <element signature="e#13088#13404#0" expanded="true" />
+            <element signature="e#13156#13380#0" expanded="true" />
+            <element signature="e#13553#13757#0" expanded="true" />
+            <element signature="e#13919#14552#0" expanded="true" />
+            <element signature="e#14672#14882#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2119" max-vertical-offset="2665">
+          <caret line="163" column="46" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ImapTree.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="46" max-vertical-offset="1482">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="1482">
+          <caret line="105" column="29" selection-start-line="105" selection-start-column="29" selection-end-line="105" selection-end-column="29" />
           <folding>
             <element signature="e#31#79#0" expanded="true" />
             <element signature="e#3525#3953#0" expanded="true" />
@@ -1315,21 +1364,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-26.413794" vertical-offset="1353" max-vertical-offset="2665">
-          <caret line="163" column="46" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2466" max-vertical-offset="2964">
-          <caret line="205" column="12" selection-start-line="205" selection-start-column="12" selection-end-line="205" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2047" max-vertical-offset="2925">
+          <caret line="205" column="37" selection-start-line="205" selection-start-column="37" selection-end-line="205" selection-end-column="37" />
           <folding>
             <element signature="e#32#66#0" expanded="true" />
             <element signature="e#1427#1563#0" expanded="true" />
@@ -1342,83 +1380,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Config.groovy">
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Operation.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.25" vertical-offset="3128" max-vertical-offset="3978">
-          <caret line="269" column="89" selection-start-line="269" selection-start-column="70" selection-end-line="269" selection-end-column="89" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="1365">
+          <caret line="57" column="37" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
-            <element signature="e#258#909#0" expanded="true" />
-            <element signature="e#1090#1441#0" expanded="true" />
-            <element signature="e#1649#1866#0" expanded="true" />
-            <element signature="e#1887#2034#0" expanded="true" />
-            <element signature="e#2168#3537#0" expanded="true" />
-            <element signature="e#2361#3532#0" expanded="true" />
-            <element signature="e#2473#3526#0" expanded="true" />
-            <element signature="e#3041#3257#0" expanded="true" />
-            <element signature="e#5133#5159#0" expanded="true" />
-            <element signature="e#5180#6827#0" expanded="true" />
-            <element signature="e#6845#6908#0" expanded="true" />
-            <element signature="e#10022#10192#0" expanded="true" />
-            <element signature="e#10290#10577#0" expanded="true" />
-            <element signature="e#10358#10553#0" expanded="true" />
-            <element signature="e#10653#10934#0" expanded="true" />
-            <element signature="e#10721#10910#0" expanded="true" />
-            <element signature="e#11010#11299#0" expanded="true" />
-            <element signature="e#11078#11275#0" expanded="true" />
-            <element signature="e#11372#11657#0" expanded="true" />
-            <element signature="e#11440#11633#0" expanded="true" />
-            <element signature="e#11725#12017#0" expanded="true" />
-            <element signature="e#11793#11993#0" expanded="true" />
-            <element signature="e#12097#12410#0" expanded="true" />
-            <element signature="e#12165#12386#0" expanded="true" />
-            <element signature="e#12487#12796#0" expanded="true" />
-            <element signature="e#12555#12772#0" expanded="true" />
-            <element signature="e#12873#13189#0" expanded="true" />
-            <element signature="e#12941#13165#0" expanded="true" />
-            <element signature="e#13704#14337#0" expanded="true" />
-            <element signature="e#14457#14667#0" expanded="true" />
+            <element signature="e#2540#2706#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/javax/mail/Folder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7360" max-vertical-offset="21411">
+          <caret line="604" column="43" selection-start-line="604" selection-start-column="28" selection-end-line="604" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Config-Example.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3882353" vertical-offset="3193" max-vertical-offset="4043">
-          <caret line="273" column="89" selection-start-line="273" selection-start-column="70" selection-end-line="273" selection-end-column="89" />
+        <state vertical-scroll-proportion="0.25170842" vertical-offset="754" max-vertical-offset="4134">
+          <caret line="77" column="97" selection-start-line="77" selection-start-column="97" selection-end-line="77" selection-end-column="97" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
             <element signature="e#386#1588#0" expanded="true" />
             <element signature="e#1325#1402#0" expanded="true" />
             <element signature="e#1824#2175#0" expanded="true" />
             <element signature="e#2383#2600#0" expanded="true" />
-            <element signature="e#2621#2768#0" expanded="true" />
-            <element signature="e#2902#4271#0" expanded="true" />
-            <element signature="e#3095#4266#0" expanded="true" />
-            <element signature="e#3207#4260#0" expanded="true" />
-            <element signature="e#3775#3991#0" expanded="true" />
-            <element signature="e#5869#5895#0" expanded="true" />
-            <element signature="e#5916#7563#0" expanded="true" />
-            <element signature="e#7581#7644#0" expanded="true" />
-            <element signature="e#10762#10932#0" expanded="true" />
-            <element signature="e#11030#11317#0" expanded="true" />
-            <element signature="e#11098#11293#0" expanded="true" />
-            <element signature="e#11393#11674#0" expanded="true" />
-            <element signature="e#11461#11650#0" expanded="true" />
-            <element signature="e#11750#12024#0" expanded="true" />
-            <element signature="e#11818#12000#0" expanded="true" />
-            <element signature="e#12097#12367#0" expanded="true" />
-            <element signature="e#12165#12343#0" expanded="true" />
-            <element signature="e#12435#12712#0" expanded="true" />
-            <element signature="e#12503#12688#0" expanded="true" />
-            <element signature="e#12792#13090#0" expanded="true" />
-            <element signature="e#12860#13066#0" expanded="true" />
-            <element signature="e#13167#13461#0" expanded="true" />
-            <element signature="e#13235#13437#0" expanded="true" />
-            <element signature="e#13538#13839#0" expanded="true" />
-            <element signature="e#13606#13815#0" expanded="true" />
-            <element signature="e#14354#14987#0" expanded="true" />
-            <element signature="e#15107#15451#0" expanded="true" />
+            <element signature="e#2743#2890#0" expanded="true" />
+            <element signature="e#4105#4321#0" expanded="true" />
+            <element signature="e#6199#6225#0" expanded="true" />
+            <element signature="e#6246#7893#0" expanded="true" />
+            <element signature="e#7911#7974#0" expanded="true" />
+            <element signature="e#10125#15424#0" expanded="true" />
+            <element signature="e#10596#15419#0" expanded="true" />
+            <element signature="e#10657#15413#0" expanded="true" />
+            <element signature="e#10709#15406#0" expanded="true" />
+            <element signature="e#10927#15398#0" expanded="true" />
+            <element signature="e#11092#11262#0" expanded="true" />
+            <element signature="e#11360#11647#0" expanded="true" />
+            <element signature="e#11428#11623#0" expanded="true" />
+            <element signature="e#11723#12004#0" expanded="true" />
+            <element signature="e#11791#11980#0" expanded="true" />
+            <element signature="e#12080#12354#0" expanded="true" />
+            <element signature="e#12148#12330#0" expanded="true" />
+            <element signature="e#12427#12697#0" expanded="true" />
+            <element signature="e#12495#12673#0" expanded="true" />
+            <element signature="e#12765#13042#0" expanded="true" />
+            <element signature="e#12833#13018#0" expanded="true" />
+            <element signature="e#13122#13420#0" expanded="true" />
+            <element signature="e#13190#13396#0" expanded="true" />
+            <element signature="e#13497#13791#0" expanded="true" />
+            <element signature="e#13565#13767#0" expanded="true" />
+            <element signature="e#13868#14169#0" expanded="true" />
+            <element signature="e#13936#14145#0" expanded="true" />
+            <element signature="e#14251#14546#0" expanded="true" />
+            <element signature="e#14318#14522#0" expanded="true" />
+            <element signature="e#14684#15317#0" expanded="true" />
+            <element signature="e#15437#15781#0" expanded="true" />
           </folding>
         </state>
       </provider>
