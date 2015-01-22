@@ -67,7 +67,8 @@ config{
 		GroovyConsole = new Operation(
 			fullControl: {ImapTreeSize imapTree->
 				// http://groovy.codehaus.org/Groovy+Console
-				Console console = new Console([imapTree: imapTree, config: config] as Binding);
+				// Start with current binding to allow access to existing classes http://stackoverflow.com/questions/16826014/embedded-groovy-console-how-do-i-share-entire-state
+				Console console = new Console(imapTree.getClass().getClassLoader(), [imapTree: imapTree, config: config] as Binding);
 				console.run();
 				console.with{ // Set default content of console
 					swing.edt{
