@@ -1,0 +1,5 @@
+
+
+./ImapTree.groovy --account Pahan --operation gmailTrueDeleteMessages --config "accounts.Pahan.folder='BAK_test/Ant/INBOX'" | tee .results/Pahan.delete.full
+./ImapTree.groovy --account Backup --operation gmailTrueDeleteMessages --config "accounts.Backup.folder='BAK/Ant/INBOX'" | tee .results/Backup.delete.full
+

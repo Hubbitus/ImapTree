@@ -1,0 +1,24 @@
+#!/bin/bash
+
+RES_DIR=".results/GROUP_TALKS#quota_warning/"
+
+mkdir -p "$RES_DIR"
+
+#ACCOUNT=Pahan
+ACCOUNT=Ant
+#FOLDER='BAK_test/Ant/GROUP_TALKS/quota warning'
+#FOLDER='test'
+FOLDER='GROUP_TALKS.quota warning'
+
+./ImapTree.groovy \
+	--account ${ACCOUNT} \
+	--operation GroovyConsole \
+	--config "operations.conf.some='some option'"
+
+
+# 		--config operations.eachMessage.messageProcess='{m-> println "<<${m.folder}>> (Folder attributes: ${m.folder.getAttributes()})); (ID: ${m.getMsgId()}); (UID: ${-1 == m.getUID() ? m.folder.getUID(m) : m.getUID()}); (ThreadID: ${m.getThrId()}); (Labels: ${m.getLabels()}); {SUBJ: ${m.subject}}; {HEADERS: ${m.getAllHeaders().toList().collect{ "<${it.name}:${it.value}>" } }}" }' \
+#		--operation GroovyConsole \
+#
+#		--config operations.eachMessage.messageProcess='{m-> println m.dump()  }' \
+
+

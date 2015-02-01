@@ -1,0 +1,19 @@
+#!/bin/bash
+
+DATE=$(date +'%F_%T')
+
+function parseSizes(){
+	ACCOUNT="$1"
+
+	mv .results/$ACCOUNT.sizes.full .results/$ACCOUNT.sizes.full.BAK.$DATE
+	mv .results/$ACCOUNT.sizes .results/$ACCOUNT.sizes.BAK.$DATE
+
+	./ImapTree.groovy --account $ACCOUNT | tee .results/$ACCOUNT.sizes.full
+
+	grep -P '^<<' .results/$ACCOUNT.sizes.full | sed 's/BAK_test/BAK/g' > .results/$ACCOUNT.sizes
+}
+
+parseSizes Backup
+parseSizes Pahan
+
+meld .results/Pahan.sizes .results/Backup.sizes

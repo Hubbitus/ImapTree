@@ -1,0 +1,34 @@
+#!/bin/bash
+
+RES_DIR=".results/GROUP_TALKS#quota_warning/"
+
+mkdir -p "$RES_DIR"
+
+#ACCOUNTS=( Pahan Backup )
+#FOLDERS=( test_min test_min )
+
+#ACCOUNTS=( Pahan )
+#FOLDERS=( 'BAK_test/Ant/GROUP_TALKS/quota warning' )
+
+ACCOUNTS=( Ant )
+FOLDERS=( 'GROUP_TALKS.quota warning' )
+
+for (( i = 0 ; i < ${#ACCOUNTS[@]}; i++ )); do
+	echo "PROCESS $i:${ACCOUNTS[$i]}"
+	./ImapTree.groovy \
+		--account ${ACCOUNTS[$i]} \
+		--operation eachMessage \
+		--config "accounts.${ACCOUNTS[$i]}.folder='${FOLDERS[$i]}'" \
+		--config operations.eachMessage.messageProcess='{m-> println "<<${m.folder}>> (Folder attributes: ${m.folder.getAttributes()})); (UID: ${-1 == m.getUID() ? m.folder.getUID(m) : m.getUID()}); {SUBJ: ${m.subject}}; \n\tHEADERS:"; m.getAllHeaders().toList().each{ println "\t<${it.name}:${it.value}>" } }' \
+			| tee "$RES_DIR/${ACCOUNTS[$i]}.log"
+
+# Gmail only
+# 		--config operations.eachMessage.messageProcess='{m-> println "<<${m.folder}>> (Folder attributes: ${m.folder.getAttributes()})); (ID: ${m.getMsgId()}); (UID: ${-1 == m.getUID() ? m.folder.getUID(m) : m.getUID()}); (ThreadID: ${m.getThrId()}); (Labels: ${m.getLabels()}); {SUBJ: ${m.subject}}; {HEADERS: ${m.getAllHeaders().toList().collect{ "<${it.name}:${it.value}>" } }}" }' \
+#		--operation GroovyConsole \
+#
+#		--config operations.eachMessage.messageProcess='{m-> println m.dump()  }' \
+
+#
+done
+
+
