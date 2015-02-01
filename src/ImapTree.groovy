@@ -57,7 +57,7 @@ else{
 //			'operations.printFolderSizes.treeTraverseOrder="breadthFirst"'
 // parsed into strings: it[0]=[operations.printFolderSizes.treeTraverseOrder], it[1]=["breadthFirst]
 //			println "it[0]=[${it[0]}], it[1]=[${it[1]}]"
-			config.setFromPropertyPathLikeKey(it[0], it[1]);
+			config.setFromPropertyPathLikeKey(it[0] as String, it[1]);
 		}
 	}
 
@@ -85,7 +85,7 @@ else{
 				throw new RuntimeException ("It seams requested account [$accountName] is not defined in config!");
 			}
 	}
-	File xmlCacheFile = new File(config.log.fullXmlCache.replace('%{account}', accountName));
+	File xmlCacheFile = new File((String)config.log.fullXmlCache.replace('%{account}', accountName));
 
 	if (!opt.c){
 		imapTree = new ImapTreeSize(imapAccount);
@@ -95,7 +95,7 @@ else{
 	}
 	else{
 		println("Run from cache file [${xmlCacheFile.absolutePath}]");
-		imapTree = ImapTreeSize.deserializeFromFile(xmlCacheFile, imapAccount);
+		imapTree = ImapTreeSize.deserialize(xmlCacheFile, imapAccount);
 	}
 
 	Operation operation = (opt.operation ? config.operations[opt.operation] : config.operations.printFolderSizes) as Operation;

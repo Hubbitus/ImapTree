@@ -143,5 +143,16 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Grab:spymemcached-2.10.5.jar">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.groovy/grapes/net.spy/spymemcached/jars/spymemcached-2.10.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.ideaLibSources/spymemcached-2.10.5-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

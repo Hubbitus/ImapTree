@@ -43,6 +43,7 @@ class ImapTreeSize {
 
 	@XStreamOmitField
 	@Lazy private Store store = {
+		//noinspection GroovyConstructorNamedArguments
 		Session session = Session.getInstance(
 			new Properties(
 				'mail.store.protocol': account.type
@@ -92,10 +93,11 @@ class ImapTreeSize {
 			node = parentTreeNode;
 		} else {
 			node = new Node(parentTreeNode, cur.fullName, [size: getFolderSize(cur), folder: cur], cur);
+
 			log.debug """Folder <<${node.name()}>>: size: ${node.@size}; parent folder <<${
-				node.parent().value()[0]
+				//noinspection GroovyAssignabilityCheck
+				node.parent().value()[0] // value()[0] required to obtain real value but not NodeList. Bug? See trees.groovy
 			}>> size: ${node.parent().@size}"""
-			// value()[0] required to obtain real value but not NodeList. Bug? See trees.groovy
 		}
 		pl.next();
 
@@ -158,38 +160,67 @@ class ImapTreeSize {
 	}();
 
 	/**
+	 * Return string representation of This object in XML. If that once saved to file that can be then reconstructed by
+	 * fabric method {@link #deserialize(java.io.File, info.hubbitus.imaptree.config.ImapAccount)}}
+	 *
+	 * @return
+	 */
+	String serialize(){
+		xStream.toXML(this);
+	}
+
+	/**
 	 * Write string representation of This object in XML. If that once saved to file that can be then reconstructed by
-	 * fabric method {@link #deserializeFromFile(java.io.File, info.hubbitus.imaptree.config.ImapAccount)}}
+	 * fabric method {@link #deserialize(java.io.File, info.hubbitus.imaptree.config.ImapAccount)}}
+	 *
+	 * File re-created if exists.
 	 *
 	 * @return
 	 */
 	void serializeToFile(File file) {
 		if(file.exists()) file.delete();
-		file << xStream.toXML(this);
+		file << serialize();
 	}
 
 	/**
-	 * Reconstruct object from previous saved XML cache file. {@see # serializeToFile ( java.io.File )}
+	 * Reconstruct object from previous saved XML cache file. {@see #serializeToFile ( java.io.File )}
 	 *
 	 * @param file
 	 * @param imapAccount ImapAccount - for what tie deserialized object. Used to do not store excessive information like
 	 *	store, loggers into file and leave it readable.
 	 * @return
 	 */
-	static ImapTreeSize deserializeFromFile(File file, ImapAccount imapAccount) {
+	static ImapTreeSize deserialize(File file, ImapAccount imapAccount) {
 		ImapTreeSize imapTreeSize = new ImapTreeSize(imapAccount, true);
-		imapTreeSize.deserialize(file);
+		imapTreeSize.deserialize_(file);
+	}
+
+	/**
+	 * Reconstruct object from previous saved XML-string. {@see #serialize}
+	 *
+	 * @param file
+	 * @param imapAccount ImapAccount - for what tie deserialized object. Used to do not store excessive information like
+	 *	store, loggers into file and leave it readable.
+	 * @return
+	 */
+	static ImapTreeSize deserialize(String str, ImapAccount imapAccount) {
+		ImapTreeSize imapTreeSize = new ImapTreeSize(imapAccount, true);
+		imapTreeSize.deserialize_(str);
 	}
 
 	/**
 	 * Reconstruct object from previous saved XML cache file. {@see # serializeToFile (java.io.File)}
-	 * Non-static helper for {@link #deserializeFromFile(java.io.File, info.hubbitus.imaptree.config.ImapAccount)}
+	 * Non-static helper for {@link #deserialize(java.io.File, info.hubbitus.imaptree.config.ImapAccount)}
 	 *
 	 * @param file
 	 * @return
 	 */
-	private ImapTreeSize deserialize(File file){
+	private ImapTreeSize deserialize_(File file){
 		xStream.fromXML(file);
+	}
+
+	private ImapTreeSize deserialize_(String str){
+		xStream.fromXML(str);
 	}
 
 	/**
