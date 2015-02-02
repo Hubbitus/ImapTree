@@ -1,4 +1,5 @@
 #!/opt/groovy-2.3.6/bin/groovy
+import info.hubbitus.imaptree.config.CliBuilderAutoWidth
 import info.hubbitus.imaptree.config.ImapAccount
 import info.hubbitus.imaptree.ImapTreeSize
 import info.hubbitus.imaptree.config.Operation
@@ -16,7 +17,7 @@ import info.hubbitus.imaptree.utils.ConfigExtended
 
 ConfigExtended config = (ConfigExtended)new ConfigSlurper().parse(Config).config;
 
-def cli = new CliBuilder(/*usage: 'Usage:'*/)
+CliBuilderAutoWidth cli = new CliBuilderAutoWidth(/*usage: 'Usage:'*/)
 cli.h(longOpt: 'help', 'This usage information', required: false)
 cli.a(longOpt: 'account', 'Account name from defined in config file under config.accounts section. Required if you define more than one there. Otherwise warning printed and its selected automatically.', required: false, args: 1)
 cli.c(longOpt: 'cached', 'run from cached file. No information gathered from imap account actually. Instead read previously saved file config.fullXmlCache. Useful for deep analysis and experiments.', required: false)
@@ -37,15 +38,6 @@ OptionAccessor opt = cli.parse(args)
 config.opt = opt;
 
 if(opt.h /*|| opt.arguments().isEmpty()*/ ) {
-	/*
-	* Unix-hack to use full terminal width (by suggestion from http://stackoverflow.com/questions/1286461/can-i-find-the-console-width-with-java)
-	* It was implemented in similar fashion (https://issues.apache.org/jira/browse/CLI-166), but then reverted because can't
-	* be used for all systems in java-way
-	*/
-	try{
-		cli.width = ["bash", "-c", "tput cols 2> /dev/tty"].execute().text.toInteger()
-	}
-	catch(IOException ignore){}
 	cli.usage()
 }
 else{
