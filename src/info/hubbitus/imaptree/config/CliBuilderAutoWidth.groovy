@@ -7,13 +7,13 @@ package info.hubbitus.imaptree.config
  *
  * @author Pavel Alexeev - <Pahan@Hubbitus.info> (pasha)
  * @created 2015-02-02 04:03
- * */
+ **/
 class CliBuilderAutoWidth extends CliBuilder{
 	CliBuilderAutoWidth() {
 		super();
 		try{
-			width = ["bash", "-c", "tput cols 2> /dev/tty"].execute().text.toInteger()
+			width = ['bash', '-c', 'tput cols 2> /dev/tty'].execute().text.toInteger()
 		}
-		catch(IOException ignore){}
+		catch(IOException | NumberFormatException ignore){}
 	}
 }
