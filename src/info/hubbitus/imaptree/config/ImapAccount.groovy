@@ -4,7 +4,7 @@ import groovy.transform.CompileStatic
 import groovy.transform.TupleConstructor
 
 /**
- *
+ * Config object ro represent main account entity
  *
  * @author Pavel Alexeev - <Pahan@Hubbitus.info> (pasha)
  * @created 2015-01-01 21:06
@@ -12,6 +12,9 @@ import groovy.transform.TupleConstructor
 @TupleConstructor
 @CompileStatic
 class ImapAccount{
+	// To refer it for example in log
+	String name;
+
 	String host = 'imap.gmail.com';
 	Integer port = 933;
 	String login;

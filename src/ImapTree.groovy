@@ -1,5 +1,6 @@
 #!/opt/groovy-2.3.6/bin/groovy
 import info.hubbitus.imaptree.config.CliBuilderAutoWidth
+import info.hubbitus.imaptree.config.GlobalConf
 import info.hubbitus.imaptree.config.ImapAccount
 import info.hubbitus.imaptree.ImapTreeSize
 import info.hubbitus.imaptree.config.Operation
@@ -14,8 +15,6 @@ import info.hubbitus.imaptree.utils.ConfigExtended
  * @created 2015-01-01 19:22
  * */
 
-
-ConfigExtended config = (ConfigExtended)new ConfigSlurper().parse(Config).config;
 
 CliBuilderAutoWidth cli = new CliBuilderAutoWidth(/*usage: 'Usage:'*/)
 cli.h(longOpt: 'help', 'This usage information', required: false)
@@ -35,53 +34,43 @@ cli.D(longOpt: 'config', '''Change configured options from command line. Allow r
 	Values trimmed - use quotes and escapes where appropriate''', required: false, args: 2, valueSeparator: '=', argName: 'property=value')
 OptionAccessor opt = cli.parse(args)
 
-config.opt = opt;
+GlobalConf.opt = opt;
 
 if(opt.h /*|| opt.arguments().isEmpty()*/ ) {
 	cli.usage()
 }
 else{
-	if (opt.D){
-		(opt.Ds as List).collate(2).each{// Override configs from commandline options
-// @TODO BUG?:
-//			--config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
-// works while:
-//			'operations.printFolderSizes.treeTraverseOrder="breadthFirst"'
-// parsed into strings: it[0]=[operations.printFolderSizes.treeTraverseOrder], it[1]=["breadthFirst]
-//			println "it[0]=[${it[0]}], it[1]=[${it[1]}]"
-			config.setFromPropertyPathLikeKey(it[0] as String, it[1]);
-		}
-	}
+	GlobalConf.overrideFromListPropertiesPairs(opt.Ds as List)
 
 	ImapTreeSize imapTree;
 	String accountName;
 	ImapAccount imapAccount;
 
 	switch(true){
-		case !config.accounts:
+		case !GlobalConf.accounts:
 			throw new RuntimeException('You must configure at least one parameter in config-file Config.groovy. See Config-Example.groovy for details');
 
-		case config.accounts.size() > 1 && !opt.a:
+		case GlobalConf.accounts.size() > 1 && !opt.a:
 			throw new RuntimeException ('You must provide desired account name in commandline via -a/--account option because multiple accounts defined in config!');
 
-		case 1 == config.accounts.size():
-			accountName = config.accounts.find{true}.key;
-			imapAccount = config.accounts.find{true}.value;
+		case 1 == GlobalConf.accounts.size():
+			accountName = GlobalConf.accounts.find{true}.key;
+			imapAccount = GlobalConf.accounts.find{true}.value;
 			println ("You do not provide account as option, but only one defined in config. [${accountName}] will be used.");
 			break;
 
 		default:
 			accountName = opt.a;
-			imapAccount = (ImapAccount)config.accounts[accountName];
+			imapAccount = (ImapAccount)GlobalConf.accounts[accountName];
 			if (!imapAccount){
 				throw new RuntimeException ("It seams requested account [$accountName] is not defined in config!");
 			}
 	}
-	File xmlCacheFile = new File((String)config.log.fullXmlCache.replace('%{account}', accountName));
+	File xmlCacheFile = new File((String)GlobalConf.log.fullXmlCache.replace('%{account}', accountName));
 
 	if (!opt.c){
 		imapTree = new ImapTreeSize(imapAccount);
-		if (config.log.fullXmlCache){
+		if (GlobalConf.log.fullXmlCache){
 			imapTree.serializeToFile(xmlCacheFile);
 		}
 	}
@@ -90,8 +79,7 @@ else{
 		imapTree = ImapTreeSize.deserialize(xmlCacheFile, imapAccount);
 	}
 
-	Operation operation = (opt.operation ? config.operations[opt.operation] : config.operations.printFolderSizes) as Operation;
-	operation.config = config;
+	Operation operation = (opt.operation ? GlobalConf.operations[opt.operation] : GlobalConf.operations.printFolderSizes) as Operation;
 		if (operation.fullControl){
 			operation.fullControl(imapTree);
 		}else{

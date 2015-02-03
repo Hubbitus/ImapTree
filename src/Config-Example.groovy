@@ -1,7 +1,15 @@
 import groovy.ui.Console
+import groovyx.javafx.GroovyFX
 import info.hubbitus.imaptree.config.ImapAccount
 import info.hubbitus.imaptree.ImapTreeSize
 import info.hubbitus.imaptree.config.Operation
+import javafx.beans.property.ReadOnlyLongWrapper
+import javafx.beans.property.ReadOnlyStringWrapper
+import javafx.scene.control.Label
+import javafx.scene.control.TreeItem
+import javafx.scene.control.TreeTableColumn
+import javafx.scene.control.TreeTableView
+import javafx.scene.layout.StackPane
 
 import javax.mail.Flags
 import javax.mail.Folder
@@ -15,7 +23,8 @@ config{
 		// ImapTreeSize imapTree = new ImapTreeSize(config.account2);
 		// In runtime you will be then choose it by -a/--account option like: --account account1
 		account1 = new ImapAccount(
-			host: 'imap.gmail.com'
+			name: 'FirstAccount'
+			,host: 'imap.gmail.com'
 			,port: 933
 			,login: 'some.name@gmail.com'
 			,password: 'Super-Pass'
@@ -25,16 +34,19 @@ config{
 		)
 		// If you are good with defaults, you may use short form:
 		account2 = new ImapAccount(
-			login: 'some.name2@gmail.com'
-			,password: 'Super-Pass for name 2'
+			name: 'For backup'
+			,login: 'some.name2@gmail.com'
+			// To read password from file for example.
+			,password: 'cat .passfile'.execute().text
 		)
 		// Some sort ov nesting available also with groovy ConfigSlurper magic:
 		account3 = account1.with{
+			name = 'Account like 1st'
 			login = 'some.name3@gmail.com'
 			password = 'Super-Pass for name 3'
 		}
 		// and also constructor style form available (example same as account1):
-		account4 = new ImapAccount('imap.gmail.com', 933, 'some.name@gmail.com', 'Super-Pass', 'gimaps', 'INBOX')
+		account4 = new ImapAccount('4th', 'imap.gmail.com', 933, 'some.name@gmail.com', 'Super-Pass', 'gimaps', 'INBOX')
 	}
 
 	/**
@@ -160,7 +172,7 @@ println imapTree.tree.@folder.messages
 					println "\tMessage has no other labels, so move to '[Gmail]/Trash' ('${trashFolder}') to do not leave it also in '[Gmail]/All mail' (archive folder)"
 					try{
 						// http://www.jguru.com/faq/view.jsp?EID=1010890 - expunge in folder close later (IMAP have no move operation in base spec http://stackoverflow.com/questions/122267/imap-how-to-move-a-message-from-one-folder-to-another)
-						m.folder.copyMessages((m as javax.mail.Message[]), trashFolder);
+						m.folder.copyMessages((m as Message[]), trashFolder);
 					}
 					catch(Exception e){
 						println '!!!ERROR copy message to [Gmail]/Trash folder: ' + e
@@ -185,7 +197,7 @@ println imapTree.tree.@folder.messages
 		 * 	but included in OpenJDK version does not work for me. Oracle JDK does.
 		 * 	2) There used modern TreeTableView component, which is implemented only in Java-8. So only Oracle Java 8 is
 		 * 	now single choose to use it.
-		 * 	3) Even in Oracle JDK JavaFX still threated as non-mainstream, so not included in main classpath (placed in ext)
+		 * 	3) Even in Oracle JDK JavaFX still treated as non-mainstream, so not included in main classpath (placed in ext)
 		 * 	and for run such operation you may try:
 		 * 	3.1) Add it by run simple command as described: http://zenjava.com/javafx/maven/fix-classpath.html
 		 * 		(http://stackoverflow.com/questions/14095430/how-to-grab-a-dependency-and-make-it-work-with-intellij-project)
@@ -205,92 +217,92 @@ println imapTree.tree.@folder.messages
 //				@Grab(group = 'org.codehaus.groovyfx', module = 'groovyfx', version = '0.3.1')
 				// Until BUG https://jira.codehaus.org/browse/GFX-41 resolved not 0.4.0 version
 //				groovy.grape.Grape.grab(group: 'org.codehaus.groovyfx', module:'groovyfx', version:'0.3.1')
-				groovyx.javafx.GroovyFX.start{
+				GroovyFX.start{
 					stage(title: 'IMAP Tree folder sizes', visible: true) {
 						scene(fill: BLACK, width: 700, height: 300) {
 							// Unfortunately GroovyFX have no TreeTableView builder (yet?), so build it manually and insert as node
-							node new javafx.scene.control.TreeTableView(new javafx.scene.control.TreeItem(imapTree.tree)).with{
+							node new TreeTableView(new TreeItem(imapTree.tree)).with{
 								it.root.expanded = true;
 								it.tableMenuButtonVisible = true;
 
 								imapTree.tree.@fxItem = it.root;
 								imapTree.tree.depthFirst().tail().each{Node n-> // Except 1st root
-									n.@fxItem = new javafx.scene.control.TreeItem(n); // Store for childs
+									n.@fxItem = new TreeItem(n); // Store for childs
 									n.parent().@fxItem.children.add(n.@fxItem);
 								}
 
 								it.columns.setAll(
-									new javafx.scene.control.TreeTableColumn('Folder name').with{
+									new TreeTableColumn('Folder name').with{
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyStringWrapper(param.value.value.@folder.name) // Size object
+										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+											new ReadOnlyStringWrapper(param.value.value.@folder.name) // Size object
 										}
 										it
 									}
-									,new javafx.scene.control.TreeTableColumn('Folder full name').with{
+									,new TreeTableColumn('Folder full name').with{
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyStringWrapper(param.value.value.name()) // Size object
+										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+											new ReadOnlyStringWrapper(param.value.value.name()) // Size object
 										}
 										it
 									}
-									,new javafx.scene.control.TreeTableColumn('Self size, bytes').with{
+									,new TreeTableColumn('Self size, bytes').with{
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.@size.bytes ?: 0)
+										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+											new ReadOnlyLongWrapper(param.value.value.@size.bytes ?: 0)
 										}
 										it
 									}
-									,new javafx.scene.control.TreeTableColumn('Self size, hr').with{
+									,new TreeTableColumn('Self size, hr').with{
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyStringWrapper(param.value.value.@size.hr())
+										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+											new ReadOnlyStringWrapper(param.value.value.@size.hr())
 										}
 										it
 									}
-									,new javafx.scene.control.TreeTableColumn('Messages').with{
+									,new TreeTableColumn('Messages').with{
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.@size.messages ?: 0)
+										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+											new ReadOnlyLongWrapper(param.value.value.@size.messages ?: 0)
 										}
 										it
 									}
-									,new javafx.scene.control.TreeTableColumn('Sub-tree size, bytes').with{
+									,new TreeTableColumn('Sub-tree size, bytes').with{
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.depthFirst().sum { it.@size }.bytes ?: 0)
+										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+											new ReadOnlyLongWrapper(param.value.value.depthFirst().sum { it.@size }.bytes ?: 0)
 										}
 										it
 									}
-									,new javafx.scene.control.TreeTableColumn('Sub-tree size, hr').with{
+									,new TreeTableColumn('Sub-tree size, hr').with{
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyStringWrapper(param.value.value.depthFirst().sum { it.@size }.hr())
+										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+											new ReadOnlyStringWrapper(param.value.value.depthFirst().sum { it.@size }.hr())
 										}
 										it
 									}
-									,new javafx.scene.control.TreeTableColumn('Sub-tree messages').with{
+									,new TreeTableColumn('Sub-tree messages').with{
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.depthFirst().sum { it.@size }.messages ?: 0)
+										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+											new ReadOnlyLongWrapper(param.value.value.depthFirst().sum { it.@size }.messages ?: 0)
 										}
 										it
 									}
-									,new javafx.scene.control.TreeTableColumn('Child sub-tree folders').with{
+									,new TreeTableColumn('Child sub-tree folders').with{
 //										it.setPrefWidth(80);
-										it.cellValueFactory = {javafx.scene.control.TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new javafx.beans.property.ReadOnlyLongWrapper(param.value.value.depthFirst().size() - 1) // Size object
+										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+											new ReadOnlyLongWrapper(param.value.value.depthFirst().size() - 1) // Size object
 										}
 										it
 									}
 								);
 								// http://stackoverflow.com/questions/10952111/javafx-2-0-table-with-multiline-table-header
 								it.columns.forEach{col->
-									javafx.scene.control.Label label = new javafx.scene.control.Label(col.getText());
+									Label label = new Label(col.getText());
 									label.setStyle('-fx-padding: 0px; -fx-font: 10px "Serif"; -fx-text-alignment: center; -fx-min-width: 4em;'); // http://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html
 									label.setWrapText(true);
 
-									javafx.scene.layout.StackPane stack = new javafx.scene.layout.StackPane();
+									StackPane stack = new StackPane();
 									stack.getChildren().add(label);
 									stack.prefWidthProperty().bind(col.widthProperty().subtract(5));
 									label.prefWidthProperty().bind(stack.prefWidthProperty());

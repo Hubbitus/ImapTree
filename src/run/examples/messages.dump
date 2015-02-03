@@ -13,6 +13,8 @@ mkdir -p "$RES_DIR"
 ACCOUNTS=( Ant )
 FOLDERS=( 'GROUP_TALKS.quota warning' )
 
+pushd ../..
+
 for (( i = 0 ; i < ${#ACCOUNTS[@]}; i++ )); do
 	echo "PROCESS $i:${ACCOUNTS[$i]}"
 	./ImapTree.groovy \
@@ -31,4 +33,4 @@ for (( i = 0 ; i < ${#ACCOUNTS[@]}; i++ )); do
 #
 done
 
-
+popd

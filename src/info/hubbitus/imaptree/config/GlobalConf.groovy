@@ -83,36 +83,20 @@ class GlobalConf {
 	 * @return
 	 */
 	public static def get(String prop){
-		MetaProperty mp = GlobalConf.hasProperty(prop);
-		if (mp) return mp.getProperty(GlobalConf); // Real properties returned as is (class for example) to break loop
+//		MetaProperty mp = GlobalConf.hasProperty(prop);
+//		if (mp) return mp.getProperty(GlobalConf); // Real properties returned as is (class for example) to break loop
 
 		if (!GlobalConf.getInstance()._conf) GlobalConf.getInstance().init(); // Not property, to break loop!
 		GlobalConf.getInstance()._conf."$prop";
 	}
 
-	/**
-	 * Proxy also methods call to _conf if so, for example {@see info.hubbitus.imaptree.utils.ConfigExtended#setFromPropertyPathLikeKey(java.lang.String, java.lang.Object)}
-	 *
-	 * @param name
-	 * @param args
-	 * @return
-	 */
-//	static{ // For static methods it just little harder than methodMissing - http://groovy.codehaus.org/ExpandoMetaClass+-+Overriding+static+invokeMethod
-//		GlobalConf.metaClass.static.invokeMethod = {String name, args->
-//			def metaMethod = delegate.class.metaClass.getStaticMetaMethod(name, args);
-//			if(metaMethod) return metaMethod.invoke(delegate, args);
-//			else{
-//				if (!GlobalConf.instance._conf) GlobalConf.instance.init(); // Not property, to break loop!
-//				if (GlobalConf.instance._conf.respondsTo(name)){
-//					GlobalConf.instance._conf."$name"(*args);
-//				}
-//				else throw new MissingMethodException(name, ConfigExtended, args)
-//			}
-//		}
-//	}
-
 	static void setFromPropertyPathLikeKey(String propertyLikeKey, value){
 		if (!GlobalConf.getInstance()._conf) GlobalConf.getInstance().init(); // Not property, to break loop!
 		GlobalConf.getInstance()._conf.setFromPropertyPathLikeKey(propertyLikeKey, value);
+	}
+
+	static void overrideFromListPropertiesPairs(List options){
+		if (!GlobalConf.getInstance()._conf) GlobalConf.getInstance().init(); // Not property, to break loop!
+		GlobalConf.getInstance()._conf.overrideFromListPropertiesPairs(options);
 	}
 }

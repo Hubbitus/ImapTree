@@ -112,4 +112,33 @@ class ConfigExtended extends ConfigObject{
 
 		return config;
 	}
+
+	/**
+	 * Special method for CliBuilder options like configuration partially redefine like:
+	 * def cli = new CliBuilderAutoWidth()
+	 *	cli.D(longOpt: 'config', '''Change configured options from command line. Allow runtime override. May appear multiple times - processed in that order. For example:
+	 *	-D log.fullXmlCache="some.file" --config operations.printFolderSizes.folderProcess='{true}' -D operations.printFolderSizes.messageProcess='{m-> println "SUBJ: ${m.subject}"}' --config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
+	 *	Values trimmed - use quotes and escapes where appropriate''', required: false, args: 2, valueSeparator: '=', argName: 'property=value')
+	 *	if(opt.D) {
+	 *		(opt.Ds as List).collate(2).each {// Override configs from commandline options
+	 *			GlobalConf.setFromPropertyPathLikeKey(it[0] as String, it[1]);
+	 *		}
+	 *	}
+	 *became just:
+	 * config.overrideFromListPropertiesPairs(opt.Ds as List)
+	 * or even simple:
+	 * GlobalConf.overrideFromListPropertiesPairs(opt.Ds as List)
+	 *
+	 * @param options
+	 */
+	void overrideFromListPropertiesPairs(List options){
+		options.collate(2).each {// Override configs from commandline options
+			// @TODO BUG?:
+			//	--config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
+			// works while:
+			//	'operations.printFolderSizes.treeTraverseOrder="breadthFirst"'
+			// parsed into strings: it[0]=[operations.printFolderSizes.treeTraverseOrder], it[1]=["breadthFirst]
+			setFromPropertyPathLikeKey(it[0] as String, it[1]);
+		}
+	}
 }

@@ -29,24 +29,14 @@ cli.D(longOpt: 'config', '''Change configured options from command line. Allow r
 	-D log.fullXmlCache="some.file" --config operations.printFolderSizes.folderProcess='{true}' -D operations.printFolderSizes.messageProcess='{m-> println "SUBJ: ${m.subject}"}' --config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
 	Values trimmed - use quotes and escapes where appropriate''', required: false, args: 2, valueSeparator: '=', argName: 'property=value')
 OptionAccessor opt = cli.parse(args)
+GlobalConf.opt = opt;
 
 if(opt.h /*|| opt.arguments().isEmpty()*/ ) {
 	cli.usage()
 }
 else {
-	if(opt.D) {
-		(opt.Ds as List).collate(2).each {// Override configs from commandline options
-			// @TODO BUG?:
-			//	--config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
-			// works while:
-			//	'operations.printFolderSizes.treeTraverseOrder="breadthFirst"'
-			// parsed into strings: it[0]=[operations.printFolderSizes.treeTraverseOrder], it[1]=["breadthFirst]
-			GlobalConf.setFromPropertyPathLikeKey(it[0] as String, it[1]);
-		}
-	}
-}
 //println GlobalConf.log.test
-GlobalConf.opt = opt;
+	GlobalConf.overrideFromListPropertiesPairs(opt.Ds as List)
 
 //println "GlobalConf.log.test=" + GlobalConf.log.test
 
@@ -71,3 +61,4 @@ new FolderMessagesDiff(foldersDiff).dump('After copy missed messages');
 println 'Done'
 // To do not hang
 mem.shutdown();
+}

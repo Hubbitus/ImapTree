@@ -1,5 +1,7 @@
 package info.hubbitus.imaptree.config
 
+import info.hubbitus.imaptree.config.DelegateBase
+
 import javax.mail.Folder
 
 /**
@@ -31,7 +33,7 @@ import javax.mail.Folder
  *
  *
  * In closures body full this config available as config variable and it additionally have
- *	config.opt - CliBuilder parsed command line passed options.
+ *	GlobalConf.opt - CliBuilder parsed command line passed options.
  *
  * @author Pavel Alexeev - <Pahan@Hubbitus.info> (pasha)
  * @created 2015-01-05 00:33
@@ -45,11 +47,6 @@ class Operation extends DelegateBase{
 	// If it defined ALL OTHER IGNORED - for custom processors
 	// Single argument passed - ImapTreeSize object
 	Closure fullControl;
-
-	/**
-	 * Will be injected actual config. It also provide config.opt - access to parsed commandline options
-	 */
-	ConfigObject config;
 
 	// Name of method {@link groovy.util.Node} (http://groovy.codehaus.org/api/groovy/util/Node.html) for order tree traversal
 	// breadthFirst or depthFirst. See <a href="http://en.wikipedia.org/wiki/Tree_traversal">theory</a>
