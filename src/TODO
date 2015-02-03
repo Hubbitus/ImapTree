@@ -3,4 +3,4 @@
 3) Make ImapTreeDiff true configurable
 4) Fix sha1 in message caching
 5) Find minimum stable Gmail append problem (ideal 2 messages)
-6) Bring Config singleton in Groovy style (from ASA)
+(6) Bring Config singleton in Groovy style (from ASA) - GlobalConf

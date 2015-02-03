@@ -1,8 +1,4 @@
 #!/opt/groovy-2.3.6/bin/groovy
-import com.sun.mail.imap.AppendUID
-import com.sun.mail.imap.IMAPFolder
-import com.sun.mail.imap.IMAPMessage
-import groovy.json.JsonOutput
 @Grab(group = 'commons-cli', module = 'commons-cli', version = '1.2')
 
 // TMP
@@ -12,21 +8,13 @@ import groovy.json.JsonOutput
 @Grab(group = 'org.apache.logging.log4j', module = 'log4j-api', version = '2.1')
 @Grab(group = 'org.apache.logging.log4j', module = 'log4j-core', version = '2.1')
 import info.hubbitus.imaptree.ImapTreeSize
+import info.hubbitus.imaptree.config.CliBuilderAutoWidth
+import info.hubbitus.imaptree.config.GlobalConf
 import info.hubbitus.imaptree.config.ImapAccount
 import info.hubbitus.imaptree.diff.FolderMessagesCopier
 import info.hubbitus.imaptree.diff.FolderMessagesDiff
-import info.hubbitus.imaptree.utils.ConfigExtended
 import info.hubbitus.imaptree.utils.cache.memcached.ImapTreeTranscoder
 import info.hubbitus.imaptree.utils.cache.memcached.MemcachedClientExtended
-
-import javax.mail.Folder
-import java.security.MessageDigest
-import javax.mail.event.MessageChangedListener
-import javax.mail.event.MessageChangedEvent
-import javax.mail.event.MessageCountListener
-import javax.mail.event.MessageCountEvent
-
-import static info.hubbitus.imaptree.diff.FolderMessagesDiff.messageToJson
 
 /**
  * Simple example to just print folder sizes recursively
@@ -35,16 +23,41 @@ import static info.hubbitus.imaptree.diff.FolderMessagesDiff.messageToJson
  * @created 23.01.2015 23:30
  * */
 
+def cli = new CliBuilderAutoWidth(/*usage: 'Usage:'*/)
+cli.h(longOpt: 'help', 'This usage information', required: false)
+cli.D(longOpt: 'config', '''Change configured options from command line. Allow runtime override. May appear multiple times - processed in that order. For example:
+	-D log.fullXmlCache="some.file" --config operations.printFolderSizes.folderProcess='{true}' -D operations.printFolderSizes.messageProcess='{m-> println "SUBJ: ${m.subject}"}' --config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
+	Values trimmed - use quotes and escapes where appropriate''', required: false, args: 2, valueSeparator: '=', argName: 'property=value')
+OptionAccessor opt = cli.parse(args)
+
+if(opt.h /*|| opt.arguments().isEmpty()*/ ) {
+	cli.usage()
+}
+else {
+	if(opt.D) {
+		(opt.Ds as List).collate(2).each {// Override configs from commandline options
+			// @TODO BUG?:
+			//	--config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
+			// works while:
+			//	'operations.printFolderSizes.treeTraverseOrder="breadthFirst"'
+			// parsed into strings: it[0]=[operations.printFolderSizes.treeTraverseOrder], it[1]=["breadthFirst]
+			GlobalConf.setFromPropertyPathLikeKey(it[0] as String, it[1]);
+		}
+	}
+}
+//println GlobalConf.log.test
+GlobalConf.opt = opt;
+
+//println "GlobalConf.log.test=" + GlobalConf.log.test
+
 // use memcached to do not long await start and information gathering:
 def mem = new MemcachedClientExtended(new InetSocketAddress('127.0.0.1', 11211));
 
-ConfigExtended config = (ConfigExtended) new ConfigSlurper().parse(Config).config;
-
-ImapTreeSize tree1 = mem.getOrCreate('tree1', new ImapTreeTranscoder((ImapAccount)config.accounts.Ant)) {
-	new ImapTreeSize(config.accounts.Ant)
+ImapTreeSize tree1 = mem.getOrCreate('tree1', new ImapTreeTranscoder((ImapAccount)GlobalConf.accounts.Ant)) {
+	new ImapTreeSize(GlobalConf.accounts.Ant)
 };
-ImapTreeSize tree2 = mem.getOrCreate('tree2', new ImapTreeTranscoder((ImapAccount)config.accounts.PahanTest)) {
-	new ImapTreeSize(config.accounts.PahanTest)
+ImapTreeSize tree2 = mem.getOrCreate('tree2', new ImapTreeTranscoder((ImapAccount)GlobalConf.accounts.PahanTest)) {
+	new ImapTreeSize(GlobalConf.accounts.PahanTest)
 };
 
 FolderMessagesDiff foldersDiff = new FolderMessagesDiff(tree1.tree.@folder, tree2.tree.@folder);

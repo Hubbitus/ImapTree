@@ -1,7 +1,5 @@
 package info.hubbitus.imaptree.utils
 
-import groovy.transform.CompileStatic
-
 /**
  * Main goal to add functionality to ConfigObject GDK class
  *
@@ -100,7 +98,7 @@ class ConfigExtended extends ConfigObject{
 					// recur
 					doMerge((Map) configEntry, (Map) value);
 				} else {
-					if (configEntry instanceof Map && ((Map)configEntry).size() > 0){ // As parent
+					if (configEntry instanceof Map){ // As parent
 						config.put(key, value);
 					}
 					else{ // Addition to do not replace object by instead modify its properties inplace
