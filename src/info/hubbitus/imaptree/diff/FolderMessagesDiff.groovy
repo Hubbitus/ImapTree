@@ -4,6 +4,8 @@ import groovy.util.logging.Log4j2
 import com.sun.mail.imap.IMAPFolder
 import com.sun.mail.imap.IMAPMessage
 import groovy.json.JsonOutput
+import info.hubbitus.imaptree.diff.logdump.FolderMessagesDiffLoggerDefault
+import info.hubbitus.imaptree.diff.logdump.FolderMessagesDiffLoggerFiles
 
 import javax.mail.Folder
 import javax.mail.Message
@@ -19,10 +21,10 @@ import java.security.MessageDigest
  * @created 2015-01-30 22:38
  **/
 @Log4j2
-class FolderMessagesDiff {
+@SuppressWarnings("ClashingTraitMethods") // Trait methods clashing desired because Trait chaining pattern used: http://groovy-lang.org/objectorientation.html#_chaining_behavior
+class FolderMessagesDiff implements FolderMessagesDiffLoggerDefault, FolderMessagesDiffLoggerFiles{
 	IMAPFolder folder1;
 	IMAPFolder folder2;
-
 
 	FolderMessagesDiff(IMAPFolder folder1, IMAPFolder folder2) {
 		this.folder1 = folder1
@@ -153,24 +155,11 @@ class FolderMessagesDiff {
 	void dumpAnomalies(){
 		if (folder1MessagesWithNonUniqueHashes || folder2MessagesWithNonUniqueHashes || messagesInFolder1ButNotInFolder2 || messagesInFolder2ButNotInFolder1){
 			['folder1MessagesWithNonUniqueHashes', 'folder2MessagesWithNonUniqueHashes'].each{
-				if (this."$it"){
-					log.debug("ANOMALIES: $it:")
-					this."$it".each{String sha1, List<IMAPMessage> messages->
-						log.debug("${sha1}(${messages.size()})");
-						messages.each{IMAPMessage m->
-							log.debug(messageToJson(m, ['X-message-unique', 'X-HeaderToolsLite', 'Date'], true));
-						}
-					}
-				}
+				diff_folderAnomaliesHelper(this."$it", it);
 			}
 
 			['messagesInFolder1ButNotInFolder2', 'messagesInFolder2ButNotInFolder1'].each{
-				if (this."$it"){
-					log.debug("ANOMALIES: $it (${this."$it".size()}):")
-					this."$it".each{String sha1, IMAPMessage m->
-						log.debug(messageToJson(m, ['X-message-unique', 'X-HeaderToolsLite', 'Date'], true));
-					}
-				}
+				diff_messagesAnomaliesHelper(this."$it", it);
 			}
 		}
 		else{

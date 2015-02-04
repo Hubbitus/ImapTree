@@ -3,14 +3,15 @@
   <component name="ChangeListManager">
     <list id="4b23fecd-e9ea-4c09-85fe-819090fd2945" name="Default" comment="Add into configs overrideFromListPropertiesPairs(List options) convenient method for parsing config partial overrides.&#10;&#10;Add property name into ImapAccount.&#10;&#10;Switch ImapTreeSize on GlobalConf" />
     <list default="true" id="8d415f9e-969f-4469-9810-dd4391606069" name="Rejected commit: Default" comment="Add into configs overrideFromListPropertiesPairs(List options) convenient method for parsing config partial overrides.&#10;&#10;Add property name into ImapAccount.&#10;&#10;Switch ImapTreeSize on GlobalConf">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Config-Example.groovy" afterPath="$PROJECT_DIR$/src/Config-Example.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/ConfigExtended.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/ConfigExtended.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/errors/ErrorsProcessing.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/GlobalConf.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/GlobalConf.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/ImapAccount.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/ImapAccount.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ImapTree.groovy" afterPath="$PROJECT_DIR$/src/ImapTree.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ImapTreeDiff.groovy" afterPath="$PROJECT_DIR$/src/ImapTreeDiff.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Operation.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Operation.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/run/examples/messages.dump" afterPath="$PROJECT_DIR$/src/run/examples/messages.dump" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TODO" afterPath="$PROJECT_DIR$/src/TODO" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/pasha.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/pasha.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -35,18 +36,16 @@
     <favorites_list name="ImapTreeSize" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5601852">
+    <splitter split-orientation="horizontal" split-proportion="0.4950364">
       <split-first>
         <leaf>
-          <file leaf-file-name="ImapTreeDiff.groovy" pinned="false" current-in-tab="false">
+          <file leaf-file-name="ImapTreeDiff.groovy" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/ImapTreeDiff.groovy">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="884">
-                  <caret line="38" column="62" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="62" />
+                <state vertical-scroll-proportion="0.25641027" vertical-offset="442" max-vertical-offset="949">
+                  <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
                   <folding>
                     <element signature="e#31#454#0" expanded="true" />
-                    <element signature="e#2230#2276#0" expanded="true" />
-                    <element signature="e#2230#2276#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -55,30 +54,10 @@
           <file leaf-file-name="GlobalConf.groovy" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/GlobalConf.groovy">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="862" max-vertical-offset="1404">
-                  <caret line="99" column="47" selection-start-line="99" selection-start-column="47" selection-end-line="99" selection-end-column="47" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="1508">
+                  <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
                   <folding>
                     <element signature="e#39#89#0" expanded="true" />
-                    <element signature="e#1905#2236#0" expanded="true" />
-                    <element signature="e#2050#2177#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Config.groovy" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Config.groovy">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="624" max-vertical-offset="2444">
-                  <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
-                  <folding>
-                    <element signature="e#0#24#0" expanded="true" />
-                    <element signature="e#1650#15096#0" expanded="true" />
-                    <element signature="e#1706#2065#0" expanded="true" />
-                    <element signature="e#2792#4183#0" expanded="true" />
-                    <element signature="e#3007#4178#0" expanded="true" />
-                    <element signature="e#3119#4172#0" expanded="true" />
-                    <element signature="e#15102#16752#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -87,9 +66,11 @@
           <file leaf-file-name="FolderMessagesCopier.groovy" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="39" max-vertical-offset="923">
-                  <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-                  <folding />
+                <state vertical-scroll-proportion="0.0" vertical-offset="185" max-vertical-offset="1443">
+                  <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#37#77#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -97,10 +78,10 @@
           <file leaf-file-name="FolderMessagesDiffLoggerFiles.groovy" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="97" max-vertical-offset="702">
-                  <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
+                <state vertical-scroll-proportion="-2.508772" vertical-offset="117" max-vertical-offset="2041">
+                  <caret line="20" column="96" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="96" />
                   <folding>
-                    <element signature="e#45#81#0" expanded="true" />
+                    <element signature="e#45#78#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -119,58 +100,14 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Config-Example.groovy" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Config-Example.groovy" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Config-Example.groovy">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.48351648" vertical-offset="1205" max-vertical-offset="4303">
-                  <caret line="115" column="78" selection-start-line="115" selection-start-column="78" selection-end-line="115" selection-end-column="78" />
+                <state vertical-scroll-proportion="-5.678571" vertical-offset="1245" max-vertical-offset="4329">
+                  <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#24#0" expanded="true" />
-                    <element signature="e#711#2050#0" expanded="true" />
-                    <element signature="e#1751#1857#0" expanded="true" />
-                    <element signature="e#2286#2637#0" expanded="true" />
-                    <element signature="e#2845#3062#0" expanded="true" />
-                    <element signature="e#3205#3352#0" expanded="true" />
-                    <element signature="e#6865#6891#0" expanded="true" />
-                    <element signature="e#6912#8548#0" expanded="true" />
-                    <element signature="e#8566#8629#0" expanded="true" />
-                    <element signature="e#10779#15342#0" expanded="true" />
-                    <element signature="e#11235#15337#0" expanded="true" />
-                    <element signature="e#11296#15331#0" expanded="true" />
-                    <element signature="e#11348#15324#0" expanded="true" />
-                    <element signature="e#11524#15316#0" expanded="true" />
-                    <element signature="e#11689#11838#0" expanded="true" />
-                    <element signature="e#11915#12159#0" expanded="true" />
-                    <element signature="e#11983#12135#0" expanded="true" />
-                    <element signature="e#12214#12452#0" expanded="true" />
-                    <element signature="e#12282#12428#0" expanded="true" />
-                    <element signature="e#12507#12738#0" expanded="true" />
-                    <element signature="e#12575#12714#0" expanded="true" />
-                    <element signature="e#12790#13017#0" expanded="true" />
-                    <element signature="e#12858#12993#0" expanded="true" />
-                    <element signature="e#13064#13298#0" expanded="true" />
-                    <element signature="e#13132#13274#0" expanded="true" />
-                    <element signature="e#13357#13612#0" expanded="true" />
-                    <element signature="e#13425#13588#0" expanded="true" />
-                    <element signature="e#13668#13919#0" expanded="true" />
-                    <element signature="e#13736#13895#0" expanded="true" />
-                    <element signature="e#13975#14233#0" expanded="true" />
-                    <element signature="e#14043#14209#0" expanded="true" />
-                    <element signature="e#14294#14546#0" expanded="true" />
-                    <element signature="e#14361#14522#0" expanded="true" />
-                    <element signature="e#14684#15235#0" expanded="true" />
-                    <element signature="e#15355#15699#0" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ConfigExtended.groovy" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/ConfigExtended.groovy">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="1374" max-vertical-offset="1924">
-                  <caret line="138" column="77" selection-start-line="138" selection-start-column="77" selection-end-line="138" selection-end-column="77" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -178,14 +115,14 @@
         </leaf>
       </split-first>
       <split-second>
-        <splitter split-orientation="vertical" split-proportion="0.84178185">
+        <splitter split-orientation="vertical" split-proportion="0.45826772">
           <split-first>
             <leaf>
               <file leaf-file-name="FolderMessagesDiff.groovy" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="1222" max-vertical-offset="2002">
-                      <caret line="108" column="19" selection-start-line="108" selection-start-column="19" selection-end-line="108" selection-end-column="19" />
+                    <state vertical-scroll-proportion="0.0" vertical-offset="2068" max-vertical-offset="2340">
+                      <caret line="161" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
                       <folding>
                         <element signature="e#37#70#0" expanded="true" />
                       </folding>
@@ -196,14 +133,21 @@
               <file leaf-file-name="FolderMessagesDiffLoggerDefault.groovy" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="1118">
-                      <caret line="76" column="46" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="46" />
+                    <state vertical-scroll-proportion="0.0" vertical-offset="211" max-vertical-offset="1261">
+                      <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
                       <folding>
                         <element signature="e#45#81#0" expanded="true" />
-                        <element signature="e#914#1138#0" expanded="true" />
-                        <element signature="e#1020#1133#0" expanded="true" />
-                        <element signature="e#1354#1478#0" expanded="true" />
                       </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="IFolderMessagesDiffLogger.groovy" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="546">
+                      <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+                      <folding />
                     </state>
                   </provider>
                 </entry>
@@ -211,7 +155,7 @@
               <file leaf-file-name="ImapTree.groovy" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/ImapTree.groovy">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="791" max-vertical-offset="1222">
+                    <state vertical-scroll-proportion="0.0" vertical-offset="755" max-vertical-offset="1222">
                       <caret line="81" column="9" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
                       <folding>
                         <element signature="e#31#87#0" expanded="true" />
@@ -220,44 +164,25 @@
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="Operation.groovy" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Operation.groovy">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="247" max-vertical-offset="1274">
-                      <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-                      <folding>
-                        <element signature="e#39#88#0" expanded="true" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="ImapAccount.groovy" pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/ImapAccount.groovy">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.14606741" vertical-offset="0" max-vertical-offset="445">
-                      <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="CliBuilderAutoWidth.groovy" pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/CliBuilderAutoWidth.groovy">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="13" max-vertical-offset="325">
-                      <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
-                      <folding />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file leaf-file-name="TODO" pinned="false" current-in-tab="false">
+              <file leaf-file-name="TODO" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/src/TODO">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="26" max-vertical-offset="143">
-                      <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+                    <state vertical-scroll-proportion="0.7839196" vertical-offset="0" max-vertical-offset="312">
+                      <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
                       <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="ImapTreeSize.groovy" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state vertical-scroll-proportion="0.0" vertical-offset="717" max-vertical-offset="2873">
+                      <caret line="98" column="103" selection-start-line="98" selection-start-column="103" selection-end-line="98" selection-end-column="103" />
+                      <folding>
+                        <element signature="e#1427#1563#0" expanded="false" />
+                        <element signature="e#1616#1985#0" expanded="false" />
+                      </folding>
                     </state>
                   </provider>
                 </entry>
@@ -266,11 +191,51 @@
           </split-first>
           <split-second>
             <leaf>
-              <file leaf-file-name="FolderMessagesDiff.groovy" pinned="false" current-in-tab="true">
+              <file leaf-file-name="Config.groovy" pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/src/Config.groovy">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state vertical-scroll-proportion="0.81276596" vertical-offset="2604" max-vertical-offset="3081">
+                      <caret line="345" column="0" selection-start-line="345" selection-start-column="0" selection-end-line="345" selection-end-column="0" />
+                      <folding>
+                        <element signature="e#0#36#0" expanded="true" />
+                        <element signature="e#5815#5841#0" expanded="false" />
+                        <element signature="e#5862#7509#0" expanded="false" />
+                        <element signature="e#7527#7590#0" expanded="false" />
+                        <element signature="e#9736#15125#0" expanded="false" />
+                        <element signature="e#10207#15120#0" expanded="false" />
+                        <element signature="e#10268#15114#0" expanded="false" />
+                        <element signature="e#10320#15107#0" expanded="false" />
+                        <element signature="e#10538#15099#0" expanded="false" />
+                        <element signature="e#10703#10873#0" expanded="false" />
+                        <element signature="e#10971#11258#0" expanded="false" />
+                        <element signature="e#11039#11234#0" expanded="false" />
+                        <element signature="e#11334#11615#0" expanded="false" />
+                        <element signature="e#11402#11591#0" expanded="false" />
+                        <element signature="e#11691#11980#0" expanded="false" />
+                        <element signature="e#11759#11956#0" expanded="false" />
+                        <element signature="e#12053#12338#0" expanded="false" />
+                        <element signature="e#12121#12314#0" expanded="false" />
+                        <element signature="e#12406#12698#0" expanded="false" />
+                        <element signature="e#12474#12674#0" expanded="false" />
+                        <element signature="e#12778#13091#0" expanded="false" />
+                        <element signature="e#12846#13067#0" expanded="false" />
+                        <element signature="e#13168#13477#0" expanded="false" />
+                        <element signature="e#13236#13453#0" expanded="false" />
+                        <element signature="e#13554#13870#0" expanded="false" />
+                        <element signature="e#13622#13846#0" expanded="false" />
+                        <element signature="e#13952#14247#0" expanded="false" />
+                        <element signature="e#14019#14223#0" expanded="false" />
+                        <element signature="e#14385#15018#0" expanded="false" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="FolderMessagesDiff.groovy" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="728" max-vertical-offset="2002">
-                      <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+                    <state vertical-scroll-proportion="0.0" vertical-offset="897" max-vertical-offset="2340">
+                      <caret line="73" column="39" selection-start-line="73" selection-start-column="39" selection-end-line="73" selection-end-column="39" />
                       <folding>
                         <element signature="e#37#70#0" expanded="true" />
                       </folding>
@@ -329,31 +294,32 @@
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffFiledumper.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLogger.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.java" />
-        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy" />
-        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy" />
-        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/CliBuilderExtended.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/CliBuilderAutoWidth.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Config-RNG.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Config.groovy" />
-        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy" />
-        <option value="$PROJECT_DIR$/src/TODO" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/ConfigExtended.groovy" />
-        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/GlobalConf.groovy" />
-        <option value="$PROJECT_DIR$/src/ImapTreeDiff.groovy" />
         <option value="$PROJECT_DIR$/src/ImapTree.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Operation.groovy" />
-        <option value="$PROJECT_DIR$/src/Config.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/ImapAccount.groovy" />
         <option value="$PROJECT_DIR$/src/Config-Example.groovy" />
+        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy" />
+        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy" />
+        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy" />
+        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy" />
+        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/GlobalConf.groovy" />
+        <option value="$PROJECT_DIR$/src/Config.groovy" />
+        <option value="$PROJECT_DIR$/src/ImapTreeDiff.groovy" />
+        <option value="$PROJECT_DIR$/src/TODO" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1366" />
-    <option name="width" value="1551" />
-    <option name="height" value="1050" />
+    <option name="x" value="1364" />
+    <option name="y" value="-3" />
+    <option name="width" value="1557" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -394,6 +360,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -618,7 +585,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -632,7 +598,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.25287357" />
-    <property name="options.lastSelected" value="preferences.pluginManager" />
+    <property name="options.lastSelected" value="editor.preferences.folding" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="recentsLimit" value="5" />
@@ -1231,10 +1197,16 @@
       <option name="project" value="LOCAL" />
       <updated>1422996535020</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Add into configs overrideFromListPropertiesPairs(List options) convenient method for parsing config partial overrides.&#10;&#10;Add property name into ImapAccount.&#10;&#10;Switch ImapTreeSize on GlobalConf">
+      <created>1422996670141</created>
+      <option name="number" value="00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1422996670141</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
-  <component name="TodoView" selected-index="0">
+  <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
       <are-packages-shown value="false" />
       <are-modules-shown value="false" />
@@ -1255,25 +1227,27 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1366" y="0" width="1551" height="1050" extended-state="4" />
+    <frame x="1364" y="-3" width="1557" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.49971414" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32869378" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32869378" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32349727" sideWeight="0.25016546" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5132837" sideWeight="0.21906023" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952598" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.4996691" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3985122" sideWeight="0.7088021" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41639343" sideWeight="0.5003309" order="14" side_tool="true" content_ui="tabs" x="1418" y="647" width="1751" height="318" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15813954" sideWeight="0.6771653" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17342193" sideWeight="0.6771653" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Aquarium" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.32958305" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="1893" y="214" width="498" height="621" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32518598" sideWeight="0.63203174" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18464594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21016562" sideWeight="0.32125986" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5132837" sideWeight="0.78093976" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32954547" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1282,12 +1256,10 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24957167" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32970712" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35324407" sideWeight="0.8947717" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="DatabaseBrowser" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32970712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3177471" sideWeight="0.74983454" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34006375" sideWeight="0.7088021" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.4996691" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="DBOutput" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32954547" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1356,14 +1328,8 @@
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/ConfigExtended.groovy</url>
-          <line>62</line>
-          <properties />
-          <option name="timeStamp" value="99" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/GlobalConf.groovy</url>
-          <line>94</line>
+          <line>102</line>
           <properties />
           <option name="timeStamp" value="100" />
         </line-breakpoint>
@@ -1379,44 +1345,85 @@
           <properties />
           <option name="timeStamp" value="103" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy</url>
+          <line>115</line>
+          <properties />
+          <option name="timeStamp" value="111" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy</url>
+          <line>116</line>
+          <properties />
+          <option name="timeStamp" value="112" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy</url>
+          <line>43</line>
+          <properties />
+          <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Config.groovy</url>
+          <line>344</line>
+          <properties />
+          <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy</url>
+          <line>161</line>
+          <properties />
+          <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy</url>
+          <line>114</line>
+          <properties />
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy</url>
+          <line>137</line>
+          <properties />
+          <option name="timeStamp" value="125" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy</url>
+          <line>60</line>
+          <properties />
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy</url>
+          <line>62</line>
+          <properties />
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy</url>
+          <line>65</line>
+          <properties />
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy</url>
+          <line>79</line>
+          <properties />
+          <option name="timeStamp" value="131" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="106" />
+      <option name="time" value="136" />
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="GroovyScriptRunConfiguration">
-        <watch expression="GlobalConf.metaClass.getStaticMetaMethod(name, args);" />
-      </configuration>
-    </watches-manager>
+    <watches-manager />
   </component>
   <component name="XPathView.XPathProjectComponent">
     <history />
     <find-history />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/com/sun/mail/imap/AppendUID.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73333335" vertical-offset="271" max-vertical-offset="871">
-          <caret line="53" column="27" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.groovy/grapes/net.spy/spymemcached/jars/spymemcached-2.10.5.jar!/net/spy/memcached/transcoders/Transcoder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.44" vertical-offset="31" max-vertical-offset="312">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/groovy-all/2.3.7/groovy-all-2.3.7-sources.jar!/groovy/lang/Script.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33259913" vertical-offset="1123" max-vertical-offset="2873">
-          <caret line="112" column="16" selection-start-line="112" selection-start-column="16" selection-end-line="112" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.ideaLibSources/spymemcached-2.10.5-sources.jar!/net/spy/memcached/transcoders/IntegerTranscoder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="296" max-vertical-offset="754">
@@ -1569,17 +1576,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2119" max-vertical-offset="2665">
-          <caret line="163" column="46" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/run/examples/delete">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="882">
@@ -1594,75 +1590,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31296295" vertical-offset="0" max-vertical-offset="540">
-          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/errors/ErrorsProcessing.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36173913" vertical-offset="0" max-vertical-offset="575">
           <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="1118">
-          <caret line="76" column="46" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="46" />
-          <folding>
-            <element signature="e#45#81#0" expanded="true" />
-            <element signature="e#914#1138#0" expanded="true" />
-            <element signature="e#1020#1133#0" expanded="true" />
-            <element signature="e#1354#1478#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9398907" vertical-offset="644" max-vertical-offset="2444">
-          <caret line="98" column="38" selection-start-line="98" selection-start-column="38" selection-end-line="98" selection-end-column="38" />
-          <folding>
-            <element signature="e#1427#1563#0" expanded="false" />
-            <element signature="e#1616#1985#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="39" max-vertical-offset="923">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1222" max-vertical-offset="2002">
-          <caret line="108" column="19" selection-start-line="108" selection-start-column="19" selection-end-line="108" selection-end-column="19" />
-          <folding>
-            <element signature="e#37#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/CliBuilderAutoWidth.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="13" max-vertical-offset="325">
-          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/groovy-all/2.3.7/groovy-all-2.3.7-sources.jar!/groovy/lang/Delegate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3321739" vertical-offset="1408" max-vertical-offset="2613">
-          <caret line="128" column="18" selection-start-line="128" selection-start-column="18" selection-end-line="128" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1698,28 +1629,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="97" max-vertical-offset="702">
-          <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
-          <folding>
-            <element signature="e#45#81#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TODO">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="143">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/src.zip!/sun/reflect/NativeMethodAccessorImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="341" max-vertical-offset="923">
           <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1727,24 +1641,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="103" max-vertical-offset="663">
           <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ImapTreeDiff.groovy">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="884">
-          <caret line="38" column="62" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="62" />
-          <folding>
-            <element signature="e#31#454#0" expanded="true" />
-            <element signature="e#2230#2276#0" expanded="true" />
-            <element signature="e#2230#2276#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="2119" max-vertical-offset="2665">
+          <caret line="163" column="46" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/ImapAccount.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61348313" vertical-offset="0" max-vertical-offset="445">
+          <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/CliBuilderAutoWidth.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08351178" vertical-offset="0" max-vertical-offset="467">
+          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ImapTree.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="791" max-vertical-offset="1222">
+        <state vertical-scroll-proportion="0.0" vertical-offset="755" max-vertical-offset="1222">
           <caret line="81" column="9" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
           <folding>
             <element signature="e#31#87#0" expanded="true" />
@@ -1752,100 +1682,217 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/src.zip!/java/io/File.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7773" max-vertical-offset="28340">
+          <caret line="148" column="13" selection-start-line="148" selection-start-column="13" selection-end-line="148" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="class#PathStatus#0;class#File#0" expanded="false" />
+            <element signature="e#9259#9260#0" expanded="false" />
+            <element signature="e#9294#9295#0" expanded="false" />
+            <element signature="e#22132#22133#0" expanded="false" />
+            <element signature="e#22159#22160#0" expanded="false" />
+            <element signature="e#22749#22750#0" expanded="false" />
+            <element signature="e#22791#22792#0" expanded="false" />
+            <element signature="e#24015#24016#0" expanded="false" />
+            <element signature="e#24054#24055#0" expanded="false" />
+            <element signature="e#65748#65749#0" expanded="false" />
+            <element signature="e#65798#65799#0" expanded="false" />
+            <element signature="e#69388#69389#0" expanded="false" />
+            <element signature="e#69438#69439#0" expanded="false" />
+            <element signature="e#73096#73097#0" expanded="false" />
+            <element signature="e#73150#73151#0" expanded="false" />
+            <element signature="e#76710#76711#0" expanded="false" />
+            <element signature="e#76747#76748#0" expanded="false" />
+            <element signature="class#TempDirectory#0;class#File#0" expanded="false" />
+            <element signature="e#81742#81743#0" expanded="false" />
+            <element signature="e#81779#81780#0" expanded="false" />
+            <element signature="e#90534#90535#0" expanded="false" />
+            <element signature="e#90583#90584#0" expanded="false" />
+            <element signature="e#92254#92255#0" expanded="false" />
+            <element signature="e#92294#92295#0" expanded="false" />
+            <element signature="e#92555#92556#0" expanded="false" />
+            <element signature="e#92587#92588#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/groovy-all/2.3.7/groovy-all-2.3.7-sources.jar!/groovy/lang/Delegate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2613">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="211" max-vertical-offset="1261">
+          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+          <folding>
+            <element signature="e#45#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/groovy-all/2.3.7/groovy-all-2.3.7-sources.jar!/org/codehaus/groovy/runtime/callsite/StaticMetaMethodSite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1418" max-vertical-offset="1846">
+          <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2068" max-vertical-offset="2340">
+          <caret line="161" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
+          <folding>
+            <element signature="e#37#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/GlobalConf.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="862" max-vertical-offset="1404">
-          <caret line="99" column="47" selection-start-line="99" selection-start-column="47" selection-end-line="99" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="1508">
+          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
           <folding>
             <element signature="e#39#89#0" expanded="true" />
-            <element signature="e#1905#2236#0" expanded="true" />
-            <element signature="e#2050#2177#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Operation.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="247" max-vertical-offset="1274">
-          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-          <folding>
-            <element signature="e#39#88#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Config.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2444">
-          <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-            <element signature="e#1650#15096#0" expanded="true" />
-            <element signature="e#1706#2065#0" expanded="true" />
-            <element signature="e#2792#4183#0" expanded="true" />
-            <element signature="e#3007#4178#0" expanded="true" />
-            <element signature="e#3119#4172#0" expanded="true" />
-            <element signature="e#15102#16752#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/ImapAccount.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14606741" vertical-offset="0" max-vertical-offset="445">
-          <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/ConfigExtended.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1374" max-vertical-offset="1924">
-          <caret line="138" column="77" selection-start-line="138" selection-start-column="77" selection-end-line="138" selection-end-column="77" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Config-Example.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48351648" vertical-offset="1205" max-vertical-offset="4303">
-          <caret line="115" column="78" selection-start-line="115" selection-start-column="78" selection-end-line="115" selection-end-column="78" />
+        <state vertical-scroll-proportion="-5.678571" vertical-offset="1245" max-vertical-offset="4329">
+          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
-            <element signature="e#711#2050#0" expanded="true" />
-            <element signature="e#1751#1857#0" expanded="true" />
-            <element signature="e#2286#2637#0" expanded="true" />
-            <element signature="e#2845#3062#0" expanded="true" />
-            <element signature="e#3205#3352#0" expanded="true" />
-            <element signature="e#6865#6891#0" expanded="true" />
-            <element signature="e#6912#8548#0" expanded="true" />
-            <element signature="e#8566#8629#0" expanded="true" />
-            <element signature="e#10779#15342#0" expanded="true" />
-            <element signature="e#11235#15337#0" expanded="true" />
-            <element signature="e#11296#15331#0" expanded="true" />
-            <element signature="e#11348#15324#0" expanded="true" />
-            <element signature="e#11524#15316#0" expanded="true" />
-            <element signature="e#11689#11838#0" expanded="true" />
-            <element signature="e#11915#12159#0" expanded="true" />
-            <element signature="e#11983#12135#0" expanded="true" />
-            <element signature="e#12214#12452#0" expanded="true" />
-            <element signature="e#12282#12428#0" expanded="true" />
-            <element signature="e#12507#12738#0" expanded="true" />
-            <element signature="e#12575#12714#0" expanded="true" />
-            <element signature="e#12790#13017#0" expanded="true" />
-            <element signature="e#12858#12993#0" expanded="true" />
-            <element signature="e#13064#13298#0" expanded="true" />
-            <element signature="e#13132#13274#0" expanded="true" />
-            <element signature="e#13357#13612#0" expanded="true" />
-            <element signature="e#13425#13588#0" expanded="true" />
-            <element signature="e#13668#13919#0" expanded="true" />
-            <element signature="e#13736#13895#0" expanded="true" />
-            <element signature="e#13975#14233#0" expanded="true" />
-            <element signature="e#14043#14209#0" expanded="true" />
-            <element signature="e#14294#14546#0" expanded="true" />
-            <element signature="e#14361#14522#0" expanded="true" />
-            <element signature="e#14684#15235#0" expanded="true" />
-            <element signature="e#15355#15699#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="717" max-vertical-offset="2873">
+          <caret line="98" column="103" selection-start-line="98" selection-start-column="103" selection-end-line="98" selection-end-column="103" />
+          <folding>
+            <element signature="e#1427#1563#0" expanded="false" />
+            <element signature="e#1616#1985#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="230" max-vertical-offset="546">
+          <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Operation.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1030" max-vertical-offset="1417">
+          <caret line="85" column="61" selection-start-line="85" selection-start-column="61" selection-end-line="85" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.508772" vertical-offset="117" max-vertical-offset="2041">
+          <caret line="20" column="96" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="96" />
+          <folding>
+            <element signature="e#45#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/ConfigExtended.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1565" max-vertical-offset="1924">
+          <caret line="133" column="31" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
+          <folding>
+            <element signature="e#3693#3755#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/bench/SpentTest.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="546">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Config.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.81276596" vertical-offset="2604" max-vertical-offset="3081">
+          <caret line="345" column="0" selection-start-line="345" selection-start-column="0" selection-end-line="345" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#5815#5841#0" expanded="false" />
+            <element signature="e#5862#7509#0" expanded="false" />
+            <element signature="e#7527#7590#0" expanded="false" />
+            <element signature="e#9736#15125#0" expanded="false" />
+            <element signature="e#10207#15120#0" expanded="false" />
+            <element signature="e#10268#15114#0" expanded="false" />
+            <element signature="e#10320#15107#0" expanded="false" />
+            <element signature="e#10538#15099#0" expanded="false" />
+            <element signature="e#10703#10873#0" expanded="false" />
+            <element signature="e#10971#11258#0" expanded="false" />
+            <element signature="e#11039#11234#0" expanded="false" />
+            <element signature="e#11334#11615#0" expanded="false" />
+            <element signature="e#11402#11591#0" expanded="false" />
+            <element signature="e#11691#11980#0" expanded="false" />
+            <element signature="e#11759#11956#0" expanded="false" />
+            <element signature="e#12053#12338#0" expanded="false" />
+            <element signature="e#12121#12314#0" expanded="false" />
+            <element signature="e#12406#12698#0" expanded="false" />
+            <element signature="e#12474#12674#0" expanded="false" />
+            <element signature="e#12778#13091#0" expanded="false" />
+            <element signature="e#12846#13067#0" expanded="false" />
+            <element signature="e#13168#13477#0" expanded="false" />
+            <element signature="e#13236#13453#0" expanded="false" />
+            <element signature="e#13554#13870#0" expanded="false" />
+            <element signature="e#13622#13846#0" expanded="false" />
+            <element signature="e#13952#14247#0" expanded="false" />
+            <element signature="e#14019#14223#0" expanded="false" />
+            <element signature="e#14385#15018#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="185" max-vertical-offset="1443">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="e#37#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TODO">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7839196" vertical-offset="0" max-vertical-offset="312">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ImapTreeDiff.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25641027" vertical-offset="442" max-vertical-offset="949">
+          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding>
+            <element signature="e#31#454#0" expanded="true" />
           </folding>
         </state>
       </provider>

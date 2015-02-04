@@ -27,6 +27,11 @@ import java.nio.file.*
 class GlobalConf {
 	private static final String FILENAME = '/Config.groovy';
 
+	/**
+	 * For long run services it may be desired to auto-watch config change and read it on the fly
+	 */
+	private static final boolean USE_FILE_CHANGE_AUTO_WATCH = false;
+
 	private ConfigExtended _conf;
 	private Thread watcher;
 
@@ -34,26 +39,29 @@ class GlobalConf {
 	 * (Re)initialization_
 	 */
 	public void init(){
-		// Start watching for file change. Unfortunately only watch dir implemented in Java 7, not just file change
-		Path watchDir = Paths.get(this.getClass().getResource(FILENAME).toURI().resolve('.')); // https://weblogs.java.net/blog/kohsuke/archive/2007/04/how_to_convert.html, http://stackoverflow.com/questions/10159186/how-to-get-parent-url-in-java
+		if (USE_FILE_CHANGE_AUTO_WATCH) {
+			// Start watching for file change. Unfortunately only watch dir implemented in Java 7, not just file change
+			Path watchDir = Paths.get(this.getClass().getResource(FILENAME).toURI().resolve('.'));
+			// https://weblogs.java.net/blog/kohsuke/archive/2007/04/how_to_convert.html, http://stackoverflow.com/questions/10159186/how-to-get-parent-url-in-java
 
-		WatchService watchService = FileSystems.getDefault().newWatchService();
-		watchDir.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+			WatchService watchService = FileSystems.getDefault().newWatchService();
+			watchDir.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
 
-		// Processing will be by done watch service in another thread to in sane way handle also manual placed there files
-		watcher = Thread.start('ConfigChangeWatchThread'){
-			//noinspection GroovyInfiniteLoopStatement
-			while(true){
-				WatchKey key = watchService.take();
-				if (key) {
-					key.pollEvents().each{
-						if (it.context().toString().endsWith(FILENAME.substring(1))){// Check without /
-							onConfigChange();
+			// Processing will be by done watch service in another thread to in sane way handle also manual placed there files
+			watcher = Thread.start('ConfigChangeWatchThread') {
+				//noinspection GroovyInfiniteLoopStatement
+				while(true) {
+					WatchKey key = watchService.take();
+					if(key) {
+						key.pollEvents().each {
+							if(it.context().toString().endsWith(FILENAME.substring(1))) {// Check without /
+								onConfigChange();
+							}
 						}
+						key.reset();
 					}
-					key.reset();
+					sleep(100); // 100 ms
 				}
-				sleep(100); // 100 ms
 			}
 		}
 		onConfigChange();

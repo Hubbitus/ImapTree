@@ -1,6 +1,19 @@
+TODO IMPLEMENT:
 (1) Extend CliBuilder like CliBuilderAutoWidth
-2) Implement Traits chain messages logging
+(2) Implement Traits chain messages logging and 2 base loggers: LogFile (base) and detailed per-file.
 3) Make ImapTreeDiff true configurable
 4) Fix sha1 in message caching
 5) Find minimum stable Gmail append problem (ideal 2 messages)
 (6) Bring Config singleton in Groovy style (from ASA) - GlobalConf
+7) Investigate and fill bug from info.hubbitus.imaptree.utils.ConfigExtended.overrideFromListPropertiesPairs processing on command line options quoting
+8) Class SpentTest. Runt test. Write tests.
+
+TODO DOCUMENT:
+1) Powerful chain logging
+2) Diff and copy functionality
+
+TODO changes by remove quirks dependant from external changes/bugs
+1) @Override in traits - Groovy bug https://jira.codehaus.org/browse/GROOVY-7198 we can't use @Override
+2) Class Operation: @AutoClone Simple annotation can't be used due to the bug: https://jira.codehaus.org/browse/GROOVY-7091 (fixed in groovy >= 2.3.8)
+3) class FolderMessagesCopier: Due to the groovy BUG https://jira.codehaus.org/browse/GROOVY-7288 we can't it just @delegate like:
+4) Very strange bug in Config - https://jira.codehaus.org/browse/GROOVY-7289

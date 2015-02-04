@@ -1,5 +1,6 @@
 package info.hubbitus.imaptree.diff
 
+import groovy.transform.TupleConstructor
 import groovy.util.logging.Log4j2
 import com.sun.mail.imap.AppendUID
 import com.sun.mail.imap.IMAPFolder
@@ -14,7 +15,7 @@ import javax.mail.event.MessageChangedListener
 import javax.mail.event.MessageCountEvent
 import javax.mail.event.MessageCountListener
 
-import static info.hubbitus.imaptree.diff.FolderMessagesDiff.messageToJson
+import static FolderMessagesDiff.messageToJson
 
 /**
  *
@@ -23,9 +24,14 @@ import static info.hubbitus.imaptree.diff.FolderMessagesDiff.messageToJson
  * @created 2015-01-31 01:04
  **/
 @Log4j2
-//@TupleConstructor
+@TupleConstructor
 class FolderMessagesCopier {
-	@Delegate FolderMessagesDiff folders;
+	/**
+	 * Due to the groovy BUG https://jira.codehaus.org/browse/GROOVY-7288 we can't it just @delegate like:
+	 * @Delegate FolderMessagesDiff folders;
+	 * and then use folder1 and folder2.
+	 */
+	FolderMessagesDiff folders;
 
 	static{
 		AppendUID.metaClass.asString = {
@@ -42,7 +48,7 @@ class FolderMessagesCopier {
 
 	protected void setupListeners() {
 		// We provide only folder2 change
-		folder2.addMessageChangedListener(
+		folders.folder2.addMessageChangedListener(
 			[
 				messageChanged: { MessageChangedEvent e ->
 					log.info("e.getMessageChangeType(): ${e.getMessageChangeType()}; e.message: ${e.message}; UID: ${-1 == e.mesage.getUID() ? e.message.folder.getUID(e.message) : e.message.getUID()}; sha1: ${sha1(e.message.getMimeStream().text)}}");
@@ -50,7 +56,7 @@ class FolderMessagesCopier {
 			] as MessageChangedListener
 		);
 
-		folder2.addMessageCountListener(
+		folders.folder2.addMessageCountListener(
 			[
 				messagesAdded   : { MessageCountEvent e ->
 					log.info("messagesAdded: ${e.messages.size()}; e.getType(): ${e.getType()}; e.isRemoved(): ${e.isRemoved()}; Message: ${messageToJson((IMAPMessage)e.messages[0])}");
@@ -63,7 +69,7 @@ class FolderMessagesCopier {
 	}
 
 	void reopenFoldersReadWrite(){
-		[folder1, folder2].each{IMAPFolder folder->
+		[folders.folder1, folders.folder2].each{IMAPFolder folder->
 			if (Folder.READ_ONLY == folder.getMode()){
 				folder.close(false);
 			}
@@ -88,11 +94,11 @@ class FolderMessagesCopier {
 	AppendUID[] copyMissedMessagesToFolder2(){
 		Map<String,Expando> map = [:];
 		map*.value.size();
-		log.info("Copying missed mails from folder1 to folder2 (total ${messagesInFolder1ButNotInFolder2*.value.size()}):");
+		log.info("Copying missed mails from folder1 to folder2 (total ${folders.messagesInFolder1ButNotInFolder2*.value.size()}):");
 		// Base example from https://code.google.com/p/imapcopy/source/browse/trunk/ImapCopy/src/java/com/fisbein/joan/model/ImapCopier.java
-		AppendUID[] appendRes = folder2.appendUIDMessages((Message[])messagesInFolder1ButNotInFolder2*.value);
-		folder2.expunge();
-		folder1.expunge();
+		AppendUID[] appendRes = folders.folder2.appendUIDMessages((Message[])folders.messagesInFolder1ButNotInFolder2*.value);
+		folders.folder2.expunge();
+		folders.folder1.expunge();
 		log.debug('Appended UIDs: ' + appendRes.collect{ it.asString() });
 		return appendRes;
 	}

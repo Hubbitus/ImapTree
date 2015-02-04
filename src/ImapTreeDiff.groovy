@@ -16,6 +16,8 @@ import info.hubbitus.imaptree.diff.FolderMessagesDiff
 import info.hubbitus.imaptree.utils.cache.memcached.ImapTreeTranscoder
 import info.hubbitus.imaptree.utils.cache.memcached.MemcachedClientExtended
 
+import java.util.concurrent.TimeUnit
+
 /**
  * Simple example to just print folder sizes recursively
  *
@@ -54,11 +56,11 @@ FolderMessagesDiff foldersDiff = new FolderMessagesDiff(tree1.tree.@folder, tree
 foldersDiff.dump('Before copy missed messages');
 
 FolderMessagesCopier copier = new FolderMessagesCopier(foldersDiff);
-copier.copyMissedMessagesToFolder2();
+//copier.copyMissedMessagesToFolder2();
 
-new FolderMessagesDiff(foldersDiff).dump('After copy missed messages');
+//new FolderMessagesDiff(foldersDiff).dump('After copy missed messages');
 
 println 'Done'
 // To do not hang
-mem.shutdown();
+mem.shutdown(10, TimeUnit.MILLISECONDS);
 }
