@@ -1,9 +1,8 @@
-package info.hubbitus.imaptree.diff.logdump;
+package info.hubbitus.imaptree.diff.logdump
 
-import com.sun.mail.imap.IMAPMessage;
-
-import java.util.List;
-import java.util.Map;
+import com.sun.mail.imap.AppendUID;
+import com.sun.mail.imap.IMAPMessage
+import groovy.transform.CompileStatic;
 
 /**
  * Implementing traits chaining.
@@ -19,6 +18,7 @@ import java.util.Map;
  * @author Pavel Alexeev - <Pahan@Hubbitus.info> (pasha)
  * @created 2015-02-02 03:09
  */
+@CompileStatic
 interface IFolderMessagesDiffLogger {
 
 	/**
@@ -29,6 +29,18 @@ interface IFolderMessagesDiffLogger {
 	 */
 	ConfigObject getConf();
 
+	/**
+	 * Init method, f.e to open files, create loggers, establish connection, clear folders and so on
+	 */
+	void diff_init();
+
+	/**
+	 * Short found differences summary
+	 *
+	 * @param diff
+	 */
+	void diff_metricsCount(Map diff);
+
 	void diff_folder1MessagesWithNonUniqueHashes(Map<String,List<IMAPMessage>> messagesByHashes);
 
 	void diff_folder2MessagesWithNonUniqueHashes(Map<String,List<IMAPMessage>> messagesByHashes);
@@ -36,4 +48,9 @@ interface IFolderMessagesDiffLogger {
 	void diff_messagesInFolder1ButNotInFolder2(Map<String,IMAPMessage> messagesByHashes);
 
 	void diff_messagesInFolder2ButNotInFolder1(Map<String,IMAPMessage> messagesByHashes);
+
+	/**
+	 * Result of copy (APPEND) operation by message UIDs
+	 */
+	void diff_appendedUIDs(AppendUID[] uids);
 }

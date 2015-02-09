@@ -1,6 +1,9 @@
 package info.hubbitus.imaptree.diff.logdump
 
+import com.sun.mail.imap.AppendUID
 import com.sun.mail.imap.IMAPMessage
+import groovy.transform.CompileStatic
+import groovy.transform.Memoized
 import groovy.util.logging.Log4j2
 import info.hubbitus.imaptree.config.GlobalConf
 
@@ -22,11 +25,30 @@ trait FolderMessagesDiffLoggerDefault implements IFolderMessagesDiffLogger{
 	 *
 	 * @return
 	 */
+	@Memoized // @Memoized by fact ignored for trait due to the bug https://jira.codehaus.org/browse/GROOVY-7293
 	ConfigObject getConf(){
+		// Rebind local variables: https://github.com/Hubbitus/groovy-test-examples/blob/03b6394299650078637570847e1ac363934ddd30/Structures-Patterns/ConfigSlurper/InConfigValuesAccess.groovy
+		GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.files.each{key, value->
+			if (value instanceof Closure)
+				value.binding = new Binding(GlobalConf.log.diff.FolderMessagesDiffLoggerFiles);
+		}
 		GlobalConf.log.diff.FolderMessagesDiffLoggerDefault
 	}
 
 	/**
+	 * Due to the Groovy bug https://jira.codehaus.org/browse/GROOVY-7198 we can't use @Override
+	 */
+	void diff_init() {
+	}
+/**
+	 * Due to the Groovy bug https://jira.codehaus.org/browse/GROOVY-7198 we can't use @Override
+	 *
+	 * @param diff
+	 */
+	void diff_metricsCount(Map diff) {
+		log.debug(diff);
+	}
+/**
 	 * May be protected in class, but not in trait
 	 *
 	 * @param messagesByHashes
@@ -87,5 +109,16 @@ trait FolderMessagesDiffLoggerDefault implements IFolderMessagesDiffLogger{
 	 */
 	void diff_messagesInFolder2ButNotInFolder1(Map<String,IMAPMessage> messagesByHashes){
 		diff_messagesAnomaliesHelper(messagesByHashes, callerMethodName())
+	}
+
+	static String AppendUIDtoString(AppendUID uid){
+		return "{uid:${uid.uid},uidvalidity:${uid.uidvalidity}}"
+	}
+
+	/**
+	 * Due to the Groovy bug https://jira.codehaus.org/browse/GROOVY-7198 we can't use @Override
+	 */
+	void diff_appendedUIDs(AppendUID[] uids){
+		log.debug('Appended UIDs: ' + uids.collect{ AppendUIDtoString(it) });
 	}
 }
