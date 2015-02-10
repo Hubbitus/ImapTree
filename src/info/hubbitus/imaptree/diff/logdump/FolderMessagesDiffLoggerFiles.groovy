@@ -6,6 +6,7 @@ import com.sun.mail.imap.AppendUID
 import groovy.json.JsonOutput
 import com.sun.mail.imap.IMAPMessage
 import info.hubbitus.imaptree.config.GlobalConf
+import info.hubbitus.imaptree.utils.cache.MessagesCache
 import info.hubbitus.imaptree.utils.errors.EvaluateClosureChecked
 import org.codehaus.groovy.control.io.NullWriter
 
@@ -65,32 +66,13 @@ trait FolderMessagesDiffLoggerFiles extends FolderMessagesDiffLoggerDefault impl
 	 */
 	void diff_appendedUIDs(AppendUID[] uids){
 		withConfiguredWriter(
-			evaluateClosureChecked('conf.files.appendedUIDs()'){
-				conf.files.appendedUIDs();
-			}
-			){Writer writer->
-			writer.println(JsonOutput.prettyPrint(JsonOutput.toJson(uids.collect{ AppendUIDtoString(it) })));
+				evaluateClosureChecked('conf.files.appendedUIDs()') {
+					conf.files.appendedUIDs();
+				} as String
+		) { Writer writer ->
+			writer.println(JsonOutput.prettyPrint(JsonOutput.toJson(uids.collect { AppendUIDtoString(it) })));
 		}
 		super.diff_appendedUIDs(uids); // chain
-	}
-
-	/**
-	 * Due to the Groovy bug https://jira.codehaus.org/browse/GROOVY-7198 we can't use @Override
-	 *
-	 * @param messagesByHashes
-	 * @param anomaly
-	 */
-	void diff_folderAnomaliesHelper(Map<String,List<IMAPMessage>> messagesByHashes, String anomaly){
-		if (conf.enabled && messagesByHashes){
-			withConfiguredWriter(
-				evaluateClosureChecked("conf.files.perAnomaly($anomaly)"){
-					conf.files.perAnomaly(anomaly);
-				}
-				){Writer writer ->
-				write_diff_folderAnomaly(writer, messagesByHashes, anomaly)
-			}
-		}
-		super.diff_folderAnomaliesHelper(messagesByHashes, anomaly); // chain
 	}
 
 	/**
@@ -100,55 +82,14 @@ trait FolderMessagesDiffLoggerFiles extends FolderMessagesDiffLoggerDefault impl
 	 * @param configuredFileName Filename to write. Groovy's false to do not perform write at all
 	 * @param write Closure to perform actual write. Should accept Writer argument.
 	 */
-	synchronized private static void withConfiguredWriter(String configuredFileName, Closure write){
-		if(configuredFileName){
+	private static void withConfiguredWriter(String configuredFileName, Closure write){
+		if(configuredFileName) {
 			new File(configuredFileName).parentFile.mkdirs(); // Try create all sub-dirs
-			new File(configuredFileName).withWriterAppend{Writer writer->
+			new File(configuredFileName).withWriterAppend { Writer writer ->
 				write(writer);
 			}
 		} else {
 			write(new NullWriter());
-		}
-	}
-
-
-	/**
-	 * Write FULL anomaly into provided fullWriter of folder differences (list of messages by hash)
-	 *
-	 * @param messagesByHashes
-	 * @param perAnomalyWrite
-	 * @return
-	 */
-	private Map<String, List<IMAPMessage>> write_diff_folderAnomaly(Writer fullWriter, Map<String, List<IMAPMessage>> messagesByHashes, String anomaly) {
-		String header = "=== $anomaly (${messagesByHashes.size()}) ===";
-		fullWriter.println(header)
-		messagesByHashes.each { String sha1, List<IMAPMessage> messages ->
-			String hashSubHeader = "${sha1}(${messages.size()})";
-			fullWriter.write(hashSubHeader);
-
-			// per message
-			messages.each{IMAPMessage m ->
-				withConfiguredWriter(
-					evaluateClosureChecked("conf.files.perMessage($anomaly, m)"){
-						conf.files.perMessage(anomaly, m);
-					}){Writer writer ->
-					writer.println(header);
-					writer.println(hashSubHeader);
-
-					String message = evaluateClosureChecked('conf.messageShortPresentation(m);') {
-						conf.messageShortPresentation(m);
-					}
-					writer.println(message);
-					fullWriter.println(message); // @TODO do it in parallel may increase performance
-				}
-				withConfiguredWriter(
-					evaluateClosureChecked("conf.files.dumpFullMessage($anomaly, m)"){
-						conf.files.dumpFullMessage(anomaly, m)
-					}) {Writer writer ->
-					// Do not full body load if no real write needed
-					if (writer != NullWriter) writer.println(m.getMimeStream().text);
-				}
-			}
 		}
 	}
 
@@ -158,24 +99,18 @@ trait FolderMessagesDiffLoggerFiles extends FolderMessagesDiffLoggerDefault impl
 	 * @param messagesByHashes
 	 * @param anomaly
 	 */
-	void diff_messagesAnomaliesHelper(Map<String,IMAPMessage> messagesByHashes, String anomaly){
-		log.debug('TEST1:' + (conf.enabled && messagesByHashes))
-		log.debug('TEST1.1:' + conf.enabled)
-		log.debug('TEST1.2:' + messagesByHashes)
-		log.debug('TEST1.3:' + anomaly)
-		log.debug('TEST1.4:' + messagesByHashes.size())
-//?		log.debug('TEST1.5:' + messagesByHashes.collectEntries{String sha1, IMAPMessage m-> [ (sha1): conf.messageShortPresentation(m) ] })
+	void diff_messagesAnomaliesHelper(Map<String,IMAPMessage> messagesByHashes, String anomaly, MessagesCache cache){
 		if (conf.enabled && messagesByHashes){
 			String file = evaluateClosureChecked("conf.files.perAnomaly($anomaly)"){
 				conf.files.perAnomaly(anomaly)
 			}
 			log.debug("diff_messagesAnomaliesHelper [$anomaly], write to [${file}]")
 			withConfiguredWriter(file){Writer writer->
-				write_diff_messagesAnomaly(writer, messagesByHashes, anomaly)
+				write_diff_messagesAnomaly(writer, messagesByHashes, anomaly, cache)
 			}
 		}
 
-		super.diff_messagesAnomaliesHelper(messagesByHashes, anomaly); // chain
+		super.diff_messagesAnomaliesHelper(messagesByHashes, anomaly, cache); // chain
 	}
 
 	/**
@@ -185,30 +120,33 @@ trait FolderMessagesDiffLoggerFiles extends FolderMessagesDiffLoggerDefault impl
 	 * @param perAnomalyWrite
 	 * @return
 	 */
-	private Map<String, IMAPMessage> write_diff_messagesAnomaly(Writer fullWriter, Map<String, IMAPMessage> messagesByHashes, String anomaly) {
+	private Map<String, IMAPMessage> write_diff_messagesAnomaly(Writer fullWriter, Map<String, IMAPMessage> messagesByHashes, String anomaly, MessagesCache cache) {
 		String header = "=== $anomaly (${messagesByHashes.size()}) ===";
 		fullWriter.println(header);
-		messagesByHashes.each{String sha1, IMAPMessage m->
-			String file = evaluateClosureChecked("conf.files.perMessage($anomaly, m)"){
+		messagesByHashes.each { String sha1, IMAPMessage m ->
+			String file = evaluateClosureChecked("conf.files.perMessage($anomaly, m)") {
 				conf.files.perMessage(anomaly, m);
 			}
 			log.debug("write_diff_messagesAnomaly [$anomaly], write to [${file}]")
-			withConfiguredWriter(file){Writer writer->
+			withConfiguredWriter(file) { Writer writer ->
 				writer.println(header);
-				String message = evaluateClosureChecked('conf.messageShortPresentation(m)'){
-					conf.messageShortPresentation(m);
+				String message = evaluateClosureChecked('conf.messageShortPresentation(cache, m)') {
+					conf.messageShortPresentation(cache, m);
 				}
 				fullWriter.println(message); // @TODO do it in parallel may increase performance
 				writer.println(message);
 			}
 
-			file = evaluateClosureChecked("conf.files.dumpFullMessage($anomaly, m)"){
+			file = evaluateClosureChecked("conf.files.dumpFullMessage($anomaly, m)") {
 				conf.files.dumpFullMessage(anomaly, m);
 			}
-			log.info('TEST2:' + file);
-			log.info('TEST2.1:' + anomaly);
-			withConfiguredWriter(file){Writer writer ->
-				if (writer != NullWriter) writer.println(m.getMimeStream().text);
+			withConfiguredWriter(file) { Writer writer ->
+				if(!(writer instanceof NullWriter)) {
+					String fullMessage = evaluateClosureChecked("conf.messageFullDump(cache, m)") {
+						conf.messageFullDump(cache, m);
+					}
+					if(fullMessage) writer.println(fullMessage);
+				}
 			}
 		}
 	}

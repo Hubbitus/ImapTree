@@ -3,19 +3,15 @@ package info.hubbitus.imaptree.diff
 import groovy.transform.TupleConstructor
 import groovy.util.logging.Log4j2
 import com.sun.mail.imap.AppendUID
-import com.sun.mail.imap.IMAPFolder
 import com.sun.mail.imap.IMAPMessage
+import info.hubbitus.imaptree.diff.logdump.FolderMessagesDiffLoggerDefault
+import info.hubbitus.imaptree.diff.logdump.FolderMessagesDiffLoggerFiles
 
-import javax.mail.FetchProfile
-import javax.mail.Folder
 import javax.mail.Message
-import javax.mail.UIDFolder
 import javax.mail.event.MessageChangedEvent
 import javax.mail.event.MessageChangedListener
 import javax.mail.event.MessageCountEvent
 import javax.mail.event.MessageCountListener
-
-import static FolderMessagesDiff.messageToJson
 
 /**
  *
@@ -25,7 +21,9 @@ import static FolderMessagesDiff.messageToJson
  **/
 @Log4j2
 @TupleConstructor
-class FolderMessagesCopier {
+@SuppressWarnings("ClashingTraitMethods") // Trait methods clashing desired because Trait chaining pattern used: http://groovy-lang.org/objectorientation.html#_chaining_behavior
+class FolderMessagesCopier implements FolderMessagesDiffLoggerDefault, FolderMessagesDiffLoggerFiles{
+
 	/**
 	 * Due to the groovy BUG https://jira.codehaus.org/browse/GROOVY-7288 we can't it just @delegate like:
 	 * @Delegate FolderMessagesDiff folders;
@@ -33,58 +31,72 @@ class FolderMessagesCopier {
 	 */
 	FolderMessagesDiff folders;
 
-	static{
-		AppendUID.metaClass.asString = {
-			return "{uid:${delegate.uid},uidvalidity:${delegate.uidvalidity}}"
-		}
-	}
-
 	FolderMessagesCopier(FolderMessagesDiff folders) {
 		this.folders = folders
 
 		setupListeners();
-		reopenFoldersReadWrite();
 	}
 
 	protected void setupListeners() {
 		// We provide only folder2 change
-		folders.folder2.addMessageChangedListener(
+		folders.folder2messages.folder.addMessageChangedListener(
 			[
 				messageChanged: { MessageChangedEvent e ->
-					log.info("e.getMessageChangeType(): ${e.getMessageChangeType()}; e.message: ${e.message}; UID: ${-1 == e.mesage.getUID() ? e.message.folder.getUID(e.message) : e.message.getUID()}; sha1: ${sha1(e.message.getMimeStream().text)}}");
+					log.info("messageChanged: e.getMessageChangeType(): ${e.getMessageChangeType()}; e.message: ${e.message}; UID: ${-1 == e.message.getUID() ? e.message.folder.getUID(e.message) : e.message.getUID()}; sha1: ${sha1(e.message.getMimeStream().text)}}");
+					try{
+						synchronized(this){
+							diff_messagesAnomaliesHelper(
+								[ ( e.message.sha1() ): (IMAPMessage)e.message ]
+								,'messagesChanged'
+								,folders.folder2messages
+							);
+						}
+					}
+					catch(Throwable t){
+						log.error("Error happened process messagesChanged event: ", t);
+					}
 				}
 			] as MessageChangedListener
 		);
 
-		folders.folder2.addMessageCountListener(
+		folders.folder2messages.folder.addMessageCountListener(
 			[
 				messagesAdded   : { MessageCountEvent e ->
-					log.info("messagesAdded: ${e.messages.size()}; e.getType(): ${e.getType()}; e.isRemoved(): ${e.isRemoved()}; Message: ${messageToJson((IMAPMessage)e.messages[0])}");
+//					log.info("messagesAdded: ${e.messages.size()}; e.getType(): ${e.getType()}; e.isRemoved(): ${e.isRemoved()}; Message: ${messageToJson((IMAPMessage)e.messages[0])}");
+					try{
+						synchronized(this){
+							diff_messagesAnomaliesHelper(
+								e.messages.collectEntries{Message m->
+									[ ( m.lastSha1 ): m ]
+								}
+								,'messagesAdded'
+								,folders.folder2messages
+							);
+						}
+					}
+					catch(Throwable t){
+						log.error("Error happened process messagesAdded event: ", t);
+					}
 				}
 				,messagesRemoved: { MessageCountEvent e ->
-					log.info("messagesRemoved: ${e.messages.size()}; e.getType(): ${e.getType()}; e.isRemoved(): ${e.isRemoved()}; Messages: ${e.messages.collect{messageToJson((IMAPMessage)e.messages[0])}}");
+//					log.info("messagesRemoved: ${e.messages.size()}; e.getType(): ${e.getType()}; e.isRemoved(): ${e.isRemoved()}; Messages: ${e.messages.collect{messageToJson((IMAPMessage)it)}}");
+					try {
+						synchronized(this){
+							diff_messagesAnomaliesHelper(
+								e.messages.collectEntries{Message m->
+									[ ( m.lastSha1 ): m ]
+								}
+								,'messagesRemoved'
+								,folders.folder2messages
+							);
+						}
+					}
+					catch(Throwable t){
+						log.error("Error happened process messagesRemoved event: ", t);
+					}
 				}
 			] as MessageCountListener
 		);
-	}
-
-	void reopenFoldersReadWrite(){
-		[folders.folder1, folders.folder2].each{IMAPFolder folder->
-			if (Folder.READ_ONLY == folder.getMode()){
-				folder.close(false);
-			}
-			if (!folder.open){
-				folder.open(Folder.READ_WRITE);
-			}
-			FetchProfile fp = new FetchProfile();
-			// Prefetch all possible to speedup operations on content
-			fp.add(FetchProfile.Item.CONTENT_INFO);
-			fp.add(FetchProfile.Item.ENVELOPE);
-			fp.add(FetchProfile.Item.FLAGS);
-			fp.add(FetchProfile.Item.SIZE);
-			fp.add(UIDFolder.FetchProfileItem.UID);
-			folder.fetch(folder.messages, fp);
-		}
 	}
 
 	/**
@@ -92,14 +104,12 @@ class FolderMessagesCopier {
 	 */
 	@SuppressWarnings("GroovyAssignabilityCheck") // - Idea BUG: https://youtrack.jetbrains.com/issue/IDEA-135863
 	AppendUID[] copyMissedMessagesToFolder2(){
-		Map<String,Expando> map = [:];
-		map*.value.size();
 		log.info("Copying missed mails from folder1 to folder2 (total ${folders.messagesInFolder1ButNotInFolder2*.value.size()}):");
+		folders.folder2messages.reopenFolderReadWrite();
 		// Base example from https://code.google.com/p/imapcopy/source/browse/trunk/ImapCopy/src/java/com/fisbein/joan/model/ImapCopier.java
-		AppendUID[] appendRes = folders.folder2.appendUIDMessages((Message[])folders.messagesInFolder1ButNotInFolder2*.value);
-		folders.folder2.expunge();
-		folders.folder1.expunge();
-		log.debug('Appended UIDs: ' + appendRes.collect{ it.asString() });
-		return appendRes;
+		AppendUID[] appendedUids = folders.folder2messages.folder.appendUIDMessages((Message[])folders.messagesInFolder1ButNotInFolder2*.value)
+		diff_appendedUIDs(appendedUids);
+		folders.folder2messages.folder.expunge();
+		appendedUids;
 	}
 }

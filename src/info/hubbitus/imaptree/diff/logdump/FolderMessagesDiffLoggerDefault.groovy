@@ -1,13 +1,12 @@
 package info.hubbitus.imaptree.diff.logdump
 
-import com.sun.mail.imap.AppendUID
-import com.sun.mail.imap.IMAPMessage
-import groovy.transform.CompileStatic
 import groovy.transform.Memoized
 import groovy.util.logging.Log4j2
+import com.sun.mail.imap.AppendUID
+import com.sun.mail.imap.IMAPMessage
 import info.hubbitus.imaptree.config.GlobalConf
+import info.hubbitus.imaptree.utils.cache.MessagesCache
 
-import static info.hubbitus.imaptree.diff.FolderMessagesDiff.messageToJson
 import static info.hubbitus.imaptree.utils.errors.ErrorsProcessing.callerMethodName
 
 /**
@@ -48,29 +47,12 @@ trait FolderMessagesDiffLoggerDefault implements IFolderMessagesDiffLogger{
 	void diff_metricsCount(Map diff) {
 		log.debug(diff);
 	}
-/**
-	 * May be protected in class, but not in trait
-	 *
-	 * @param messagesByHashes
-	 * @param anomaly
-	 */
-	void diff_folderAnomaliesHelper(Map<String,List<IMAPMessage>> messagesByHashes, String anomaly){
-		if (messagesByHashes){
-			log.debug("ANOMALY: $anomaly (${messagesByHashes.size()}):")
-			messagesByHashes.each{String sha1, List<IMAPMessage> messages->
-				log.debug("${sha1}(${messages.size()})");
-				messages.each{IMAPMessage m->
-					log.debug(messageToJson(m, ['X-message-unique', 'X-HeaderToolsLite', 'Date'], true));
-				}
-			}
-		}
-	}
 
-	void diff_messagesAnomaliesHelper(Map<String,IMAPMessage> messagesByHashes, String anomaly){
+	void diff_messagesAnomaliesHelper(Map<String,IMAPMessage> messagesByHashes, String anomaly, MessagesCache cache){
 		if (messagesByHashes){
 			log.debug("ANOMALY: $anomaly (${messagesByHashes.size()}):")
 			messagesByHashes.each{String sha1, IMAPMessage m->
-				log.debug(messageToJson(m, ['X-message-unique', 'X-HeaderToolsLite', 'Date'], true));
+				log.debug(cache.messageToJson(m, ['X-message-unique', 'X-HeaderToolsLite', 'Date'], true));
 			}
 		}
 	}
@@ -80,8 +62,8 @@ trait FolderMessagesDiffLoggerDefault implements IFolderMessagesDiffLogger{
 	 *
 	 * @param messagesByHashes
 	 */
-	void diff_folder1MessagesWithNonUniqueHashes(Map<String,List<IMAPMessage>> messagesByHashes){
-		diff_folderAnomaliesHelper(messagesByHashes, callerMethodName())
+	void diff_messagesInFolder1ButNotInFolder2(Map<String,IMAPMessage> messagesByHashes, MessagesCache cache){
+		diff_messagesAnomaliesHelper(messagesByHashes, callerMethodName(), cache)
 	}
 
 	/**
@@ -89,26 +71,8 @@ trait FolderMessagesDiffLoggerDefault implements IFolderMessagesDiffLogger{
 	 *
 	 * @param messagesByHashes
 	 */
-	void diff_folder2MessagesWithNonUniqueHashes(Map<String,List<IMAPMessage>> messagesByHashes){
-		diff_folderAnomaliesHelper(messagesByHashes, callerMethodName())
-	}
-
-	/**
-	 * Due to the Groovy bug https://jira.codehaus.org/browse/GROOVY-7198 we can't use @Override
-	 *
-	 * @param messagesByHashes
-	 */
-	void diff_messagesInFolder1ButNotInFolder2(Map<String,IMAPMessage> messagesByHashes){
-		diff_messagesAnomaliesHelper(messagesByHashes, callerMethodName())
-	}
-
-	/**
-	 * Due to the Groovy bug https://jira.codehaus.org/browse/GROOVY-7198 we can't use @Override
-	 *
-	 * @param messagesByHashes
-	 */
-	void diff_messagesInFolder2ButNotInFolder1(Map<String,IMAPMessage> messagesByHashes){
-		diff_messagesAnomaliesHelper(messagesByHashes, callerMethodName())
+	void diff_messagesInFolder2ButNotInFolder1(Map<String,IMAPMessage> messagesByHashes, MessagesCache cache){
+		diff_messagesAnomaliesHelper(messagesByHashes, callerMethodName(), cache)
 	}
 
 	static String AppendUIDtoString(AppendUID uid){

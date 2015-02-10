@@ -41,25 +41,13 @@ class FolderMessagesDiff implements FolderMessagesDiffLoggerDefault, FolderMessa
 		folder2messages.hashes.findAll{ it.key in (folder2messages.hashes*.key - folder1messages.hashes*.key) }
 	}()
 
-	@Lazy
-	Map<String,List<IMAPMessage>> folder1MessagesWithNonUniqueHashes = {
-		(folder1.messages as List<IMAPMessage>).groupBy{ it.sha1() }.findAll{ it.value.size() > 1 }
-	}()
-
-	@Lazy
-	Map<String,List<IMAPMessage>> folder2MessagesWithNonUniqueHashes = {
-		(folder2.messages as List<IMAPMessage>).groupBy{ it.sha1() }.findAll{ it.value.size() > 1 }
-	}()
-
 	void dumpAnomalies(){
-		if (folder1MessagesWithNonUniqueHashes || folder2MessagesWithNonUniqueHashes || messagesInFolder1ButNotInFolder2 || messagesInFolder2ButNotInFolder1){
-			['folder1MessagesWithNonUniqueHashes', 'folder2MessagesWithNonUniqueHashes'].each{
-				diff_folderAnomaliesHelper(this."$it", it);
-			}
-
-			['messagesInFolder1ButNotInFolder2', 'messagesInFolder2ButNotInFolder1'].each{
-				diff_messagesAnomaliesHelper(this."$it", it);
-			}
+		if (messagesInFolder1ButNotInFolder2 || messagesInFolder2ButNotInFolder1){
+			if (messagesInFolder1ButNotInFolder2)
+				diff_messagesInFolder1ButNotInFolder2(messagesInFolder1ButNotInFolder2, folder1messages);
+//				diff_messagesAnomaliesHelper(messagesInFolder1ButNotInFolder2, 'messagesInFolder1ButNotInFolder2', folder1messages);
+			if (messagesInFolder2ButNotInFolder1)
+				diff_messagesInFolder2ButNotInFolder1(messagesInFolder1ButNotInFolder2, folder2messages);
 		}
 		else{
 			log.debug('No anomalies found (folders messages content are equal)');
@@ -73,10 +61,8 @@ class FolderMessagesDiff implements FolderMessagesDiffLoggerDefault, FolderMessa
 
 	@Lazy Map diffMetricsCount = {
 		[
-			'Messages in 1st folder': folder1.messages.size()
-			,'Messages unique by hash in 1st folder': folder1.messages*.sha1().unique().size()
-			,'Messages in 2nd folder': folder2.messages.size()
-			,'Messages unique by hash in 2nd folder': folder2.messages*.sha1().unique().size()
+			'Messages in 1st folder': folder1messages.hashes.size()
+			,'Messages in 2nd folder': folder2messages.hashes.size()
 			// Very good example about map diff - http://groovyconsole.appspot.com/script/364002
 			,'In Folder1 but NOT in Folder2': messagesInFolder1ButNotInFolder2.size()
 			,'In Folder2 but NOT in Folder1': messagesInFolder2ButNotInFolder1.size()

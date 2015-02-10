@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DynamicElementsStorage">
+    <option name="containingClasses">
+      <map>
+        <entry key="javax.mail.Message">
+          <value>
+            <DClassElement>
+              <option name="name" value="javax.mail.Message" />
+              <option name="myName" value="javax.mail.Message" />
+              <option name="myProperties">
+                <set>
+                  <DPropertyElement>
+                    <option name="name" value="lastSha1" />
+                    <option name="static" value="false" />
+                    <option name="type" value="java.lang.String" />
+                    <option name="myType" value="java.lang.String" />
+                    <option name="myStatic" value="false" />
+                    <option name="myName" value="lastSha1" />
+                  </DPropertyElement>
+                </set>
+              </option>
+              <option name="myMethods">
+                <set>
+                  <DMethodElement>
+                    <option name="name" value="getUIDsafe" />
+                    <option name="static" value="false" />
+                    <option name="type" value="java.lang.Long" />
+                    <option name="myType" value="java.lang.Long" />
+                    <option name="myStatic" value="false" />
+                    <option name="myName" value="getUIDsafe" />
+                  </DMethodElement>
+                  <DMethodElement>
+                    <option name="name" value="sha1" />
+                    <option name="static" value="false" />
+                    <option name="type" value="java.lang.String" />
+                    <option name="myType" value="java.lang.String" />
+                    <option name="myStatic" value="false" />
+                    <option name="myName" value="sha1" />
+                  </DMethodElement>
+                </set>
+              </option>
+            </DClassElement>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

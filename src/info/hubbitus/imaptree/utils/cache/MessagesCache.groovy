@@ -1,5 +1,6 @@
 package info.hubbitus.imaptree.utils.cache
 
+import groovy.transform.CompileStatic
 import groovy.util.logging.Log4j2
 import com.sun.mail.imap.IMAPFolder
 import com.sun.mail.imap.IMAPMessage
@@ -9,6 +10,7 @@ import javax.mail.FetchProfile
 import javax.mail.Folder
 import javax.mail.Message
 import javax.mail.MessageRemovedException
+import javax.mail.MessagingException
 import javax.mail.UIDFolder
 import java.lang.reflect.Field
 import java.security.MessageDigest
@@ -16,7 +18,7 @@ import java.security.MessageDigest
 /**
  * Class to handle full folder prefetch, hashing, search.
  * Main purpose is to provide efficiency immutable prefetched cache for messages in IMAP folder to obtain information
- * for example on deleted messages http://stackoverflow.com/questions/27565495/getting-uid-of-deleted-message/27573410?noredirect=1#comment45141607_27573410
+ * for example on deleted messages <a href="http://stackoverflow.com/questions/27565495/getting-uid-of-deleted-message/27573410?noredirect=1#comment45141607_27573410">see</a>
  *
  * @author Pavel Alexeev - <Pahan@Hubbitus.info>
  * @created 10-02-2015 12:06 AM
@@ -34,9 +36,9 @@ class MessagesCache{
  	 */
 	final Map<Integer,IMAPMessage> msgNumbers;
 
-	MessagesCache(IMAPFolder folder) {
-		this.folder = folder
-		reopenFolderReadWrite();
+	MessagesCache(IMAPFolder folder){
+		this.folder = folder;
+		fetchAllMessages();
 		uids = folder.messages.collectEntries{Message m->
 			[ ( m.getUIDsafe() ): m ]
 		}.asImmutable();
@@ -44,9 +46,9 @@ class MessagesCache{
 
 		// Check hashes unique! If they are not - we incorrect choose hash function or content
 		assert hashesList*.value*.size().every{ 1 == it };
-		hashes = hashesList*.value*.getAt(0) as Map<String,IMAPMessage>;
+		hashes = hashesList.collectEntries{ [ (it.key): it.value[0] ] } as Map<String,IMAPMessage>;
 
-		msgNumbers = folder.messages.groupBy{ it.getMessageNumber() }.asImmutable() as Map<Integer,IMAPMessage>;
+		msgNumbers = folder.messages.collectEntries{ [(it.getMessageNumber()): it] }.asImmutable() as Map<Integer,IMAPMessage>
 	}
 
 	String messageToJson(IMAPMessage m, List<String> headers = [], boolean prettyPrint = false){
@@ -79,7 +81,7 @@ class MessagesCache{
 			try{
 				[
 					DELETED: true
-					,userFlags: m.@flags.userFlags // Direct field access without try refresh from server what lead to javax.mail.MessageRemovedException
+					,userFlags: m.@flags?.userFlags // Direct field access without try refresh from server what lead to javax.mail.MessageRemovedException
 					,UID: m.getUIDsafe()
 					,getReceivedDate: { // Access private field instead of MessageRemovedException (can't use just m.@ notation because it java class) (http://stackoverflow.com/questions/1196192/how-do-i-read-a-private-field-in-java)
 						Field f = IMAPMessage.getDeclaredField('receivedDate')
@@ -97,31 +99,52 @@ class MessagesCache{
 			}
 			catch(MessageRemovedException rm){
 				// @TODO Log incorrectly highlighted red due to the Idea bug: https://youtrack.jetbrains.com/issue/IDEA-136170
-				log.error("MessageRemovedException happened on messageToJson() convert DELETED message with uid: ${m.getUIDsafe()}", rm);
+				log.error("MessageRemovedException happened on messageToJson() convert DELETED message with uid: ${m.getUIDsafe()}", rm.message);
+				return [
+					DELETED: true
+					,MessageRemovedException: rm.message
+				]
+			}
+			catch(Exception e){
+				log.error("Unknown exception happened on messageToJson() convert DELETED message with uid: ${m.getUIDsafe()}: ", e.message);
+				return [
+					DELETED: true
+					,Exception: e.message
+				]
 			}
 		}
 		else{
 			try{
-				[
+				def res = [
 					userFlags                        : m.getFlags().getUserFlags()
 					, UID                            : m.getUIDsafe()
 					, getMessageID                   : m.getMessageID()
-					, getModSeq                      : m.getModSeq()
+//?					, getModSeq                      : m.getModSeq()
 					, getReceivedDate                : m.getReceivedDate()
 					, getMessageNumber               : m.getMessageNumber()
 					, getSequenceNumber              : m.getSequenceNumber()
 					, size                           : m.getSize()
-					, 'm.getMimeStream().text.size()': m.getMimeStream().text.size()
-					, sha1                           : sha1(m.getMimeStream().text)
+//?					, 'm.getMimeStream().text.size()': m.getMimeStream().text.size()
+					, sha1                           : (m.lastSha1 ?: sha1(m.getMimeStream().text))
 				]
-				+
-				m.getMatchingHeaders(headers as String[]).toList().collectEntries {
-					["Header <${it.name}>": it.value]
+				try{
+					res += m.getMatchingHeaders(headers as String[]).toList().collectEntries {
+						["Header <${it.name}>": it.value]
+					}
 				}
+				catch(MessagingException me){
+					res += ['headers: Exception evaluate headers: ': me.message]
+				}
+				return res;
 			}
 			catch(MessageRemovedException rm){
 				// @TODO Log incorrectly highlighted red due to the Idea bug: https://youtrack.jetbrains.com/issue/IDEA-136170
-				log.error("MessageRemovedException happened on messageToJson() convert message with uid: ${m.getUIDsafe()}", rm);
+				log.error("MessageRemovedException happened on messageToJson() convert message with uid: ${m.getUIDsafe()}: ", rm.message);
+				return [ MessageRemovedException: rm.message ]
+			}
+			catch(Exception e){
+				log.error("Unknown exception happened on messageToJson() convert message with uid: ${m.getUIDsafe()}: ", e.message);
+				return [ Exception: e.message ]
 			}
 		}
 	}
@@ -145,18 +168,25 @@ class MessagesCache{
 		 */
 		IMAPMessage.metaClass.getUIDsafe = {
 			try{
-				(-1L == delegate.getUID() ? ((IMAPFolder)delegate.folder).getUID(delegate) : delegate.getUID())
+				IMAPMessage m = (IMAPMessage)delegate;
+				(-1L == m.getUID() ? ((IMAPFolder)m.folder).getUID(m) : m.getUID());
 			}
 			catch (MessageRemovedException ignored){}
 		}
 	}
 
-	void reopenFolderReadWrite(){
-		if (Folder.READ_ONLY == folder.getMode()){
+	void reopenFolderReadWrite() {
+		if(folder.open && Folder.READ_ONLY == folder.getMode()) {
 			folder.close(false);
 		}
-		if (!folder.open){
+		if(!folder.open) {
 			folder.open(Folder.READ_WRITE);
+		}
+	}
+
+	void fetchAllMessages(){
+		if(!folder.open) {
+			folder.open(Folder.READ_ONLY);
 		}
 		FetchProfile fp = new FetchProfile();
 		// Prefetch all possible to speedup operations on content

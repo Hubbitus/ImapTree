@@ -17,8 +17,7 @@ import java.nio.file.*
  * Off course it may be desired use DI and IOC for some big systems, but it just easy and better use Singleton for
  * scripts as I thought.
  *
- * It assume (convention) Config.groovy exists and it present configuration in main config tag like: "config { }"
- * That's all, it will b loaded and parsed on demand.
+ * It assume Config.groovy exists. That's all, it will be loaded and parsed on demand.
  *
  * @author Pavel Alexeev <Pahan@Hubbitus.info>
  * @created 15.07.2013 22:27 (ais), 16.07.2014 17:12:59 (rewrote rng), 03.02.2015 01:55:14 (imported and reworked)
@@ -48,7 +47,7 @@ class GlobalConf {
 			watchDir.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
 
 			// Processing will be by done watch service in another thread to in sane way handle also manual placed there files
-			watcher = Thread.start('ConfigChangeWatchThread') {
+			watcher = Thread.start('ConfigChangeWatchThread'){
 				//noinspection GroovyInfiniteLoopStatement
 				while(true) {
 					WatchKey key = watchService.take();
@@ -68,7 +67,7 @@ class GlobalConf {
 	}
 
 	synchronized private void onConfigChange(){
-		_conf = (ConfigExtended)new ConfigSlurper().parse(this.getClass().getResource(FILENAME)).config;
+		_conf = (ConfigExtended)new ConfigSlurper().parse(this.getClass().getResource(FILENAME));
 	}
 
 	/**
@@ -103,7 +102,7 @@ class GlobalConf {
 		GlobalConf.getInstance()._conf.setFromPropertyPathLikeKey(propertyLikeKey, value);
 	}
 
-	static void overrideFromListPropertiesPairs(List options){
+	static void overrideFromListPropertiesPairs(/*List | false*/ options){
 		if (!GlobalConf.getInstance()._conf) GlobalConf.getInstance().init(); // Not property, to break loop!
 		GlobalConf.getInstance()._conf.overrideFromListPropertiesPairs(options);
 	}

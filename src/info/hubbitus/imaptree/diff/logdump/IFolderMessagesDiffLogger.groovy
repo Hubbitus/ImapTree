@@ -2,7 +2,8 @@ package info.hubbitus.imaptree.diff.logdump
 
 import com.sun.mail.imap.AppendUID;
 import com.sun.mail.imap.IMAPMessage
-import groovy.transform.CompileStatic;
+import groovy.transform.CompileStatic
+import info.hubbitus.imaptree.utils.cache.MessagesCache;
 
 /**
  * Implementing traits chaining.
@@ -41,13 +42,9 @@ interface IFolderMessagesDiffLogger {
 	 */
 	void diff_metricsCount(Map diff);
 
-	void diff_folder1MessagesWithNonUniqueHashes(Map<String,List<IMAPMessage>> messagesByHashes);
+	void diff_messagesInFolder1ButNotInFolder2(Map<String,IMAPMessage> messagesByHashes, MessagesCache cache);
 
-	void diff_folder2MessagesWithNonUniqueHashes(Map<String,List<IMAPMessage>> messagesByHashes);
-
-	void diff_messagesInFolder1ButNotInFolder2(Map<String,IMAPMessage> messagesByHashes);
-
-	void diff_messagesInFolder2ButNotInFolder1(Map<String,IMAPMessage> messagesByHashes);
+	void diff_messagesInFolder2ButNotInFolder1(Map<String,IMAPMessage> messagesByHashes, MessagesCache cache);
 
 	/**
 	 * Result of copy (APPEND) operation by message UIDs

@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit
  *
  * @author Pavel Alexeev - <Pahan@Hubbitus.info> (pasha)
  * @created 23.01.2015 23:30
- * */
+ **/
 
 def cli = new CliBuilderAutoWidth(/*usage: 'Usage:'*/)
 cli.h(longOpt: 'help', 'This usage information', required: false)
@@ -38,9 +38,18 @@ if(opt.h /*|| opt.arguments().isEmpty()*/ ) {
 }
 else {
 //println GlobalConf.log.test
-	GlobalConf.overrideFromListPropertiesPairs(opt.Ds as List)
+	GlobalConf.overrideFromListPropertiesPairs(opt.Ds)
 
 //println "GlobalConf.log.test=" + GlobalConf.log.test
+//GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.files.perAnomaly.binding = new Binding(GlobalConf.log.diff.FolderMessagesDiffLoggerFiles)
+//println "GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.dir=${GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.dir}"
+//println "GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.files.perAnomaly('QWERTY')=${GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.files.perAnomaly('QWERTY')}"
+//
+//GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.dir = '/root/'
+//
+//println "GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.dir=${GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.dir}"
+//println "GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.files.perAnomaly('QWERTY')=${GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.files.perAnomaly('QWERTY')}"
+//System.exit(101);
 
 // use memcached to do not long await start and information gathering:
 def mem = new MemcachedClientExtended(new InetSocketAddress('127.0.0.1', 11211));
@@ -55,10 +64,19 @@ ImapTreeSize tree2 = mem.getOrCreate('tree2', new ImapTreeTranscoder((ImapAccoun
 FolderMessagesDiff foldersDiff = new FolderMessagesDiff(tree1.tree.@folder, tree2.tree.@folder);
 foldersDiff.dump('Before copy missed messages');
 
+// Change path to do not overwrite. It must be before copier created because it use config for log changes in destination
+GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.dir = GlobalConf.log.diff.FolderMessagesDiffLoggerFiles.dirRecheck
 FolderMessagesCopier copier = new FolderMessagesCopier(foldersDiff);
-//copier.copyMissedMessagesToFolder2();
+copier.copyMissedMessagesToFolder2();
 
-//new FolderMessagesDiff(foldersDiff).dump('After copy missed messages');
+// Recheck results
+new FolderMessagesDiff(foldersDiff.folder1messages.folder, foldersDiff.folder2messages.folder).dump('After copy missed messages');
+
+// Wait run message change listener thread
+ThreadGroup mainGroup = Thread.currentThread().threadGroup;
+Thread[] activeThreads = new Thread[mainGroup.activeCount()];
+mainGroup.enumerate(activeThreads, true);
+activeThreads.findAll{ it != Thread.currentThread() }*.join(10000); // Wait all at least 5 seconds
 
 println 'Done'
 // To do not hang

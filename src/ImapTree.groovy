@@ -4,7 +4,6 @@ import info.hubbitus.imaptree.config.GlobalConf
 import info.hubbitus.imaptree.config.ImapAccount
 import info.hubbitus.imaptree.ImapTreeSize
 import info.hubbitus.imaptree.config.Operation
-import info.hubbitus.imaptree.utils.ConfigExtended
 
 @Grab(group='commons-cli', module='commons-cli', version='1.2')
 
@@ -40,7 +39,7 @@ if(opt.h /*|| opt.arguments().isEmpty()*/ ) {
 	cli.usage()
 }
 else{
-	GlobalConf.overrideFromListPropertiesPairs(opt.Ds as List)
+	GlobalConf.overrideFromListPropertiesPairs(opt.Ds)
 
 	ImapTreeSize imapTree;
 	String accountName;

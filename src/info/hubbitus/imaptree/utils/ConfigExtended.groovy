@@ -131,14 +131,16 @@ class ConfigExtended extends ConfigObject{
 	 *
 	 * @param options
 	 */
-	void overrideFromListPropertiesPairs(List options){
-		options.collate(2).each {// Override configs from commandline options
-			// @TODO BUG?:
-			//	--config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
-			// works while:
-			//	'operations.printFolderSizes.treeTraverseOrder="breadthFirst"'
-			// parsed into strings: it[0]=[operations.printFolderSizes.treeTraverseOrder], it[1]=["breadthFirst]
-			setFromPropertyPathLikeKey(it[0] as String, it[1]);
+	void overrideFromListPropertiesPairs(/*List | false*/ options){
+		if (options){ // Empty list also collated!
+			options.collate(2).each{// Override configs from commandline options
+				// @TODO BUG?:
+				//	--config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
+				// works while:
+				//	'operations.printFolderSizes.treeTraverseOrder="breadthFirst"'
+				// parsed into strings: it[0]=[operations.printFolderSizes.treeTraverseOrder], it[1]=["breadthFirst]
+				setFromPropertyPathLikeKey(it[0] as String, it[1]);
+			}
 		}
 	}
 }

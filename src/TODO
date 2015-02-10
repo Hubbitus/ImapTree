@@ -6,14 +6,19 @@ TODO IMPLEMENT:
 5) Find minimum stable Gmail append problem (ideal 2 messages)
 (6) Bring Config singleton in Groovy style (from ASA) - GlobalConf
 7) Investigate and fill bug from info.hubbitus.imaptree.utils.ConfigExtended.overrideFromListPropertiesPairs processing on command line options quoting
-8) Class SpentTest. Runt test. Write tests.
+8) Class SpentTest. Run test. Write tests.
+9) Try obtain in runtime trait name but not instance class name (IFolderMessagesDiffLogger)
 
 TODO DOCUMENT:
 1) Powerful chain logging
 2) Diff and copy functionality
 
-TODO changes by remove quirks dependant from external changes/bugs
+TODO changes by remove quirks dependent from external changes/bugs
 1) @Override in traits - Groovy bug https://jira.codehaus.org/browse/GROOVY-7198 we can't use @Override
 2) Class Operation: @AutoClone Simple annotation can't be used due to the bug: https://jira.codehaus.org/browse/GROOVY-7091 (fixed in groovy >= 2.3.8)
 3) class FolderMessagesCopier: Due to the groovy BUG https://jira.codehaus.org/browse/GROOVY-7288 we can't it just @delegate like:
 4) Very strange bug in Config - https://jira.codehaus.org/browse/GROOVY-7289
+5) @Memoized by fact ignored for trait due to the bug https://jira.codehaus.org/browse/GROOVY-7293
+6) Reported Idea bug: https://youtrack.jetbrains.com/issue/IDEA-136170 (FolderMessagesDiff)
+7) evaluateClosureChecked for ConfigObject can't be implemented in desired way due to the newly reported groovy bug: https://jira.codehaus.org/browse/GROOVY-7295
+8) Reported BUG in Idea in spread operator handling: https://youtrack.jetbrains.com/issue/IDEA-135863
