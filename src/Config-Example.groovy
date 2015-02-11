@@ -1,8 +1,10 @@
+import com.sun.mail.imap.IMAPMessage
 import groovy.ui.Console
 import groovyx.javafx.GroovyFX
 import info.hubbitus.imaptree.config.ImapAccount
 import info.hubbitus.imaptree.ImapTreeSize
 import info.hubbitus.imaptree.config.Operation
+import info.hubbitus.imaptree.utils.cache.MessagesCache
 import javafx.beans.property.ReadOnlyLongWrapper
 import javafx.beans.property.ReadOnlyStringWrapper
 import javafx.scene.control.Label
@@ -14,33 +16,34 @@ import javafx.scene.layout.StackPane
 import javax.mail.Flags
 import javax.mail.Folder
 import javax.mail.Message
+import java.lang.management.ManagementFactory
 
 // By default Config.groovy used as configuration! So, rename this file first, or adjust path in example scripts accordingly!!!
-config{
-	accounts{
+config {
+	accounts {
 		// You may define different accounts to choose later which use like:
 		// ImapTreeSize imapTree = new ImapTreeSize(config.account1);
 		// ImapTreeSize imapTree = new ImapTreeSize(config.account2);
 		// In runtime you will be then choose it by -a/--account option like: --account account1
 		account1 = new ImapAccount(
-			name: 'FirstAccount'
-			,host: 'imap.gmail.com'
-			,port: 933
-			,login: 'some.name@gmail.com'
-			,password: 'Super-Pass'
-			// Google Imap assumed. You may try use generic 'imap' or 'imaps' instead of 'gimaps', it should work but have not tested. Please let me known if you need it but it does not work
-			,type: 'gimaps'
-			,folder: 'INBOX' // Initial folder to scan.
+				name: 'FirstAccount'
+				, host: 'imap.gmail.com'
+				, port: 933
+				, login: 'some.name@gmail.com'
+				, password: 'Super-Pass'
+				// Google Imap assumed. You may try use generic 'imap' or 'imaps' instead of 'gimaps', it should work but have not tested. Please let me known if you need it but it does not work
+				, type: 'gimaps'
+				, folder: 'INBOX' // Initial folder to scan.
 		)
 		// If you are good with defaults, you may use short form:
 		account2 = new ImapAccount(
-			name: 'For backup'
-			,login: 'some.name2@gmail.com'
-			// To read password from file for example.
-			,password: 'cat .passfile'.execute().text
+				name: 'For backup'
+				, login: 'some.name2@gmail.com'
+				// To read password from file for example.
+				, password: 'cat .passfile'.execute().text
 		)
 		// Some sort ov nesting available also with groovy ConfigSlurper magic:
-		account3 = account1.with{
+		account3 = account1.with {
 			name = 'Account like 1st'
 			login = 'some.name3@gmail.com'
 			password = 'Super-Pass for name 3'
@@ -54,41 +57,41 @@ config{
 	 * One default operation defined historically - just print folder sizes,
 	 *
 	 */
-	operations{
+	operations {
 		// For description of options see Operation class
 		printFolderSizes = new Operation(
-			folderProcess: {Node node->
-				if ( (false == config.opt.'print-depth') || (node.name().split(node.@folder.separator.toString()).size() <= config.opt.'print-depth'.toInteger()) ){
-					println "<<${node.name()}>>: SelfSize: ${node.@size}; subTreeSize: ${node.depthFirst().sum { it.@size }}; childSubtreeFolders: ${node.depthFirst().size() - 1}"
+				folderProcess: { Node node ->
+					if((false == config.opt.'print-depth') || (node.name().split(node.@folder.separator.toString()).size() <= config.opt.'print-depth'.toInteger())) {
+						println "<<${node.name()}>>: SelfSize: ${node.@size}; subTreeSize: ${node.depthFirst().sum { it.@size }}; childSubtreeFolders: ${node.depthFirst().size() - 1}"
+					}
+					false
 				}
-				false
-			}
-			,messageProcess: {Message m-> } // Is not used in particular case (false returned from folder handler), but for example may contain: println m.subject
+				, messageProcess: { Message m -> } // Is not used in particular case (false returned from folder handler), but for example may contain: println m.subject
 		)
 		eachMessage = new Operation(
-			folderProcess: {Node node->
-				println "eachMessage process folder <<${node.name()}>>: SelfSize: ${node.@size}; subTreeSize: ${node.depthFirst().sum { it.@size }}; childSubtreeFolders: ${node.depthFirst().size() - 1}"
-				true
-			}
-			// For Gmail there will be GmailMessage: https://javamail.java.net/nonav/docs/api/com/sun/mail/gimap/GmailMessage.html
-			,messageProcess: {Message m->
-				println "<<${m.folder}>> (Folder attributes: ${m.folder.getAttributes()})); (Labels: ${m.getLabels()}); {SUBJ: ${m.subject}}"
-			}
+				folderProcess: { Node node ->
+					println "eachMessage process folder <<${node.name()}>>: SelfSize: ${node.@size}; subTreeSize: ${node.depthFirst().sum { it.@size }}; childSubtreeFolders: ${node.depthFirst().size() - 1}"
+					true
+				}
+				// For Gmail there will be GmailMessage: https://javamail.java.net/nonav/docs/api/com/sun/mail/gimap/GmailMessage.html
+				, messageProcess: { Message m ->
+			println "<<${m.folder}>> (Folder attributes: ${m.folder.getAttributes()})); (Labels: ${m.getLabels()}); {SUBJ: ${m.subject}}"
+		}
 		)
 		// Just bing results in interactive GUI GroovyConsole for further experiments
 		GroovyConsole = new Operation(
-			fullControl: {ImapTreeSize imapTree->
-				// http://groovy.codehaus.org/Groovy+Console
-				// Start with current binding to allow access to existing classes http://stackoverflow.com/questions/16826014/embedded-groovy-console-how-do-i-share-entire-state
-				Console console = new Console(imapTree.getClass().getClassLoader(), [imapTree: imapTree, config: config] as Binding);
-				console.run();
-				console.with{ // Set default content of console
-					swing.edt{
-						inputArea.editable = false
-					}
-					swing.doOutside{
-						try {
-							def consoleText ='''// Typical usage this console to analyse results:
+				fullControl: { ImapTreeSize imapTree ->
+					// http://groovy.codehaus.org/Groovy+Console
+					// Start with current binding to allow access to existing classes http://stackoverflow.com/questions/16826014/embedded-groovy-console-how-do-i-share-entire-state
+					Console console = new Console(imapTree.getClass().getClassLoader(), [imapTree: imapTree, config: config] as Binding);
+					console.run();
+					console.with { // Set default content of console
+						swing.edt {
+							inputArea.editable = false
+						}
+						swing.doOutside {
+							try {
+								def consoleText = '''// Typical usage this console to analyse results:
 // All groovy magic available!
 // F.e. redefine closure
 config.operations.printFolderSizes.config = config
@@ -110,31 +113,31 @@ if (!imapTree.tree.@folder.open)
 println imapTree.tree.@folder.messages
 */
 ''';
-							swing.edt {
-								updateTitle()
-								inputArea.document.remove 0, inputArea.document.length
-								inputArea.document.insertString 0, consoleText, null
-								setDirty(false)
-								inputArea.caretPosition = 0
+								swing.edt {
+									updateTitle()
+									inputArea.document.remove 0, inputArea.document.length
+									inputArea.document.insertString 0, consoleText, null
+									setDirty(false)
+									inputArea.caretPosition = 0
+								}
+							} finally {
+								swing.edt { inputArea.editable = true }
+								// GROOVY-3684: focus away and then back to inputArea ensures caret blinks
+								swing.doLater outputArea.&requestFocusInWindow
+								swing.doLater inputArea.&requestFocusInWindow
 							}
-						} finally {
-							swing.edt { inputArea.editable = true }
-							// GROOVY-3684: focus away and then back to inputArea ensures caret blinks
-							swing.doLater outputArea.&requestFocusInWindow
-							swing.doLater inputArea.&requestFocusInWindow
 						}
 					}
 				}
-			}
 		)
 		/**
-		* Task to really delete messages from selected folder, free space (do not leave it in '[Gmail]All mail' archive) and
-		* also do not delete copies from other folders (labels).
-		*
-		* GMail have special settings in options how to handle deleted via IMAP messages. But unfortunately it fully ignored.
-		* See file devel/Delete.Tests for more details and experiments.
-		* Handling IMAP actions also specific: https://support.google.com/mail/answer/77657?hl=en
-		* Really there not so many possibilities:
+		 * Task to really delete messages from selected folder, free space (do not leave it in '[Gmail]All mail' archive) and
+		 * also do not delete copies from other folders (labels).
+		 *
+		 * GMail have special settings in options how to handle deleted via IMAP messages. But unfortunately it fully ignored.
+		 * See file devel/Delete.Tests for more details and experiments.
+		 * Handling IMAP actions also specific: https://support.google.com/mail/answer/77657?hl=en
+		 * Really there not so many possibilities:
 		 * 1) Setup move messages to '[Gmail]/Trash' folder and delete messages *without* hold Shift key - then messages fully
 		 * deleted from ALL folders if there was copies.
 		 * 1.1) It does not work with folders - labels like '[Gmail]/Корзина/My deleted folder' created instead.
@@ -149,39 +152,41 @@ println imapTree.tree.@folder.messages
 		 * Essentially space from messages must be freed.
 		 *
 		 * Folders leaved as is to examine its empty.
-		**/
+		 **/
 		gmailTrueDeleteMessages = new Operation(
-			folderOpenMode: Folder.READ_WRITE
-			,folderProcess: {Node node->
-				true
-			}
-			,messageProcess: {Message m->
-				println "gmailTrueGeleteMessages: <<${m.folder}>> (Folder attributes: ${m.folder.getAttributes()})); (Labels: ${m.getLabels()}); {SUBJ: ${m.subject}}"
-				List labels = m.getLabels() - ''; // Strange bu always present empty '' label
-				if (labels){ // If their any labels (current folder is not returned in list) - we just remove that - what is equal label remove - it should became in all other
-					println "\tMessage has other labels ${labels} - regular delete it (remove label)"
-					try{
-						m.setFlag(Flags.Flag.DELETED, true);
-					}
-					catch(Exception e){
-						println '!!!ERROR set DELETED flag on message: ' + e
-					}
+				folderOpenMode: Folder.READ_WRITE
+				, folderProcess: { Node node ->
+			true
+		}
+				, messageProcess: { Message m ->
+			println "gmailTrueGeleteMessages: <<${m.folder}>> (Folder attributes: ${m.folder.getAttributes()})); (Labels: ${m.getLabels()}); {SUBJ: ${m.subject}}"
+			List labels = m.getLabels() - ''; // Strange bu always present empty '' label
+			if(labels) {
+				// If their any labels (current folder is not returned in list) - we just remove that - what is equal label remove - it should became in all other
+				println "\tMessage has other labels ${labels} - regular delete it (remove label)"
+				try {
+					m.setFlag(Flags.Flag.DELETED, true);
 				}
-				else{ // otherwise - move (copy) to [Gmail]/Trash folder to fully remove it, even from "[Gmail]/All mail" folder, because settings which are present in settings of account does not work as expected
-					def trashFolder = m.folder.store.getFolder('[Gmail]').list('*').find{ /\Trash/ in it.getAttributes() } // [Gmail]/Корзина in Russian. Locale agnostic search by http://stackoverflow.com/a/26591696/307525
-					println "\tMessage has no other labels, so move to '[Gmail]/Trash' ('${trashFolder}') to do not leave it also in '[Gmail]/All mail' (archive folder)"
-					try{
-						// http://www.jguru.com/faq/view.jsp?EID=1010890 - expunge in folder close later (IMAP have no move operation in base spec http://stackoverflow.com/questions/122267/imap-how-to-move-a-message-from-one-folder-to-another)
-						m.folder.copyMessages((m as Message[]), trashFolder);
-					}
-					catch(Exception e){
-						println '!!!ERROR copy message to [Gmail]/Trash folder: ' + e
-					}
+				catch(Exception e) {
+					println '!!!ERROR set DELETED flag on message: ' + e
+				}
+			} else {
+				// otherwise - move (copy) to [Gmail]/Trash folder to fully remove it, even from "[Gmail]/All mail" folder, because settings which are present in settings of account does not work as expected
+				def trashFolder = m.folder.store.getFolder('[Gmail]').list('*').find { /\Trash/ in it.getAttributes() }
+				// [Gmail]/Корзина in Russian. Locale agnostic search by http://stackoverflow.com/a/26591696/307525
+				println "\tMessage has no other labels, so move to '[Gmail]/Trash' ('${trashFolder}') to do not leave it also in '[Gmail]/All mail' (archive folder)"
+				try {
+					// http://www.jguru.com/faq/view.jsp?EID=1010890 - expunge in folder close later (IMAP have no move operation in base spec http://stackoverflow.com/questions/122267/imap-how-to-move-a-message-from-one-folder-to-another)
+					m.folder.copyMessages((m as Message[]), trashFolder);
+				}
+				catch(Exception e) {
+					println '!!!ERROR copy message to [Gmail]/Trash folder: ' + e
 				}
 			}
-			,folderClose: {node->
-				node.@folder.close(true); // Close and expunge
-			}
+		}
+				, folderClose: { node ->
+			node.@folder.close(true); // Close and expunge
+		}
 		)
 		/**
 		 * Task to present gathered Imap-tree sizes as FX TreeTableView (
@@ -203,126 +208,239 @@ println imapTree.tree.@folder.messages
 		 * 		(http://stackoverflow.com/questions/14095430/how-to-grab-a-dependency-and-make-it-work-with-intellij-project)
 		 * 	3.2) Or manually provide path to it on script running time:
 		 * 	$ groovy -cp $JAVA_HOME/jre/lib/ext/jfxrt.jar:/home/pasha/.groovy/grapes/org.codehaus.groovyfx/groovyfx/jars/groovyfx-0.4.0.jar ./ImapTree.groovy --account BackupTest --operation fxTreeTable -c
-		 *	4) In that project also GroovyFX used, and due to reported by me bug:
-		 *	https://jira.codehaus.org/browse/GFX-41 we can't automatically Grab 0.4.0 version which is required. As
-		 *	workaround also you may provide path to .jar file manually as shown before.
+		 * 	4) In that project also GroovyFX used, and due to reported by me bug:
+		 * 	https://jira.codehaus.org/browse/GFX-41 we can't automatically Grab 0.4.0 version which is required. As
+		 * 	workaround also you may provide path to .jar file manually as shown before.
 		 * I hope such issues will ba vanished in time.
 		 * Until it is not, and to do not make such dependencies mandatory, task written to use anywhere fully qualified
 		 * class names to avoid imports, which may lead to just do not start even other tasks!
 		 */
 		fxTreeTable = new Operation(
-			fullControl: {ImapTreeSize imapTree->
-				// Runtime manually grab to do not make it hard dependency. All classes use full qualified names and
-				// does not imported for that reason
+				fullControl: { ImapTreeSize imapTree ->
+					// Runtime manually grab to do not make it hard dependency. All classes use full qualified names and
+					// does not imported for that reason
 //				@Grab(group = 'org.codehaus.groovyfx', module = 'groovyfx', version = '0.3.1')
-				// Until BUG https://jira.codehaus.org/browse/GFX-41 resolved not 0.4.0 version
+					// Until BUG https://jira.codehaus.org/browse/GFX-41 resolved not 0.4.0 version
 //				groovy.grape.Grape.grab(group: 'org.codehaus.groovyfx', module:'groovyfx', version:'0.3.1')
-				GroovyFX.start{
-					stage(title: 'IMAP Tree folder sizes', visible: true) {
-						scene(fill: BLACK, width: 700, height: 300) {
-							// Unfortunately GroovyFX have no TreeTableView builder (yet?), so build it manually and insert as node
-							node new TreeTableView(new TreeItem(imapTree.tree)).with{
-								it.root.expanded = true;
-								it.tableMenuButtonVisible = true;
+					GroovyFX.start {
+						stage(title: 'IMAP Tree folder sizes', visible: true) {
+							scene(fill: BLACK, width: 700, height: 300) {
+								// Unfortunately GroovyFX have no TreeTableView builder (yet?), so build it manually and insert as node
+								node new TreeTableView(new TreeItem(imapTree.tree)).with {
+									it.root.expanded = true;
+									it.tableMenuButtonVisible = true;
 
-								imapTree.tree.@fxItem = it.root;
-								imapTree.tree.depthFirst().tail().each{Node n-> // Except 1st root
-									n.@fxItem = new TreeItem(n); // Store for childs
-									n.parent().@fxItem.children.add(n.@fxItem);
-								}
-
-								it.columns.setAll(
-									new TreeTableColumn('Folder name').with{
-//										it.setPrefWidth(150);
-										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new ReadOnlyStringWrapper(param.value.value.@folder.name) // Size object
-										}
-										it
+									imapTree.tree.@fxItem = it.root;
+									imapTree.tree.depthFirst().tail().each { Node n -> // Except 1st root
+										n.@fxItem = new TreeItem(n); // Store for childs
+										n.parent().@fxItem.children.add(n.@fxItem);
 									}
-									,new TreeTableColumn('Folder full name').with{
+
+									it.columns.setAll(
+											new TreeTableColumn('Folder name').with {
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+												it.cellValueFactory = { TreeTableColumn.CellDataFeatures<Node, String> param ->
+													new ReadOnlyStringWrapper(param.value.value.@folder.name) // Size object
+												}
+												it
+											}
+											, new TreeTableColumn('Folder full name').with {
+//										it.setPrefWidth(150);
+										it.cellValueFactory = { TreeTableColumn.CellDataFeatures<Node, String> param ->
 											new ReadOnlyStringWrapper(param.value.value.name()) // Size object
 										}
 										it
 									}
-									,new TreeTableColumn('Self size, bytes').with{
+											, new TreeTableColumn('Self size, bytes').with {
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+										it.cellValueFactory = { TreeTableColumn.CellDataFeatures<Node, String> param ->
 											new ReadOnlyLongWrapper(param.value.value.@size.bytes ?: 0)
 										}
 										it
 									}
-									,new TreeTableColumn('Self size, hr').with{
+											, new TreeTableColumn('Self size, hr').with {
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+										it.cellValueFactory = { TreeTableColumn.CellDataFeatures<Node, String> param ->
 											new ReadOnlyStringWrapper(param.value.value.@size.hr())
 										}
 										it
 									}
-									,new TreeTableColumn('Messages').with{
+											, new TreeTableColumn('Messages').with {
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+										it.cellValueFactory = { TreeTableColumn.CellDataFeatures<Node, String> param ->
 											new ReadOnlyLongWrapper(param.value.value.@size.messages ?: 0)
 										}
 										it
 									}
-									,new TreeTableColumn('Sub-tree size, bytes').with{
+											, new TreeTableColumn('Sub-tree size, bytes').with {
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new ReadOnlyLongWrapper(param.value.value.depthFirst().sum { it.@size }.bytes ?: 0)
+										it.cellValueFactory = { TreeTableColumn.CellDataFeatures<Node, String> param ->
+											new ReadOnlyLongWrapper(param.value.value.depthFirst().sum {
+												it.@size
+											}.bytes ?: 0)
 										}
 										it
 									}
-									,new TreeTableColumn('Sub-tree size, hr').with{
+											, new TreeTableColumn('Sub-tree size, hr').with {
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new ReadOnlyStringWrapper(param.value.value.depthFirst().sum { it.@size }.hr())
+										it.cellValueFactory = { TreeTableColumn.CellDataFeatures<Node, String> param ->
+											new ReadOnlyStringWrapper(param.value.value.depthFirst().sum {
+												it.@size
+											}.hr())
 										}
 										it
 									}
-									,new TreeTableColumn('Sub-tree messages').with{
+											, new TreeTableColumn('Sub-tree messages').with {
 //										it.setPrefWidth(150);
-										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
-											new ReadOnlyLongWrapper(param.value.value.depthFirst().sum { it.@size }.messages ?: 0)
+										it.cellValueFactory = { TreeTableColumn.CellDataFeatures<Node, String> param ->
+											new ReadOnlyLongWrapper(param.value.value.depthFirst().sum {
+												it.@size
+											}.messages ?: 0)
 										}
 										it
 									}
-									,new TreeTableColumn('Child sub-tree folders').with{
+											, new TreeTableColumn('Child sub-tree folders').with {
 //										it.setPrefWidth(80);
-										it.cellValueFactory = {TreeTableColumn.CellDataFeatures<Node, String> param ->
+										it.cellValueFactory = { TreeTableColumn.CellDataFeatures<Node, String> param ->
 											new ReadOnlyLongWrapper(param.value.value.depthFirst().size() - 1) // Size object
 										}
 										it
 									}
-								);
-								// http://stackoverflow.com/questions/10952111/javafx-2-0-table-with-multiline-table-header
-								it.columns.forEach{col->
-									Label label = new Label(col.getText());
-									label.setStyle('-fx-padding: 0px; -fx-font: 10px "Serif"; -fx-text-alignment: center; -fx-min-width: 4em;'); // http://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html
-									label.setWrapText(true);
+									);
+									// http://stackoverflow.com/questions/10952111/javafx-2-0-table-with-multiline-table-header
+									it.columns.forEach { col ->
+										Label label = new Label(col.getText());
+										label.setStyle('-fx-padding: 0px; -fx-font: 10px "Serif"; -fx-text-alignment: center; -fx-min-width: 4em;'); // http://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html
+										label.setWrapText(true);
 
-									StackPane stack = new StackPane();
-									stack.getChildren().add(label);
-									stack.prefWidthProperty().bind(col.widthProperty().subtract(5));
-									label.prefWidthProperty().bind(stack.prefWidthProperty());
-									col.setGraphic(stack);
+										StackPane stack = new StackPane();
+										stack.getChildren().add(label);
+										stack.prefWidthProperty().bind(col.widthProperty().subtract(5));
+										label.prefWidthProperty().bind(stack.prefWidthProperty());
+										col.setGraphic(stack);
+									}
+									it.columnResizePolicy = it.CONSTRAINED_RESIZE_POLICY
+									it
 								}
-								it.columnResizePolicy = it.CONSTRAINED_RESIZE_POLICY
-								it
 							}
 						}
 					}
 				}
-			}
 		)
 	}
 
-	log{
+	log {
 		// To save full cache of results to operate next time from it. Provide false there to disable writing
-		// When read from file occurred no any validation or invalidation performed (IMAP may change over time).
-		// Directory must exists
 		// %{account} will be replaced by used account name
-		fullXmlCache = '.results/%{account}.data.xml'
+		fullXmlCache = ".results/%{account}.data.xml"
+
+		diff {
+			FolderMessagesDiffLoggerFiles { // Per trait (class)
+				enabled = true;
+				/**
+				 * Closure.which return string by message. Used in perAnomaly and perMessage files
+				 */
+				messageShortPresentation = { MessagesCache cache, IMAPMessage m -> cache.messageToJson(m, ['X-message-unique', 'X-HeaderToolsLite', 'Date', 'Subject'], true) }
+
+				/**
+				 * Closure.which return string by full message representation.
+				 */
+				messageFullDump = { MessagesCache cache, IMAPMessage m ->
+					String res;
+					if(m.expunged) {
+						res = 'MESSAGE DELETED!!!\n';
+						res += 'Short representation instead: ' + cache.messageToJson(m, ['X-message-unique', 'X-HeaderToolsLite', 'Date', 'Subject'], true)
+					} else return m.getMimeStream().text;
+
+					res;
+				}
+
+				/**
+				 * If folder does not exists - creation attempt performed
+				 * Use closure to allow override and dynamically obtain directory value
+				 */
+				dir = '/home/pasha/Projects/ImapTreeSize/src/.results/diff';
+
+				/**
+				 * Two differences performed. Initial state. Than missed messages copied into folder2 and recheck
+				 * performed. There second directory. No need use it anywhere in config - it just will be copied into dir.
+				 */
+				dirRecheck = '/home/pasha/Projects/ImapTreeSize/src/.results/diff.resultCheck';
+
+				/**
+				 * List of values:
+				 * 	1 - first folder (source)
+				 * 	2 - second (destination)
+				 * 	false (null) - no one
+				 *
+				 * Off course you may dump both: [1, 2]
+				 */
+				dumpALLmessages = [1, 2];
+
+				/**
+				 * ANY filename closure may return Groovy false (0, null) and then will not performed attempt write it
+				 * RECOMMENDED use defined before dir, but not required.
+				 * It may be used as usual by full path like: log.diff.FolderMessagesDiffLoggerFiles.dir or just dir
+				 * (${dir}), so per trait name binding will be provided.
+				 */
+				files {
+					// Closure called at start. For example for clearing target dir.
+					init = {
+						// Clear directories only if they are from not current PID@host
+						// http://snipplr.com/view/20787/
+						String pid = ManagementFactory.getRuntimeMXBean().getName();
+						try {
+							if(new File("$dirRecheck/lock.pid").text == pid)
+								return;
+						}
+						catch(FileNotFoundException ignore) {
+						}
+
+						println "Directories [$dir] and [$dirRecheck] will be deleted"
+						new File(dir).deleteDir();
+						new File(dirRecheck).deleteDir();
+						new File(dirRecheck).mkdirs();
+						new File("$dirRecheck/lock.pid").write(pid);
+					}
+					/**
+					 * Short found differences summary file
+					 */
+					metricsCount = { "${dir}/_diff.summary" }
+
+					/**
+					 * By default files like: _folder1MessagesWithNonUniqueHashes.anomaly
+					 * Now anomalies may be one of:
+					 * folder1MessagesWithNonUniqueHashes, folder2MessagesWithNonUniqueHashes, messagesInFolder1ButNotInFolder2,
+					 * messagesInFolder2ButNotInFolder1, messagesAdded (on folder2 listeners on copy), messagesRemoved (on folder2 listeners on copy),
+					 * messagesChanged
+					 * One mass file on problem: write set of messages if any
+					 */
+					perAnomaly = { String anomaly -> "${dir}/_${anomaly}.anomaly" }
+					/**
+					 * Each file on problem message. You should guarantee what name unique! Recommended use of UID or current dates
+					 */
+					perMessage = { String anomaly, IMAPMessage m -> "${dir}/_${anomaly}.msgs/${m.getUIDsafe()}-${m.getMessageNumber()}.msg" }
+					/**
+					 * File for dump full message for particular problem  with headers for deep analise
+					 */
+					dumpFullMessage = { String anomaly, IMAPMessage m ->
+						"${dir}/_${anomaly}.msgs/${m.getUIDsafe()}-${m.getMessageNumber()}.eml"
+					}
+
+					/**
+					 * Dump ALL messages (store locally)
+					 * See before also ../dumpALLmessages option. first is folder number (1,2)
+					 */
+					dumpALLmessage = { Integer folderNo, IMAPMessage m ->
+						"${dir}/_folder${folderNo}ALLmessages.msgs/${m.getUIDsafe()}-${m.getMessageNumber()}.eml"
+					}
+
+					/**
+					 * If there differences found copy performed, and using UIDPLUS extension of IMAP protocol UIDs returned
+					 */
+					appendedUIDs = { "$dir/_appended.uids" }
+				}
+			}
+		}
 	}
 }

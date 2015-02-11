@@ -47,8 +47,8 @@ class ImapTreeSize {
 		Session session = Session.getInstance(
 			new Properties(
 				'mail.store.protocol': account.type
-				, 'mail.imaps.host': account.host
-				, 'mail.imaps.port': account.port
+				,'mail.imaps.host': account.host
+				,'mail.imaps.port': account.port
 			)
 			, null
 		);
@@ -152,7 +152,8 @@ class ImapTreeSize {
 //		xStream.omitField(Folder, 'store');
 		xStream.registerConverter(new DontSaveConverter(Store, store));
 //		xStream.omitField(IMAPFolder, 'logger');
-		xStream.registerConverter(new DontSaveConverter(MailLogger, new MailLogger('_fromXmlFolder', 'DEBUG IMAP', store.session)));
+//		xStream.registerConverter(new DontSaveConverter(MailLogger, new MailLogger('_fromXmlFolder', 'DEBUG IMAP', store.session)));
+		xStream.registerConverter(new DontSaveConverter(MailLogger, new MailLogger('javamailLogger', 'DEBUG IMAP', true, System.err)));
 //		xStream.omitField(IMAPFolder, 'connectionPoolLogger');
 		xStream.registerConverter(new DontSaveConverter(MailLogger, ((IMAPStore)store).getConnectionPoolLogger()));
 

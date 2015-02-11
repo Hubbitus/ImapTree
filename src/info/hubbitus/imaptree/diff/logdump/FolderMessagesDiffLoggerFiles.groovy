@@ -76,6 +76,26 @@ trait FolderMessagesDiffLoggerFiles extends FolderMessagesDiffLoggerDefault impl
 	}
 
 	/**
+	 * Due to the Groovy bug https://jira.codehaus.org/browse/GROOVY-7198 we can't use @Override
+	 */
+	void diff_messagesALL(Integer folderNo, MessagesCache cache){
+		cache.uids.each{long uid, IMAPMessage m->
+			String file = evaluateClosureChecked("conf.files.dumpALLmessage($folderNo, m)") {
+				conf.files.dumpALLmessage(folderNo, m);
+			}
+			withConfiguredWriter(file) { Writer writer ->
+				if(!(writer instanceof NullWriter)) {
+					String fullMessage = evaluateClosureChecked("conf.messageFullDump(cache, m)") {
+						conf.messageFullDump(cache, m);
+					}
+					if(fullMessage) writer.println(fullMessage);
+				}
+			}
+		}
+		super.diff_messagesALL(folderNo, cache); // chain
+	}
+
+	/**
 	 * If configuredFileName is groovy-true - write data into file with that name.
 	 * Safe for exception writer flush and closing.
 	 *

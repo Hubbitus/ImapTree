@@ -1,14 +1,11 @@
 package info.hubbitus.imaptree.diff
 
-import groovy.util.logging.Log4j2
 import com.sun.mail.imap.IMAPFolder
 import com.sun.mail.imap.IMAPMessage
+import groovy.util.logging.Log4j2
 import info.hubbitus.imaptree.diff.logdump.FolderMessagesDiffLoggerDefault
 import info.hubbitus.imaptree.diff.logdump.FolderMessagesDiffLoggerFiles
 import info.hubbitus.imaptree.utils.cache.MessagesCache
-
-import javax.mail.Folder
-import javax.mail.Message
 
 /**
  * Class represent and handle two IMAPFolder differences.
@@ -51,6 +48,11 @@ class FolderMessagesDiff implements FolderMessagesDiffLoggerDefault, FolderMessa
 		}
 		else{
 			log.debug('No anomalies found (folders messages content are equal)');
+		}
+		if (conf.dumpALLmessages){
+			conf.dumpALLmessages.each{
+				diff_messagesALL(it, this."folder${it}messages");
+			}
 		}
 	}
 

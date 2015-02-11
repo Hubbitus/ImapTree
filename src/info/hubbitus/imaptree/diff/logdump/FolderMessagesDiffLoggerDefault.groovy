@@ -85,4 +85,10 @@ trait FolderMessagesDiffLoggerDefault implements IFolderMessagesDiffLogger{
 	void diff_appendedUIDs(AppendUID[] uids){
 		log.debug('Appended UIDs: ' + uids.collect{ AppendUIDtoString(it) });
 	}
+
+	/**
+	 * Due to the Groovy bug https://jira.codehaus.org/browse/GROOVY-7198 we can't use @Override
+	 */
+	void diff_messagesALL(Integer folderNo, MessagesCache cache){
+	}
 }

@@ -8,6 +8,7 @@ TODO IMPLEMENT:
 7) Investigate and fill bug from info.hubbitus.imaptree.utils.ConfigExtended.overrideFromListPropertiesPairs processing on command line options quoting
 8) Class SpentTest. Run test. Write tests.
 9) Try obtain in runtime trait name but not instance class name (IFolderMessagesDiffLogger)
+10) Implement config includes. Extract accounts in separate file, commit other config.
 
 TODO DOCUMENT:
 1) Powerful chain logging

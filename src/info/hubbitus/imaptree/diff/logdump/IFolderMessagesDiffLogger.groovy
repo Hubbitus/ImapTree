@@ -50,4 +50,16 @@ interface IFolderMessagesDiffLogger {
 	 * Result of copy (APPEND) operation by message UIDs
 	 */
 	void diff_appendedUIDs(AppendUID[] uids);
+
+	/**
+	 * Dump ALL messages (store locally)
+	 * See before also ../dumpALLmessages option. first is folder number (1,2)
+	 *
+	 * @param folderNo
+	 *		1 - first folder (source)
+	 *		2 - second (destination)
+	 * @param messages
+	 * @param cache
+	 */
+	void diff_messagesALL(Integer folderNo, MessagesCache cache);
 }

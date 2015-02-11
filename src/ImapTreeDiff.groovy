@@ -1,4 +1,5 @@
 #!/opt/groovy-2.3.6/bin/groovy
+import com.sun.mail.imap.IMAPFolder
 @Grab(group = 'commons-cli', module = 'commons-cli', version = '1.2')
 
 // TMP
@@ -15,6 +16,7 @@ import info.hubbitus.imaptree.diff.FolderMessagesCopier
 import info.hubbitus.imaptree.diff.FolderMessagesDiff
 import info.hubbitus.imaptree.utils.cache.memcached.ImapTreeTranscoder
 import info.hubbitus.imaptree.utils.cache.memcached.MemcachedClientExtended
+import java.util.logging.Level
 
 import java.util.concurrent.TimeUnit
 
@@ -60,6 +62,10 @@ ImapTreeSize tree1 = mem.getOrCreate('tree1', new ImapTreeTranscoder((ImapAccoun
 ImapTreeSize tree2 = mem.getOrCreate('tree2', new ImapTreeTranscoder((ImapAccount)GlobalConf.accounts.PahanTest)) {
 	new ImapTreeSize(GlobalConf.accounts.PahanTest)
 };
+
+((IMAPFolder)tree2.tree.@folder).store.session.setDebug(true);
+((IMAPFolder)tree2.tree.@folder).store.session.setDebugOut(System.err);
+((IMAPFolder)tree2.tree.@folder).store.session.logger.logger.level = Level.ALL
 
 FolderMessagesDiff foldersDiff = new FolderMessagesDiff(tree1.tree.@folder, tree2.tree.@folder);
 foldersDiff.dump('Before copy missed messages');

@@ -2,34 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="4b23fecd-e9ea-4c09-85fe-819090fd2945" name="Default" comment="Add into configs overrideFromListPropertiesPairs(List options) convenient method for parsing config partial overrides.&#10;&#10;Add property name into ImapAccount.&#10;&#10;Switch ImapTreeSize on GlobalConf" />
-    <list default="true" id="8d415f9e-969f-4469-9810-dd4391606069" name="Rejected commit: Default" comment="1) Implement Traits chain messages logging and 2 base loggers: LogFile (base) and detailed per-file.&#10;2) Report new groovy bug with configs https://jira.codehaus.org/browse/GROOVY-7289&#10;3) In ConfigGlobal disable file change auto watch (not needed for scripts)&#10;4) Report one more groovy BUG https://jira.codehaus.org/browse/GROOVY-7288. Work around changes in FolderMessagesCopier.groovy&#10;5) Import  ErrorsProcessing with callerMethodName() 'magic' method&#10;6) Extend TODO file by awaited bugs and docs">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/errors/EvaluateClosureChecked.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dynamic.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/groovy_2_3_6.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/ConfigExtended.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/ConfigExtended.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy" />
+    <list default="true" id="8d415f9e-969f-4469-9810-dd4391606069" name="Rejected commit: Default" comment="1) Introduce MessagesCache class.&#10;2) Add EvaluateClosureChecked trait.&#10;3) Make process more robust - handle exceptions, provide error descriptions.&#10;4) Simplify changes to just folder differences - assert what hashes of messages unique!&#10;&#10;Reported some new upstream bugs (in TODO):&#10;*) Very strange bug in Config - https://jira.codehaus.org/browse/GROOVY-7289&#10;*) @Memoized by fact ignored for trait due to the bug https://jira.codehaus.org/browse/GROOVY-7293&#10;*) Reported Idea bug: https://youtrack.jetbrains.com/issue/IDEA-136170 (FolderMessagesDiff)&#10;*) evaluateClosureChecked for ConfigObject can't be implemented in desired way due to the newly reported groovy bug: https://jira.codehaus.org/browse/GROOVY-7295&#10;*) Reported BUG in Idea in spread operator handling: https://youtrack.jetbrains.com/issue/IDEA-135863">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Config-Example.groovy" afterPath="$PROJECT_DIR$/src/Config-Example.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/GlobalConf.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/GlobalConf.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ImapTree.groovy" afterPath="$PROJECT_DIR$/src/ImapTree.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ImapTreeDiff.groovy" afterPath="$PROJECT_DIR$/src/ImapTreeDiff.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree___account_Backup.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree___account_Backup.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree___account_BackupTest___operation_GroovyConsole.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree___account_BackupTest___operation_GroovyConsole.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree___account_Pahan.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree___account_Pahan.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_BackupTest___config_operatio.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_BackupTest___config_operatio.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_BackupTest___operation_GroovyConsole.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_BackupTest___operation_GroovyConsole.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_BackupTest___operation_eachMessage.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_BackupTest___operation_eachMessage.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_BackupTest___operation_eachMessage___config_operatio.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_BackupTest___operation_eachMessage___config_operatio.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_BackupTest___operation_eachMessage___config_operations_eachMessage_messageProcess___m___println___SUBJ_____m_subject____Labels____m_getLabels______.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_BackupTest___operation_eachMessage___config_operations_eachMessage_messageProcess___m___println___SUBJ_____m_subject____Labels____m_getLabels______.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_BackupTest___operation_fxTreeTable.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_BackupTest___operation_fxTreeTable.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_Backup___operation_fxTreeTable.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c___account_Backup___operation_fxTreeTable.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c__a_Pahan___operation_eachMessage.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c__a_Pahan___operation_eachMessage.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c__a_Pahan___print_depth_4.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTree__c__a_Pahan___print_depth_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TODO" afterPath="$PROJECT_DIR$/src/TODO" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/pasha.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/pasha.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ImapTreeSize.iws" />
@@ -50,36 +31,56 @@
     <favorites_list name="ImapTreeSize" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.485771">
+    <splitter split-orientation="horizontal" split-proportion="0.49172732">
       <split-first>
         <leaf>
           <file leaf-file-name="ImapTreeDiff.groovy" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/ImapTreeDiff.groovy">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="48" column="2" selection-start-line="48" selection-start-column="2" selection-end-line="48" selection-end-column="2" />
+                  <caret line="67" column="76" selection-start-line="67" selection-start-column="76" selection-end-line="67" selection-end-column="76" />
                   <folding>
-                    <element signature="e#31#454#0" expanded="true" />
+                    <element signature="e#31#66#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Config-Example.groovy" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/Config-Example.groovy">
+          <file leaf-file-name="Level.java" pinned="false" current-in-tab="false">
+            <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/src.zip!/java/util/logging/Level.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.3558719">
-                  <caret line="175" column="21" selection-start-line="175" selection-start-column="21" selection-end-line="175" selection-end-column="21" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="159" column="57" selection-start-line="159" selection-start-column="57" selection-end-line="159" selection-end-column="57" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="FolderMessagesDiffLoggerFiles.groovy" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Session.java" pinned="false" current-in-tab="false">
+            <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/javax/mail/Session.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-5.607143">
+                  <caret line="225" column="21" selection-start-line="225" selection-start-column="21" selection-end-line="225" selection-end-column="21" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ImapTreeSize.groovy" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-7.821429">
+                  <caret line="157" column="105" selection-start-line="157" selection-start-column="105" selection-end-line="157" selection-end-column="105" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="FolderMessagesDiffLoggerFiles.groovy" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-7.785714">
-                  <caret line="50" column="7" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
+                <state vertical-scroll-proportion="0.23809524">
+                  <caret line="71" column="28" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
                   <folding>
                     <element signature="e#45#77#0" expanded="true" />
                   </folding>
@@ -91,7 +92,7 @@
             <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="145" column="122" selection-start-line="145" selection-start-column="122" selection-end-line="145" selection-end-column="122" />
+                  <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
                   <folding>
                     <element signature="e#44#81#0" expanded="true" />
                   </folding>
@@ -102,11 +103,51 @@
           <file leaf-file-name="FolderMessagesCopier.groovy" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-11.535714">
-                  <caret line="97" column="37" selection-start-line="97" selection-start-column="37" selection-end-line="97" selection-end-column="37" />
+                <state vertical-scroll-proportion="-5.392857">
+                  <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
                   <folding>
                     <element signature="e#37#77#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="MessageCountEvent.java" pinned="false" current-in-tab="false">
+            <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/javax/mail/event/MessageCountEvent.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="NativeMethodAccessorImpl.java" pinned="false" current-in-tab="false">
+            <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/src.zip!/sun/reflect/NativeMethodAccessorImpl.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="68" column="33" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="DelegatingMethodAccessorImpl.java" pinned="false" current-in-tab="false">
+            <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/src.zip!/sun/reflect/DelegatingMethodAccessorImpl.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="EventQueue.java" pinned="false" current-in-tab="false">
+            <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/javax/mail/EventQueue.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -127,14 +168,14 @@
         </leaf>
       </split-first>
       <split-second>
-        <splitter split-orientation="vertical" split-proportion="0.45754716">
+        <splitter split-orientation="vertical" split-proportion="0.3034591">
           <split-first>
             <leaf>
-              <file leaf-file-name="FolderMessagesDiffLoggerDefault.groovy" pinned="false" current-in-tab="false">
+              <file leaf-file-name="FolderMessagesDiffLoggerDefault.groovy" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0">
-                      <caret line="74" column="80" selection-start-line="74" selection-start-column="80" selection-end-line="74" selection-end-column="80" />
+                    <state vertical-scroll-proportion="2.2173913">
+                      <caret line="91" column="9" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
                       <folding>
                         <element signature="e#45#77#0" expanded="true" />
                       </folding>
@@ -146,7 +187,7 @@
                 <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy">
                   <provider selected="true" editor-type-id="text-editor">
                     <state vertical-scroll-proportion="0.0">
-                      <caret line="14" column="58" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="58" />
+                      <caret line="63" column="63" selection-start-line="63" selection-start-column="63" selection-end-line="63" selection-end-column="63" />
                       <folding>
                         <element signature="e#45#79#0" expanded="true" />
                       </folding>
@@ -154,11 +195,11 @@
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="TODO" pinned="false" current-in-tab="true">
+              <file leaf-file-name="TODO" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/TODO">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.3301887">
-                      <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+                    <state vertical-scroll-proportion="-4.642857">
+                      <caret line="10" column="86" selection-start-line="10" selection-start-column="86" selection-end-line="10" selection-end-column="86" />
                       <folding />
                     </state>
                   </provider>
@@ -167,10 +208,10 @@
               <file leaf-file-name="FolderMessagesDiff.groovy" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0">
-                      <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+                    <state vertical-scroll-proportion="-3.4642856">
+                      <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
                       <folding>
-                        <element signature="e#37#70#0" expanded="true" />
+                        <element signature="e#37#72#0" expanded="true" />
                       </folding>
                     </state>
                   </provider>
@@ -180,11 +221,23 @@
           </split-first>
           <split-second>
             <leaf>
-              <file leaf-file-name="Config.groovy" pinned="false" current-in-tab="true">
+              <file leaf-file-name="Config.groovy" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/src/Config.groovy">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.29245284">
-                      <caret line="178" column="30" selection-start-line="178" selection-start-column="30" selection-end-line="178" selection-end-column="30" />
+                    <state vertical-scroll-proportion="-4.607143">
+                      <caret line="360" column="73" selection-start-line="360" selection-start-column="73" selection-end-line="360" selection-end-column="73" />
+                      <folding>
+                        <element signature="e#0#36#0" expanded="true" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="Config-Example.groovy" pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/src/Config-Example.groovy">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state vertical-scroll-proportion="1.9710844">
+                      <caret line="445" column="1" selection-start-line="445" selection-start-column="1" selection-end-line="445" selection-end-column="1" />
                       <folding>
                         <element signature="e#0#36#0" expanded="true" />
                       </folding>
@@ -210,7 +263,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/xstream/DontSaveConverter.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/bench/Benchmark.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/bench/BenchResult.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/bench/BenchTest.groovy" />
@@ -227,7 +279,6 @@
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MemcachedClientExtended.groovy" />
         <option value="$PROJECT_DIR$/src/_diffDev.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FoldersMessagesCopier.groovy" />
-        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy" />
         <option value="/usr/lib/jvm/java-1.8.0-openjdk/src.zip!/java/util/Collection.java" />
         <option value="$PROJECT_DIR$/src/messages.dump" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/errors/ErrorsProcessing.groovy" />
@@ -242,7 +293,6 @@
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Config.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Operation.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/config/ImapAccount.groovy" />
-        <option value="$PROJECT_DIR$/src/Config-Example.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/ConfigExtended.groovy" />
         <option value="$PROJECT_DIR$/src/ImapTree.groovy" />
         <option value="$PROJECT_DIR$/src/ConfigBug7289-1.groovy" />
@@ -252,15 +302,18 @@
         <option value="$PROJECT_DIR$/src/IdeaGroovyStaticLogBug.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/errors/EvaluateClosureChecked.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/IMessagesCache.groovy" />
-        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy" />
-        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy" />
-        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy" />
+        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy" />
         <option value="$PROJECT_DIR$/src/TODO" />
-        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy" />
         <option value="$PROJECT_DIR$/src/ImapTreeDiff.groovy" />
+        <option value="/usr/lib/jvm/java-1.8.0-openjdk/src.zip!/java/util/logging/Level.java" />
+        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy" />
+        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy" />
+        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy" />
+        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy" />
         <option value="$PROJECT_DIR$/src/Config.groovy" />
+        <option value="$PROJECT_DIR$/src/Config-Example.groovy" />
       </list>
     </option>
   </component>
@@ -300,7 +353,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -311,215 +364,7 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imaptree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imaptree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imaptree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="errors" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imaptree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cache" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imaptree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cache" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="memcached" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imaptree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="diff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ImapTreeSize" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imaptree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="diff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logdump" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="GoToClass.includeLibraries" value="false" />
@@ -996,7 +841,13 @@
       <option name="project" value="LOCAL" />
       <updated>1423522682287</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="1) Introduce MessagesCache class.&#10;2) Add EvaluateClosureChecked trait.&#10;3) Make process more robust - handle exceptions, provide error descriptions.&#10;4) Simplify changes to just folder differences - assert what hashes of messages unique!&#10;&#10;Reported some new upstream bugs (in TODO):&#10;*) Very strange bug in Config - https://jira.codehaus.org/browse/GROOVY-7289&#10;*) @Memoized by fact ignored for trait due to the bug https://jira.codehaus.org/browse/GROOVY-7293&#10;*) Reported Idea bug: https://youtrack.jetbrains.com/issue/IDEA-136170 (FolderMessagesDiff)&#10;*) evaluateClosureChecked for ConfigObject can't be implemented in desired way due to the newly reported groovy bug: https://jira.codehaus.org/browse/GROOVY-7295&#10;*) Reported BUG in Idea in spread operator handling: https://youtrack.jetbrains.com/issue/IDEA-135863">
+      <created>1423607664327</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1423607664327</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1025,6 +876,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32869378" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3177471" sideWeight="0.74983454" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27769348" sideWeight="0.29156223" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1039,7 +891,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18464594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21016562" sideWeight="0.32125986" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4303932" sideWeight="0.606221" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41551542" sideWeight="0.606221" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32954547" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1050,7 +902,6 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.49971414" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="DatabaseBrowser" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32970712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3177471" sideWeight="0.74983454" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.4996691" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32518598" sideWeight="0.63203174" order="1" side_tool="false" content_ui="tabs" />
@@ -1072,7 +923,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Implement ExtendedConfig and options to override any path from commandline like:&#10;&#9;--config operations.printFolderSizes.folder='{true}' --config operations.printFolderSizes.message='{m-&gt; println &quot;SUBJ: ${m.subject}&quot;}'&#10;&#10;Rename main entrypoint script to just ImapTree" />
     <MESSAGE value="1) Make some classes static type checked (annotate @CompileStatic): Spent, Size (already was), ConfigExtended, ImapAccount&#10;2) Import from ais adapter utils.bench package. Adopt and refactor Spent, ProgressLogger (expand docs, add examples)&#10;3) Add progress logging into ImapTree.&#10;4) Introduce first test - change project layout. But groovy-tests are not runned from Idea directly and JetBrains bugtracker https://youtrack.jetbrains.com/ down. See SpentTest.groovy for more details.&#10;5) Add .idea directory under versioning control." />
     <MESSAGE value="In progressLogger add ability process streams without known capacity.&#10;Add logging for Imap tre traversal." />
     <MESSAGE value="@XStreamOmitField ProgressLogger pl" />
@@ -1097,7 +947,8 @@
     <MESSAGE value="Add into configs overrideFromListPropertiesPairs(List options) convenient method for parsing config partial overrides.&#10;&#10;Add property name into ImapAccount.&#10;&#10;Switch ImapTreeSize on GlobalConf" />
     <MESSAGE value="1) Implement Traits chain messages logging and 2 base loggers: LogFile (base) and detailed per-file.&#10;2) Report new groovy bug with configs https://jira.codehaus.org/browse/GROOVY-7289&#10;3) In ConfigGlobal disable file change auto watch (not needed for scripts)&#10;4) Report one more groovy BUG https://jira.codehaus.org/browse/GROOVY-7288. Work around changes in FolderMessagesCopier.groovy&#10;5) Import  ErrorsProcessing with callerMethodName() 'magic' method&#10;6) Extend TODO file by awaited bugs and docs" />
     <MESSAGE value="Intermediate commit as BACKUP. Before remove folder1MessagesWithNonUniqueHashes and folder2MessagesWithNonUniqueHashes with hope assert it unique!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Intermediate commit as BACKUP. Before remove folder1MessagesWithNonUniqueHashes and folder2MessagesWithNonUniqueHashes with hope assert it unique!" />
+    <MESSAGE value="1) Introduce MessagesCache class.&#10;2) Add EvaluateClosureChecked trait.&#10;3) Make process more robust - handle exceptions, provide error descriptions.&#10;4) Simplify changes to just folder differences - assert what hashes of messages unique!&#10;&#10;Reported some new upstream bugs (in TODO):&#10;*) Very strange bug in Config - https://jira.codehaus.org/browse/GROOVY-7289&#10;*) @Memoized by fact ignored for trait due to the bug https://jira.codehaus.org/browse/GROOVY-7293&#10;*) Reported Idea bug: https://youtrack.jetbrains.com/issue/IDEA-136170 (FolderMessagesDiff)&#10;*) evaluateClosureChecked for ConfigObject can't be implemented in desired way due to the newly reported groovy bug: https://jira.codehaus.org/browse/GROOVY-7295&#10;*) Reported BUG in Idea in spread operator handling: https://youtrack.jetbrains.com/issue/IDEA-135863" />
+    <option name="LAST_COMMIT_MESSAGE" value="1) Introduce MessagesCache class.&#10;2) Add EvaluateClosureChecked trait.&#10;3) Make process more robust - handle exceptions, provide error descriptions.&#10;4) Simplify changes to just folder differences - assert what hashes of messages unique!&#10;&#10;Reported some new upstream bugs (in TODO):&#10;*) Very strange bug in Config - https://jira.codehaus.org/browse/GROOVY-7289&#10;*) @Memoized by fact ignored for trait due to the bug https://jira.codehaus.org/browse/GROOVY-7293&#10;*) Reported Idea bug: https://youtrack.jetbrains.com/issue/IDEA-136170 (FolderMessagesDiff)&#10;*) evaluateClosureChecked for ConfigObject can't be implemented in desired way due to the newly reported groovy bug: https://jira.codehaus.org/browse/GROOVY-7295&#10;*) Reported BUG in Idea in spread operator handling: https://youtrack.jetbrains.com/issue/IDEA-135863" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1116,7 +967,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Config-Example.groovy</url>
-          <line>61</line>
+          <line>64</line>
           <properties />
           <option name="timeStamp" value="67" />
         </line-breakpoint>
@@ -1134,7 +985,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Config.groovy</url>
-          <line>401</line>
+          <line>411</line>
           <properties />
           <option name="timeStamp" value="116" />
         </line-breakpoint>
@@ -1146,7 +997,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" log-message="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy</url>
-          <line>130</line>
+          <line>150</line>
           <properties>
             <option name="count-filter" value="3" />
             <option name="count-filter-enabled" value="true" />
@@ -1173,7 +1024,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy</url>
-          <line>143</line>
+          <line>163</line>
           <properties />
           <option name="timeStamp" value="194" />
         </line-breakpoint>
@@ -1190,18 +1041,6 @@
           <option name="timeStamp" value="197" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ImapTreeDiff.groovy</url>
-          <line>80</line>
-          <properties />
-          <option name="timeStamp" value="201" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ImapTreeDiff.groovy</url>
-          <line>72</line>
-          <properties />
-          <option name="timeStamp" value="202" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy</url>
           <line>84</line>
           <properties>
@@ -1212,33 +1051,63 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ImapTreeDiff.groovy</url>
-          <line>83</line>
+          <line>89</line>
           <properties />
           <option name="timeStamp" value="207" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ImapTreeDiff.groovy</url>
-          <line>78</line>
+          <line>84</line>
           <properties />
           <option name="timeStamp" value="208" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Config.groovy</url>
-          <line>382</line>
+          <line>392</line>
           <properties />
           <option name="timeStamp" value="209" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Config.groovy</url>
-          <line>377</line>
+          <line>387</line>
           <properties />
           <option name="timeStamp" value="210" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Config.groovy</url>
+          <line>385</line>
+          <properties />
+          <option name="timeStamp" value="211" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Config.groovy</url>
+          <line>393</line>
+          <properties />
+          <option name="timeStamp" value="212" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Config.groovy</url>
+          <line>394</line>
+          <properties />
+          <option name="timeStamp" value="213" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Config.groovy</url>
+          <line>396</line>
+          <properties />
+          <option name="timeStamp" value="214" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Config.groovy</url>
+          <line>395</line>
+          <properties />
+          <option name="timeStamp" value="215" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="211" />
+      <option name="time" value="217" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1247,73 +1116,6 @@
     <find-history />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.groovy/grapes/org.apache.logging.log4j/log4j-api/jars/log4j-api-2.1.jar!/org/apache/logging/log4j/LogManager.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/groovy-all/2.3.7/groovy-all-2.3.7-sources.jar!/groovy/util/logging/Log4j2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="18" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
-          <folding>
-            <element signature="class#Log4j2LoggingStrategy#0;class#Log4j2#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/groovy-all/2.3.7/groovy-all-2.3.7.jar!/groovyjarjarantlr/CharScanner.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34766355">
-          <caret line="37" column="11" selection-start-line="37" selection-start-column="11" selection-end-line="37" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/ImapAccount.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61348313">
-          <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/CliBuilderAutoWidth.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08351178">
-          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/groovy-all/2.3.7/groovy-all-2.3.7-sources.jar!/groovy/lang/Delegate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="19" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="98" column="103" selection-start-line="98" selection-start-column="103" selection-end-line="98" selection-end-column="103" />
-          <folding>
-            <element signature="e#1427#1563#0" expanded="false" />
-            <element signature="e#1616#1985#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/config/Operation.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="61" selection-start-line="85" selection-start-column="61" selection-end-line="85" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/bench/SpentTest.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1370,26 +1172,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/src.zip!/sun/reflect/NativeMethodAccessorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="33" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/groovy-all/2.3.7/groovy-all-2.3.7-sources.jar!/org/codehaus/groovy/runtime/ConversionHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/src.zip!/sun/reflect/DelegatingMethodAccessorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1441,13 +1227,6 @@
         <state vertical-scroll-proportion="0.33333334">
           <caret line="744" column="0" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.groovy/grapes/org.apache.logging.log4j/log4j-api/jars/log4j-api-2.1.jar!/org/apache/logging/log4j/spi/AbstractLogger.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.64">
-          <caret line="135" column="16" selection-start-line="135" selection-start-column="16" selection-end-line="135" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -1520,16 +1299,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="80" selection-start-line="74" selection-start-column="80" selection-end-line="74" selection-end-column="80" />
-          <folding>
-            <element signature="e#45#77#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/javax/mail/Folder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1549,31 +1318,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="e#37#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/com/sun/mail/imap/IMAPMessage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14610389">
           <caret line="286" column="19" selection-start-line="286" selection-start-column="19" selection-end-line="286" selection-end-column="19" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="58" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="58" />
-          <folding>
-            <element signature="e#45#79#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1585,41 +1334,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="145" column="122" selection-start-line="145" selection-start-column="122" selection-end-line="145" selection-end-column="122" />
-          <folding>
-            <element signature="e#44#81#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/src.zip!/java/lang/ThreadGroup.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33265308">
           <caret line="66" column="11" selection-start-line="66" selection-start-column="11" selection-end-line="66" selection-end-column="11" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.785714">
-          <caret line="50" column="7" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
-          <folding>
-            <element signature="e#45#77#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.535714">
-          <caret line="97" column="37" selection-start-line="97" selection-start-column="37" selection-end-line="97" selection-end-column="37" />
-          <folding>
-            <element signature="e#37#77#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1636,8 +1355,8 @@
         <state vertical-scroll-proportion="0.3323782">
           <caret line="347" column="24" selection-start-line="347" selection-start-column="24" selection-end-line="347" selection-end-column="24" />
           <folding>
-            <element signature="e#12692#12693#0" expanded="true" />
-            <element signature="e#12757#12758#0" expanded="true" />
+            <element signature="e#12692#12693#0" expanded="false" />
+            <element signature="e#12757#12758#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1650,39 +1369,189 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/.groovy/grapes/org.apache.logging.log4j/log4j-api/jars/log4j-api-2.1.jar!/org/apache/logging/log4j/spi/AbstractLogger.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.68">
+          <caret line="135" column="16" selection-start-line="135" selection-start-column="16" selection-end-line="135" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TODO">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.642857">
+          <caret line="10" column="86" selection-start-line="10" selection-start-column="86" selection-end-line="10" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/src.zip!/sun/reflect/NativeMethodAccessorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="68" column="33" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/src.zip!/sun/reflect/DelegatingMethodAccessorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/javax/mail/EventQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/javax/mail/Session.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.607143">
+          <caret line="225" column="21" selection-start-line="225" selection-start-column="21" selection-end-line="225" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/src.zip!/java/util/logging/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33195022">
+          <caret line="1686" column="28" selection-start-line="1686" selection-start-column="28" selection-end-line="1686" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/com/sun/mail/util/MailLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6717391">
+          <caret line="253" column="21" selection-start-line="253" selection-start-column="21" selection-end-line="253" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.821429">
+          <caret line="157" column="105" selection-start-line="157" selection-start-column="105" selection-end-line="157" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ImapTreeDiff.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="2" selection-start-line="48" selection-start-column="2" selection-end-line="48" selection-end-column="2" />
+          <caret line="67" column="76" selection-start-line="67" selection-start-column="76" selection-end-line="67" selection-end-column="76" />
           <folding>
-            <element signature="e#31#454#0" expanded="true" />
+            <element signature="e#31#66#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Config-Example.groovy">
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/src.zip!/java/util/logging/Level.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3558719">
-          <caret line="175" column="21" selection-start-line="175" selection-start-column="21" selection-end-line="175" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="159" column="57" selection-start-line="159" selection-start-column="57" selection-end-line="159" selection-end-column="57" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.392857">
+          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding>
+            <element signature="e#37#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/javax/mail/event/MessageCountEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.groovy/grapes/org.apache.logging.log4j/log4j-api/jars/log4j-api-2.1.jar!/org/apache/logging/log4j/Logger.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+          <folding>
+            <element signature="e#44#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesDiff.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.4642856">
+          <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
+          <folding>
+            <element signature="e#37#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/IFolderMessagesDiffLogger.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="63" selection-start-line="63" selection-start-column="63" selection-end-line="63" selection-end-column="63" />
+          <folding>
+            <element signature="e#45#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerFiles.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23809524">
+          <caret line="71" column="28" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
+          <folding>
+            <element signature="e#45#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/logdump/FolderMessagesDiffLoggerDefault.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.2173913">
+          <caret line="91" column="9" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
+          <folding>
+            <element signature="e#45#77#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Config.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29245284">
-          <caret line="178" column="30" selection-start-line="178" selection-start-column="30" selection-end-line="178" selection-end-column="30" />
+        <state vertical-scroll-proportion="-4.607143">
+          <caret line="360" column="73" selection-start-line="360" selection-start-column="73" selection-end-line="360" selection-end-column="73" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TODO">
+    <entry file="file://$PROJECT_DIR$/src/Config-Example.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3301887">
-          <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-          <folding />
+        <state vertical-scroll-proportion="1.9710844">
+          <caret line="445" column="1" selection-start-line="445" selection-start-column="1" selection-end-line="445" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
