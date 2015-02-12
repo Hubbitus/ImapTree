@@ -44,7 +44,7 @@ class FolderMessagesDiff implements FolderMessagesDiffLoggerDefault, FolderMessa
 				diff_messagesInFolder1ButNotInFolder2(messagesInFolder1ButNotInFolder2, folder1messages);
 //				diff_messagesAnomaliesHelper(messagesInFolder1ButNotInFolder2, 'messagesInFolder1ButNotInFolder2', folder1messages);
 			if (messagesInFolder2ButNotInFolder1)
-				diff_messagesInFolder2ButNotInFolder1(messagesInFolder1ButNotInFolder2, folder2messages);
+				diff_messagesInFolder2ButNotInFolder1(messagesInFolder2ButNotInFolder1, folder2messages);
 		}
 		else{
 			log.debug('No anomalies found (folders messages content are equal)');
