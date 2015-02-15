@@ -1,5 +1,9 @@
 
 
-./ImapTree.groovy --account Pahan --operation gmailTrueDeleteMessages --config "accounts.Pahan.folder='BAK_test/Ant/INBOX'" | tee .results/Pahan.delete.full
-./ImapTree.groovy --account Backup --operation gmailTrueDeleteMessages --config "accounts.Backup.folder='BAK/Ant/INBOX'" | tee .results/Backup.delete.full
+pushd ../..
+groovy -cp $JAVA_HOME/jre/lib/ext/jfxrt.jar:/home/pasha/.groovy/grapes/org.codehaus.groovyfx/groovyfx/jars/groovyfx-0.4.0.jar ./ImapTree.groovy --account Pahan --operation gmailTrueDeleteMessages --config "accounts.Pahan.folder='BAK_test/Ant/INNER'" | tee /home/pasha/temp/mail-migration/RESULTS.compare/INNER:Pahan.removing1
+popd
+
+
+#./ImapTree.groovy --account Backup --operation gmailTrueDeleteMessages --config "accounts.Backup.folder='BAK/Ant/INBOX'" | tee .results/Backup.delete.full
 

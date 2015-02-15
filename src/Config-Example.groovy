@@ -160,7 +160,7 @@ println imapTree.tree.@folder.messages
 		}
 				, messageProcess: { Message m ->
 			println "gmailTrueGeleteMessages: <<${m.folder}>> (Folder attributes: ${m.folder.getAttributes()})); (Labels: ${m.getLabels()}); {SUBJ: ${m.subject}}"
-			List labels = m.getLabels() - ''; // Strange bu always present empty '' label
+			List<String> labels = (m.getLabels() - '').findAll{ !it.startsWith('\\') }; // Strange bu always present empty '' label, and labels like '\Important' also ignore
 			if(labels) {
 				// If their any labels (current folder is not returned in list) - we just remove that - what is equal label remove - it should became in all other
 				println "\tMessage has other labels ${labels} - regular delete it (remove label)"

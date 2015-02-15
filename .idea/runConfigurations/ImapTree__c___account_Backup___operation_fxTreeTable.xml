@@ -3,7 +3,7 @@
     <module name="ImapTreeSize" />
     <setting name="path" value="file://$PROJECT_DIR$/src/ImapTree.groovy" />
     <setting name="vmparams" value="" />
-    <setting name="params" value="-c --account BackupTest --operation fxTreeTable" />
+    <setting name="params" value="-c --account Backup --operation fxTreeTable" />
     <setting name="workDir" value="file://$PROJECT_DIR$/src" />
     <setting name="debug" value="false" />
     <RunnerSettings RunnerId="Debug">

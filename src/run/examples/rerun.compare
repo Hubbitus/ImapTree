@@ -2,18 +2,26 @@
 
 DATE=$(date +'%F_%T')
 
+ACCOUNT1=Ant
+ACCOUNT2=Backup
+
 function parseSizes(){
 	ACCOUNT="$1"
 
 	mv .results/$ACCOUNT.sizes.full .results/$ACCOUNT.sizes.full.BAK.$DATE
 	mv .results/$ACCOUNT.sizes .results/$ACCOUNT.sizes.BAK.$DATE
 
-	./ImapTree.groovy --account $ACCOUNT | tee .results/$ACCOUNT.sizes.full
+#	./ImapTree.groovy --account $ACCOUNT | tee .results/$ACCOUNT.sizes.full
+	groovy -cp $JAVA_HOME/jre/lib/ext/jfxrt.jar:/home/pasha/.groovy/grapes/org.codehaus.groovyfx/groovyfx/jars/groovyfx-0.4.0.jar ./ImapTree.groovy --account $ACCOUNT | tee .results/$ACCOUNT.sizes.full
 
-	grep -P '^<<' .results/$ACCOUNT.sizes.full | sed 's/BAK_test/BAK/g' > .results/$ACCOUNT.sizes
+	grep -P '^<<' .results/$ACCOUNT.sizes.full | sed 's/BAK_test/BAK/g' | sed 's@BAK/Ant/@@g;s@/@.@g' | sort > .results/$ACCOUNT.sizes
 }
 
-parseSizes Backup
-parseSizes Pahan
+pushd ../..
 
-meld .results/Pahan.sizes .results/Backup.sizes
+parseSizes $ACCOUNT1
+parseSizes $ACCOUNT2
+
+meld .results/$ACCOUNT1.sizes .results/$ACCOUNT2.sizes
+
+popd
