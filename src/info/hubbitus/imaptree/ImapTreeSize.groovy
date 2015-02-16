@@ -17,6 +17,7 @@ import com.thoughtworks.xstream.core.util.QuickWriter
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter
 import com.thoughtworks.xstream.io.xml.StaxDriver
+import info.hubbitus.imaptree.config.GlobalConf
 import info.hubbitus.imaptree.config.ImapAccount
 import info.hubbitus.imaptree.config.Operation
 import info.hubbitus.imaptree.utils.bench.ProgressLogger
@@ -52,6 +53,7 @@ class ImapTreeSize {
 			)
 			, null
 		);
+		session.setDebug(GlobalConf.log.imapdebug);
 		Store store = session.getStore(account.type);
 		store.connect(account.host, account.login, account.password);
 		store
@@ -121,7 +123,9 @@ class ImapTreeSize {
 			finally {
 				f.close(false)
 			}
-		} else return new Size(onlyFolders: true, bytes: 0, messages: 0)
+		}
+		else
+			return new Size(onlyFolders: true, bytes: 0, messages: 0)
 	}
 
 	// Store text as CDATA sections for readability

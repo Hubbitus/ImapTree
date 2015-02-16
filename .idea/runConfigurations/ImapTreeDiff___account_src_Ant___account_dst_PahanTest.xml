@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ImapTreeDiff --account-src Ant --account-dst PahanTest" type="GroovyScriptRunConfiguration" factoryName="Groovy" singleton="true">
+    <module name="ImapTreeSize" />
+    <setting name="path" value="file://$PROJECT_DIR$/src/ImapTreeDiff.groovy" />
+    <setting name="vmparams" value="" />
+    <setting name="params" value=" --account-src Ant --account-dst PahanTest" />
+    <setting name="workDir" value="file://$PROJECT_DIR$/src" />
+    <setting name="debug" value="false" />
+    <method />
+  </configuration>
+</component>

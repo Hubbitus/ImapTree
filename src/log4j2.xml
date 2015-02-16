@@ -11,7 +11,7 @@ http://logging.apache.org/log4j/2.0/manual/migration.html
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{1} - %msg%n"/>
 		</Console>
 		<File name="LogFile" fileName="process.log" append="false">
-			<PatternLayout pattern="%t %-5p %c{2} - %m%n"/>
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{1} - %msg%n"/>
 		</File>
 	</Appenders>
 	<Loggers>

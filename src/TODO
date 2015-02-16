@@ -1,9 +1,9 @@
 TODO IMPLEMENT:
 (1) Extend CliBuilder like CliBuilderAutoWidth
 (2) Implement Traits chain messages logging and 2 base loggers: LogFile (base) and detailed per-file.
-3) Make ImapTreeDiff true configurable
+(3) Make ImapTreeDiff true configurable
 4) Fix sha1 in message caching
-5) Find minimum stable Gmail append problem (ideal 2 messages)
+(5) Find minimum stable Gmail append problem (ideal 2 messages) (see test.bug_1, test.bug_2).
 (6) Bring Config singleton in Groovy style (from ASA) - GlobalConf
 7) Investigate and fill bug from info.hubbitus.imaptree.utils.ConfigExtended.overrideFromListPropertiesPairs processing on command line options quoting
 8) Class SpentTest. Run test. Write tests.

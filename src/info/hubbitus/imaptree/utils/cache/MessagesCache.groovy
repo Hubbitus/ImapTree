@@ -53,24 +53,18 @@ class MessagesCache{
 
 	String messageToJson(IMAPMessage m, List<String> headers = [], boolean prettyPrint = false){
 //???	assert m.getSize() == m.getMimeStream().text.size()
-		Map essential
-		if(m.expunged){ // Only base info and prefetched early data
-			essential = extractMessageEssentials(m, headers);
-			IMAPMessage mByUid = uids[m.getUIDsafe()];
-			if (mByUid){
-				essential.cachedMessageWithThatUIDwas = extractMessageEssentials(mByUid, headers);
-			}
-			IMAPMessage mByMessageNumber = msgNumbers[m.getMessageNumber()];
-			if(mByMessageNumber){
-				essential.cachedMessageWithThatMessageNumberWas = extractMessageEssentials(mByMessageNumber, headers);
-			}
-			if (mByUid && mByMessageNumber){
-				assert mByUid.getUIDsafe() == mByMessageNumber.getUIDsafe()
-				assert mByUid.getMessageNumber() == mByMessageNumber.getMessageNumber()
-			}
+		Map essential = extractMessageEssentials(m, headers);
+		IMAPMessage mByUid = uids[m.getUIDsafe()];
+		if (mByUid){
+			essential.cachedMessageWithThatUIDwas = extractMessageEssentials(mByUid, headers);
 		}
-		else {
-			essential = extractMessageEssentials(m, headers);
+		IMAPMessage mByMessageNumber = msgNumbers[m.getMessageNumber()];
+		if(mByMessageNumber){
+			essential.cachedMessageWithThatMessageNumberWas = extractMessageEssentials(mByMessageNumber, headers);
+		}
+		if (mByUid && mByMessageNumber){
+			assert mByUid.getUIDsafe() == mByMessageNumber.getUIDsafe()
+			assert mByUid.getMessageNumber() == mByMessageNumber.getMessageNumber()
 		}
 		return (prettyPrint ? JsonOutput.prettyPrint(JsonOutput.toJson(essential)) : JsonOutput.toJson(essential));
 	}
