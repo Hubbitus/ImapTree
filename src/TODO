@@ -23,3 +23,11 @@ TODO changes by remove quirks dependent from external changes/bugs
 6) Reported Idea bug: https://youtrack.jetbrains.com/issue/IDEA-136170 (FolderMessagesDiff)
 7) evaluateClosureChecked for ConfigObject can't be implemented in desired way due to the newly reported groovy bug: https://jira.codehaus.org/browse/GROOVY-7295
 8) Reported BUG in Idea in spread operator handling: https://youtrack.jetbrains.com/issue/IDEA-135863
+
+Bugs, discussions:
+1) OfflineIMAP bug https://github.com/OfflineIMAP/offlineimap/issues/149 (closed by author as Won't fix):
+2) Larch bug: https://github.com/rgrove/larch/issues/73
+3) Imapsync bugs: https://github.com/imapsync/imapsync/issues/23 (utf-8), https://github.com/imapsync/imapsync/issues/24 (compare by only headers buggy)
+	which lead to start discussion in Gilles Lamiral mail list (special thanks).
+4) JavaMail "Getting UID of deleted message" (http://stackoverflow.com/questions/27565495/getting-uid-of-deleted-message/27573410?noredirect=1#comment45177521_27573410)
+	which lead to start mail discussion with Bill Shannon

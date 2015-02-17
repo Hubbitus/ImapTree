@@ -1,6 +1,5 @@
 package info.hubbitus.imaptree.utils.cache
 
-import groovy.transform.CompileStatic
 import groovy.util.logging.Log4j2
 import com.sun.mail.imap.IMAPFolder
 import com.sun.mail.imap.IMAPMessage
@@ -188,6 +187,8 @@ class MessagesCache{
 		fp.add(FetchProfile.Item.ENVELOPE);
 		fp.add(FetchProfile.Item.FLAGS);
 		fp.add(FetchProfile.Item.SIZE);
+		fp.add(IMAPFolder.FetchProfileItem.HEADERS);
+		fp.add(IMAPFolder.FetchProfileItem.MESSAGE);
 		fp.add(UIDFolder.FetchProfileItem.UID);
 		folder.fetch(folder.messages, fp);
 	}

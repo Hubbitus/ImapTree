@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="4b23fecd-e9ea-4c09-85fe-819090fd2945" name="Default" comment="Add into configs overrideFromListPropertiesPairs(List options) convenient method for parsing config partial overrides.&#10;&#10;Add property name into ImapAccount.&#10;&#10;Switch ImapTreeSize on GlobalConf" />
-    <list default="true" id="8d415f9e-969f-4469-9810-dd4391606069" name="Rejected commit: Default" comment="Implement ALLmessages dump locally">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ImapTreeDiff___account_src_Ant___account_dst_PahanTest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Config-Example.groovy" afterPath="$PROJECT_DIR$/src/Config-Example.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ImapTreeDiff.groovy" afterPath="$PROJECT_DIR$/src/ImapTreeDiff.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy" />
+    <list default="true" id="8d415f9e-969f-4469-9810-dd4391606069" name="Rejected commit: Default" comment="1) Make ImapTreeDiff configurable. Remove hardcoded values.&#10;2) Add cache config section.&#10;3) Add log.imapdebug option to enable JavaMail debug output.&#10;4) Change file pattern of logging to the same as in output used.&#10;5) Bug of copy reproduced in test.bug_1, test.bug_2. Mailed to Giles.&#10;Reported new Larch bug: https://github.com/rgrove/larch/issues/73">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Config.groovy" afterPath="$PROJECT_DIR$/src/Config.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy" afterPath="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TODO" afterPath="$PROJECT_DIR$/src/TODO" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/log4j2.xml" afterPath="$PROJECT_DIR$/src/log4j2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/pasha.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/pasha.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ImapTreeSize.iws" />
@@ -72,7 +66,7 @@
           <file leaf-file-name="ImapTreeSize.groovy" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-4.678571">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
                   <folding />
                 </state>
@@ -82,7 +76,7 @@
           <file leaf-file-name="log4j2.xml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/log4j2.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-8.272727">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
                   <folding />
                 </state>
@@ -92,10 +86,10 @@
           <file leaf-file-name="MessagesCache.groovy" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.33112583">
-                  <caret line="68" column="82" selection-start-line="68" selection-start-column="82" selection-end-line="68" selection-end-column="82" />
+                <state vertical-scroll-proportion="0.37485582">
+                  <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
                   <folding>
-                    <element signature="e#44#81#0" expanded="true" />
+                    <element signature="e#44#77#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -172,8 +166,8 @@
               <file leaf-file-name="TODO" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/src/TODO">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.16290727">
-                      <caret line="5" column="93" selection-start-line="5" selection-start-column="93" selection-end-line="5" selection-end-column="93" />
+                    <state vertical-scroll-proportion="0.20920502">
+                      <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
                       <folding />
                     </state>
                   </provider>
@@ -210,9 +204,11 @@
               <file leaf-file-name="Config.groovy" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/src/Config.groovy">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="-12.558642">
-                      <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-                      <folding />
+                    <state vertical-scroll-proportion="0.40519482">
+                      <caret line="360" column="38" selection-start-line="360" selection-start-column="38" selection-end-line="360" selection-end-column="38" />
+                      <folding>
+                        <element signature="e#0#36#0" expanded="true" />
+                      </folding>
                     </state>
                   </provider>
                 </entry>
@@ -281,11 +277,11 @@
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy" />
         <option value="$PROJECT_DIR$/src/log4j2.xml" />
         <option value="$PROJECT_DIR$/src/ImapTreeDiff.groovy" />
-        <option value="$PROJECT_DIR$/src/Config.groovy" />
         <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy" />
-        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy" />
         <option value="$PROJECT_DIR$/src/Config-Example.groovy" />
         <option value="$PROJECT_DIR$/src/TODO" />
+        <option value="$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy" />
+        <option value="$PROJECT_DIR$/src/Config.groovy" />
       </list>
     </option>
   </component>
@@ -1072,7 +1068,13 @@
       <option name="project" value="LOCAL" />
       <updated>1424036586830</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="1) Make ImapTreeDiff configurable. Remove hardcoded values.&#10;2) Add cache config section.&#10;3) Add log.imapdebug option to enable JavaMail debug output.&#10;4) Change file pattern of logging to the same as in output used.&#10;5) Bug of copy reproduced in test.bug_1, test.bug_2. Mailed to Giles.&#10;Reported new Larch bug: https://github.com/rgrove/larch/issues/73">
+      <created>1424044824317</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1424044824317</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1101,13 +1103,11 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32869378" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3177471" sideWeight="0.74983454" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27769348" sideWeight="0.29156223" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952598" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.4996691" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1487779" sideWeight="0.70843774" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.6269926" sideWeight="0.39377895" order="14" side_tool="true" content_ui="tabs" x="1459" y="151" width="1366" height="748" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20714758" sideWeight="0.6771653" order="0" side_tool="false" content_ui="combo" />
@@ -1116,7 +1116,6 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18464594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21016562" sideWeight="0.32125986" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.50159407" sideWeight="0.606221" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32954547" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1124,10 +1123,13 @@
       <window_info id="DBHelper" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24957167" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.50159407" sideWeight="0.606221" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.49971414" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="DatabaseBrowser" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32970712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3177471" sideWeight="0.74983454" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14418125" sideWeight="0.70843774" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.4996691" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32518598" sideWeight="0.63203174" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="DBOutput" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32954547" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -1148,7 +1150,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="@XStreamOmitField ProgressLogger pl" />
     <MESSAGE value="Add default operation GroovyConsole on result" />
     <MESSAGE value="1) Introduce sub-package config&#10;2) New Class Operation and config rewrite. Add hook after folder messages process.&#10;3) Enhance ConfigExtended to override properties instead of just replace objects in config." />
     <MESSAGE value="Add Operation.clone() method, update GroovyConsole operation example." />
@@ -1173,7 +1174,8 @@
     <MESSAGE value="1) Introduce MessagesCache class.&#10;2) Add EvaluateClosureChecked trait.&#10;3) Make process more robust - handle exceptions, provide error descriptions.&#10;4) Simplify changes to just folder differences - assert what hashes of messages unique!&#10;&#10;Reported some new upstream bugs (in TODO):&#10;*) Very strange bug in Config - https://jira.codehaus.org/browse/GROOVY-7289&#10;*) @Memoized by fact ignored for trait due to the bug https://jira.codehaus.org/browse/GROOVY-7293&#10;*) Reported Idea bug: https://youtrack.jetbrains.com/issue/IDEA-136170 (FolderMessagesDiff)&#10;*) evaluateClosureChecked for ConfigObject can't be implemented in desired way due to the newly reported groovy bug: https://jira.codehaus.org/browse/GROOVY-7295&#10;*) Reported BUG in Idea in spread operator handling: https://youtrack.jetbrains.com/issue/IDEA-135863" />
     <MESSAGE value="Implement ALLmessages dump locally" />
     <MESSAGE value="Fix Gmail delete - do not account labels start from \ (like \Important) as folder labels on delete" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Gmail delete - do not account labels start from \ (like \Important) as folder labels on delete" />
+    <MESSAGE value="1) Make ImapTreeDiff configurable. Remove hardcoded values.&#10;2) Add cache config section.&#10;3) Add log.imapdebug option to enable JavaMail debug output.&#10;4) Change file pattern of logging to the same as in output used.&#10;5) Bug of copy reproduced in test.bug_1, test.bug_2. Mailed to Giles.&#10;Reported new Larch bug: https://github.com/rgrove/larch/issues/73" />
+    <option name="LAST_COMMIT_MESSAGE" value="1) Make ImapTreeDiff configurable. Remove hardcoded values.&#10;2) Add cache config section.&#10;3) Add log.imapdebug option to enable JavaMail debug output.&#10;4) Change file pattern of logging to the same as in output used.&#10;5) Bug of copy reproduced in test.bug_1, test.bug_2. Mailed to Giles.&#10;Reported new Larch bug: https://github.com/rgrove/larch/issues/73" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1225,7 +1227,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/info/hubbitus/imaptree/diff/FolderMessagesCopier.groovy</url>
-          <line>95</line>
+          <line>94</line>
           <properties />
           <option name="timeStamp" value="183" />
         </line-breakpoint>
@@ -1574,17 +1576,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="119" column="65" selection-start-line="119" selection-start-column="65" selection-end-line="119" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1669#1670#0" expanded="false" />
-            <element signature="e#1697#1698#0" expanded="false" />
-            <element signature="e#1736#1737#0" expanded="false" />
-            <element signature="e#1764#1765#0" expanded="false" />
-            <element signature="e#1795#1796#0" expanded="false" />
-            <element signature="e#1822#1823#0" expanded="false" />
-            <element signature="e#8109#8110#0" expanded="false" />
-            <element signature="e#8163#8164#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1628,7 +1619,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.64480877">
           <caret line="114" column="20" selection-start-line="114" selection-start-column="20" selection-end-line="114" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1636,7 +1626,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.29258516">
           <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1644,7 +1633,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28657314">
           <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1660,13 +1648,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.82857144">
           <caret line="31" column="67" selection-start-line="31" selection-start-column="67" selection-end-line="31" selection-end-column="67" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/log4j2.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.272727">
+        <state vertical-scroll-proportion="0.0">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
@@ -1674,7 +1661,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/ImapTreeSize.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.678571">
+        <state vertical-scroll-proportion="0.0">
           <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
           <folding />
         </state>
@@ -1731,14 +1718,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Config.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.558642">
-          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Config-Example.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1749,21 +1728,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy">
+    <entry file="file://$PROJECT_DIR$/src/TODO">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33112583">
-          <caret line="68" column="82" selection-start-line="68" selection-start-column="82" selection-end-line="68" selection-end-column="82" />
+        <state vertical-scroll-proportion="0.20920502">
+          <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Config.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40519482">
+          <caret line="360" column="38" selection-start-line="360" selection-start-column="38" selection-end-line="360" selection-end-column="38" />
           <folding>
-            <element signature="e#44#81#0" expanded="true" />
+            <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TODO">
+    <entry file="file://$PROJECT_DIR$/src/info/hubbitus/imaptree/utils/cache/MessagesCache.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16290727">
-          <caret line="5" column="93" selection-start-line="5" selection-start-column="93" selection-end-line="5" selection-end-column="93" />
-          <folding />
+        <state vertical-scroll-proportion="0.37485582">
+          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+          <folding>
+            <element signature="e#44#77#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
