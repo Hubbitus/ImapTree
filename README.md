@@ -7,14 +7,14 @@ History of born you may read below in dedicated chapter. Firstly concept and fut
 
 # How to start
 
-It written in Groovy language and use runtime dependencies, so run should bee simplee as:
+It written in Groovy language and use runtime dependencies, so run should bee simple as:
 * Clone `repo` and go to `src` directory:
 
 		git clone https://github.com/Hubbitus/ImapTree.git
 		cd into ImapTree/src
-* Create config file. Minimally you need specify at least account credential information like host, port, login and password. Good start will be use provided [Config-Example.groovy](https://github.com/Hubbitus/ImapTree/blob/master/src/Config-Example.groovy) file with excessive commentaries:
+* Configure. Default configuration is good enough for most use cases (but ma bee small excessive in logging). Provide account(s) access configuration is minimum what really required (like host, port, login and password). Good start will be to just copy provided [configuration/AccountsConfig-Example.groovy](https://github.com/Hubbitus/ImapTree/blob/master/src/configuration/AccountsConfig-Example.groovy) file with excessive commentaries:
 
-		cp Config-Example.groove Config.groovy
+		cp configuration/AccountsConfig-Example.groove configuration/AccountsConfig.groovy
 * You are done! You may just run it:
 
 		./ImapTree.groovy
@@ -27,10 +27,10 @@ Available command line option displayed by `-h` key:
 		$ ./ImapTree.groovy -h
 		usage: groovy
 		 -a,--account <arg>             Account name from defined in config file under config.accounts section. Required if you define more than one there. Otherwise warning printed and its selected automatically.
-		 -c,--cached                    run from cached file. No information gathered from imap account actually. Instead read previously saved file config.fullXmlCache. Useful for deep analysis and experiments.
+		 -c,--cached                    run from cached file. No information gathered from imap account actually. Instead read previously saved file config.cache.xml.llXmlCache. Useful for deep analysis and experiments.
 		 -d,--print-depth <arg>         Max amount of nesting folders print. By default all. Starts from 1, so only root folder will be printed. 2 means also 1st level childs and so on.
 		 -D,--config <property=value>   Change configured options from command line. Allow runtime override. May appear multiple times - processed in that order. For example:
-		                                -D log.fullXmlCache="some.file" --config operations.printFolderSizes.folderProcess='{true}' -D operations.printFolderSizes.messageProcess='{m-> println "SUBJ: ${m.subject}"}' --config
+		                                -D cache.xml.fullXmlCache="some.file" --config operations.printFolderSizes.folderProcess='{true}' -D operations.printFolderSizes.messageProcess='{m-> println "SUBJ: ${m.subject}"}' --config
 		                                "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
 		                                Values trimmed - use quotes and escapes where appropriate
 		 -h,--help                      This usage information

@@ -19,6 +19,8 @@ import java.nio.file.*
  *
  * It assume Config.groovy exists. That's all, it will be loaded and parsed on demand.
  *
+ * In handled config "includeScript( OtherConfig )" functionality implemented
+ *
  * @author Pavel Alexeev <Pahan@Hubbitus.info>
  * @created 15.07.2013 22:27 (ais), 16.07.2014 17:12:59 (rewrote rng), 03.02.2015 01:55:14 (imported and reworked)
  */
@@ -66,6 +68,10 @@ class GlobalConf {
 		onConfigChange();
 	}
 
+	/**
+	 * For load config used workaround https://github.com/Hubbitus/groovy-test-examples/commit/38f521f64bb8999861537922317b61e83045b08e
+	 * for implement "includeScript( OtherConfig )" functionality.
+	 */
 	synchronized private void onConfigChange(){
 		_conf = (ConfigExtended)new ConfigSlurper().parse(this.getClass().getResource(FILENAME));
 	}
