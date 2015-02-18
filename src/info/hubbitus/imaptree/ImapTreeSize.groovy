@@ -53,7 +53,8 @@ class ImapTreeSize {
 			)
 			, null
 		);
-		session.setDebug(GlobalConf.log.imapdebug);
+		if (account.name in GlobalConf.log.imapdebug)
+			session.setDebug(true);
 		Store store = session.getStore(account.type);
 		store.connect(account.host, account.login, account.password);
 		store

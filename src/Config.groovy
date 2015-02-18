@@ -49,11 +49,12 @@ class MainConfig extends ComposedConfigScript {
 		}
 
 		log {
-
 			/**
-			 * Enable JavaMail logging of IMAP
+			 * Enable JavaMail logging of IMAP for these accounts. List of account names (by name field provided, not
+			 * config path)
+			 * By default empty list
 			 */
-			imapdebug = true
+			imapdebug = ['PahanTest']
 
 			diff {
 				includeScript( FolderMessagesDiffLoggerFilesLogtrait )

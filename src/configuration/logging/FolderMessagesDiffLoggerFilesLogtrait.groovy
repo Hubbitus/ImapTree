@@ -3,6 +3,8 @@ package configuration.logging
 import com.sun.mail.imap.IMAPMessage
 import info.hubbitus.imaptree.utils.cache.MessagesCache
 
+import java.lang.management.ManagementFactory
+
 FolderMessagesDiffLoggerFiles { // Per trait (class)
 	enabled = true;
 	/**
