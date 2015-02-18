@@ -32,7 +32,7 @@ import java.util.logging.Level
 def cli = new CliBuilderAutoWidth(/*usage: 'Usage:'*/)
 cli.h(longOpt: 'help', 'This usage information', required: false)
 cli.D(longOpt: 'config', '''Change configured options from command line. Allow runtime override. May appear multiple times - processed in that order. For example:
-	-D log.fullXmlCache="some.file" --config operations.printFolderSizes.folderProcess='{true}' -D operations.printFolderSizes.messageProcess='{m-> println "SUBJ: ${m.subject}"}' --config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
+	-D cache.xml.fullXmlCache="some.file" --config operations.printFolderSizes.folderProcess='{true}' -D operations.printFolderSizes.messageProcess='{m-> println "SUBJ: ${m.subject}"}' --config "operations.printFolderSizes.treeTraverseOrder='breadthFirst'"
 	Values trimmed - use quotes and escapes where appropriate''', required: false, args: 2, valueSeparator: '=', argName: 'property=value')
 cli.s(longOpt: 'account-src', 'Source account for proceed (account1)', required: true, args: 1)
 cli.d(longOpt: 'account-dst', 'Destination account for proceed (account2)', required: true, args: 1)

@@ -1,4 +1,4 @@
-Config.groovy
+src/configuration/AccountsConfig.groovy
 .results
 *.log
 /target/
